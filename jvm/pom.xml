@@ -58,9 +58,6 @@
     </distributionManagement>
 
     <properties>
-        <sonar.projectKey>nitrictech_java-sdk</sonar.projectKey>
-        <sonar.organization>nitrictech</sonar.organization>
-        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <io.grpc.version>1.36.0</io.grpc.version>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>

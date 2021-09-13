@@ -15,4 +15,4 @@ generate-node:
 
 generate-python:
 	@echo "Generate python base SDK"
-	@cd python && make
+	@cd python && make grpc-client

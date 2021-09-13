@@ -11,8 +11,8 @@ grpc-client: install
 	@mkdir -p $(OUTPUT)
 	@python3 -m grpc_tools.protoc -I $(CONTRACTS) --python_betterproto_out=$(OUTPUT) ../contracts/*/*/*/*.proto
 
-
-build: grpc-client
+# Exclude dependency on grpc-client module should be versioned at this point
+build-dist:
 	@echo Building sdist and wheel
 	@python3 setup.py sdist bdist_wheel
 

@@ -1,0 +1,33 @@
+{
+  "name": "@nitric/base-sdk",
+  "description": "Nitric NodeJS base SDK",
+  "author": "Nitric <https://github.com/nitrictech>",
+  "repository": "https://github.com/nitrictech/base-sdk",
+	"license": "Apache-2.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "yarn run gen-services && yarn run fix-type-deps && yarn run fix-js-deps",
+    "gen-services": "glob-run grpc_tools_node_protoc --ts_out=service=grpc-node:. --js_out=import_style=commonjs,binary:. --grpc_out=. -I ../contracts \"../contracts/**/*.proto\"",
+    "fix-type-deps": "replace-in-files --string=\"from \\\"grpc\\\"\" --replacement=\"from \\\"@grpc/grpc-js\\\"\" ./proto/**/*.d.ts",
+    "fix-js-deps": "replace-in-files --string=\"require('grpc')\" --replacement=\"require('@grpc/grpc-js')\" ./proto/**/*.js"
+  },
+  "contributors": [
+    "Jye Cusch <jye.cusch@nitric.io>",
+    "Tim Holm <tim.holm@nitric.io>",
+    "David Moore <david.moore@nitric.io>"
+  ],
+  "dependencies": {
+    "@grpc/grpc-js": "^1.1.7",
+    "google-protobuf": "3.14.0",
+    "tslib": "^2.1.0"
+  },
+  "devDependencies": {
+    "@types/google-protobuf": "3.2.7",
+    "@types/node": "^16.9.0",
+    "glob-run": "^0.1.7",
+    "grpc-tools": "^1.9.1",
+    "replace-in-files-cli": "latest",
+    "ts-protoc-gen": "^0.14.0",
+    "typescript": "^3.3"
+  }
+}

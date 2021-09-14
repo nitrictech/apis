@@ -4,13 +4,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.nitric</groupId>
-    <artifactId>java-base-sdk</artifactId>
+    <artifactId>api</artifactId>
     <!-- NOTE: version field is unversioned and will be set during publish workflow -->
     <version>SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>Nitric Java Base SDK</name>
-    <description>Nitric Java Base SDK</description>
-    <url>https://github.com/nitrictech/base-sdk</url>
+    <name>Nitric Java API client</name>
+    <description>Nitric Java API client</description>
+    <url>https://github.com/nitrictech/apis</url>
 
     <licenses>
         <license>
@@ -41,9 +41,9 @@
     </developers>
 
     <scm>
-        <connection>scm:git@github.com:nitrictech/base-sdk.git</connection>
-        <developerConnection>scm:git@github.com:nitrictech/base-sdk.git</developerConnection>
-        <url>https://github.com/nitrictech/base-sdk</url>
+        <connection>scm:git@github.com:nitrictech/apis.git</connection>
+        <developerConnection>scm:git@github.com:nitrictech/apis.git</developerConnection>
+        <url>https://github.com/nitrictech/apis</url>
     </scm>
 
     <distributionManagement>

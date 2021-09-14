@@ -22,7 +22,7 @@ with open("README.md", "r") as readme_file:
     long_description = readme_file.read()
 
 setuptools.setup(
-    name="nitric-base",
+    name="nitric-api",
     version=get_current_version_tag(),
     author="Nitric",
     author_email="maintainers@nitric.io",

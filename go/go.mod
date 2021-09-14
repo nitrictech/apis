@@ -1,4 +1,4 @@
-module github.com/nitrictech/base-sdk/go
+module github.com/nitrictech/apis/go
 
 go 1.16
 

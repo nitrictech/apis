@@ -1,4 +1,4 @@
-module github.com/nitrictech/apis/go
+module github.com/nitrictech/apis
 
 go 1.16
 

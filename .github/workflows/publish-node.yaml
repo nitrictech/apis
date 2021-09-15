@@ -37,6 +37,6 @@ jobs:
     # release RC
     - name: Publish latest RC to NPM
       if: "github.event.release.prerelease"
-      run: npm publish --tag rc-latest
+      run: npm publish --access public --tag rc-latest
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

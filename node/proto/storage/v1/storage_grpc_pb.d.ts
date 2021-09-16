@@ -10,6 +10,7 @@ interface IStorageServiceService extends grpc.ServiceDefinition<grpc.UntypedServ
   read: grpc.MethodDefinition<proto_storage_v1_storage_pb.StorageReadRequest, proto_storage_v1_storage_pb.StorageReadResponse>;
   write: grpc.MethodDefinition<proto_storage_v1_storage_pb.StorageWriteRequest, proto_storage_v1_storage_pb.StorageWriteResponse>;
   delete: grpc.MethodDefinition<proto_storage_v1_storage_pb.StorageDeleteRequest, proto_storage_v1_storage_pb.StorageDeleteResponse>;
+  preSignUrl: grpc.MethodDefinition<proto_storage_v1_storage_pb.StoragePreSignUrlRequest, proto_storage_v1_storage_pb.StoragePreSignUrlResponse>;
 }
 
 export const StorageServiceService: IStorageServiceService;
@@ -18,6 +19,7 @@ export interface IStorageServiceServer extends grpc.UntypedServiceImplementation
   read: grpc.handleUnaryCall<proto_storage_v1_storage_pb.StorageReadRequest, proto_storage_v1_storage_pb.StorageReadResponse>;
   write: grpc.handleUnaryCall<proto_storage_v1_storage_pb.StorageWriteRequest, proto_storage_v1_storage_pb.StorageWriteResponse>;
   delete: grpc.handleUnaryCall<proto_storage_v1_storage_pb.StorageDeleteRequest, proto_storage_v1_storage_pb.StorageDeleteResponse>;
+  preSignUrl: grpc.handleUnaryCall<proto_storage_v1_storage_pb.StoragePreSignUrlRequest, proto_storage_v1_storage_pb.StoragePreSignUrlResponse>;
 }
 
 export class StorageServiceClient extends grpc.Client {
@@ -31,4 +33,7 @@ export class StorageServiceClient extends grpc.Client {
   delete(argument: proto_storage_v1_storage_pb.StorageDeleteRequest, callback: grpc.requestCallback<proto_storage_v1_storage_pb.StorageDeleteResponse>): grpc.ClientUnaryCall;
   delete(argument: proto_storage_v1_storage_pb.StorageDeleteRequest, metadataOrOptions: grpc.Metadata | grpc.CallOptions | null, callback: grpc.requestCallback<proto_storage_v1_storage_pb.StorageDeleteResponse>): grpc.ClientUnaryCall;
   delete(argument: proto_storage_v1_storage_pb.StorageDeleteRequest, metadata: grpc.Metadata | null, options: grpc.CallOptions | null, callback: grpc.requestCallback<proto_storage_v1_storage_pb.StorageDeleteResponse>): grpc.ClientUnaryCall;
+  preSignUrl(argument: proto_storage_v1_storage_pb.StoragePreSignUrlRequest, callback: grpc.requestCallback<proto_storage_v1_storage_pb.StoragePreSignUrlResponse>): grpc.ClientUnaryCall;
+  preSignUrl(argument: proto_storage_v1_storage_pb.StoragePreSignUrlRequest, metadataOrOptions: grpc.Metadata | grpc.CallOptions | null, callback: grpc.requestCallback<proto_storage_v1_storage_pb.StoragePreSignUrlResponse>): grpc.ClientUnaryCall;
+  preSignUrl(argument: proto_storage_v1_storage_pb.StoragePreSignUrlRequest, metadata: grpc.Metadata | null, options: grpc.CallOptions | null, callback: grpc.requestCallback<proto_storage_v1_storage_pb.StoragePreSignUrlResponse>): grpc.ClientUnaryCall;
 }

@@ -27,6 +27,28 @@ function deserialize_nitric_storage_v1_StorageDeleteResponse(buffer_arg) {
   return proto_storage_v1_storage_pb.StorageDeleteResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_nitric_storage_v1_StoragePreSignUrlRequest(arg) {
+  if (!(arg instanceof proto_storage_v1_storage_pb.StoragePreSignUrlRequest)) {
+    throw new Error('Expected argument of type nitric.storage.v1.StoragePreSignUrlRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_nitric_storage_v1_StoragePreSignUrlRequest(buffer_arg) {
+  return proto_storage_v1_storage_pb.StoragePreSignUrlRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_nitric_storage_v1_StoragePreSignUrlResponse(arg) {
+  if (!(arg instanceof proto_storage_v1_storage_pb.StoragePreSignUrlResponse)) {
+    throw new Error('Expected argument of type nitric.storage.v1.StoragePreSignUrlResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_nitric_storage_v1_StoragePreSignUrlResponse(buffer_arg) {
+  return proto_storage_v1_storage_pb.StoragePreSignUrlResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_nitric_storage_v1_StorageReadRequest(arg) {
   if (!(arg instanceof proto_storage_v1_storage_pb.StorageReadRequest)) {
     throw new Error('Expected argument of type nitric.storage.v1.StorageReadRequest');
@@ -109,6 +131,18 @@ delete: {
     requestDeserialize: deserialize_nitric_storage_v1_StorageDeleteRequest,
     responseSerialize: serialize_nitric_storage_v1_StorageDeleteResponse,
     responseDeserialize: deserialize_nitric_storage_v1_StorageDeleteResponse,
+  },
+  // Generate a pre-signed URL for direct operations on an item
+preSignUrl: {
+    path: '/nitric.storage.v1.StorageService/PreSignUrl',
+    requestStream: false,
+    responseStream: false,
+    requestType: proto_storage_v1_storage_pb.StoragePreSignUrlRequest,
+    responseType: proto_storage_v1_storage_pb.StoragePreSignUrlResponse,
+    requestSerialize: serialize_nitric_storage_v1_StoragePreSignUrlRequest,
+    requestDeserialize: deserialize_nitric_storage_v1_StoragePreSignUrlRequest,
+    responseSerialize: serialize_nitric_storage_v1_StoragePreSignUrlResponse,
+    responseDeserialize: deserialize_nitric_storage_v1_StoragePreSignUrlResponse,
   },
 };
 

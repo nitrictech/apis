@@ -110,6 +110,37 @@ public final class StorageServiceGrpc {
     return getDeleteMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<io.nitric.proto.storage.v1.StoragePreSignUrlRequest,
+      io.nitric.proto.storage.v1.StoragePreSignUrlResponse> getPreSignUrlMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "PreSignUrl",
+      requestType = io.nitric.proto.storage.v1.StoragePreSignUrlRequest.class,
+      responseType = io.nitric.proto.storage.v1.StoragePreSignUrlResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<io.nitric.proto.storage.v1.StoragePreSignUrlRequest,
+      io.nitric.proto.storage.v1.StoragePreSignUrlResponse> getPreSignUrlMethod() {
+    io.grpc.MethodDescriptor<io.nitric.proto.storage.v1.StoragePreSignUrlRequest, io.nitric.proto.storage.v1.StoragePreSignUrlResponse> getPreSignUrlMethod;
+    if ((getPreSignUrlMethod = StorageServiceGrpc.getPreSignUrlMethod) == null) {
+      synchronized (StorageServiceGrpc.class) {
+        if ((getPreSignUrlMethod = StorageServiceGrpc.getPreSignUrlMethod) == null) {
+          StorageServiceGrpc.getPreSignUrlMethod = getPreSignUrlMethod =
+              io.grpc.MethodDescriptor.<io.nitric.proto.storage.v1.StoragePreSignUrlRequest, io.nitric.proto.storage.v1.StoragePreSignUrlResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "PreSignUrl"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  io.nitric.proto.storage.v1.StoragePreSignUrlRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  io.nitric.proto.storage.v1.StoragePreSignUrlResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new StorageServiceMethodDescriptorSupplier("PreSignUrl"))
+              .build();
+        }
+      }
+    }
+    return getPreSignUrlMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -191,6 +222,16 @@ public final class StorageServiceGrpc {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getDeleteMethod(), responseObserver);
     }
 
+    /**
+     * <pre>
+     * Generate a pre-signed URL for direct operations on an item
+     * </pre>
+     */
+    public void preSignUrl(io.nitric.proto.storage.v1.StoragePreSignUrlRequest request,
+        io.grpc.stub.StreamObserver<io.nitric.proto.storage.v1.StoragePreSignUrlResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getPreSignUrlMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -214,6 +255,13 @@ public final class StorageServiceGrpc {
                 io.nitric.proto.storage.v1.StorageDeleteRequest,
                 io.nitric.proto.storage.v1.StorageDeleteResponse>(
                   this, METHODID_DELETE)))
+          .addMethod(
+            getPreSignUrlMethod(),
+            io.grpc.stub.ServerCalls.asyncUnaryCall(
+              new MethodHandlers<
+                io.nitric.proto.storage.v1.StoragePreSignUrlRequest,
+                io.nitric.proto.storage.v1.StoragePreSignUrlResponse>(
+                  this, METHODID_PRE_SIGN_URL)))
           .build();
     }
   }
@@ -267,6 +315,17 @@ public final class StorageServiceGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getDeleteMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     * <pre>
+     * Generate a pre-signed URL for direct operations on an item
+     * </pre>
+     */
+    public void preSignUrl(io.nitric.proto.storage.v1.StoragePreSignUrlRequest request,
+        io.grpc.stub.StreamObserver<io.nitric.proto.storage.v1.StoragePreSignUrlResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getPreSignUrlMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -314,6 +373,16 @@ public final class StorageServiceGrpc {
     public io.nitric.proto.storage.v1.StorageDeleteResponse delete(io.nitric.proto.storage.v1.StorageDeleteRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getDeleteMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Generate a pre-signed URL for direct operations on an item
+     * </pre>
+     */
+    public io.nitric.proto.storage.v1.StoragePreSignUrlResponse preSignUrl(io.nitric.proto.storage.v1.StoragePreSignUrlRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getPreSignUrlMethod(), getCallOptions(), request);
     }
   }
 
@@ -366,11 +435,23 @@ public final class StorageServiceGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getDeleteMethod(), getCallOptions()), request);
     }
+
+    /**
+     * <pre>
+     * Generate a pre-signed URL for direct operations on an item
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<io.nitric.proto.storage.v1.StoragePreSignUrlResponse> preSignUrl(
+        io.nitric.proto.storage.v1.StoragePreSignUrlRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getPreSignUrlMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_READ = 0;
   private static final int METHODID_WRITE = 1;
   private static final int METHODID_DELETE = 2;
+  private static final int METHODID_PRE_SIGN_URL = 3;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -400,6 +481,10 @@ public final class StorageServiceGrpc {
         case METHODID_DELETE:
           serviceImpl.delete((io.nitric.proto.storage.v1.StorageDeleteRequest) request,
               (io.grpc.stub.StreamObserver<io.nitric.proto.storage.v1.StorageDeleteResponse>) responseObserver);
+          break;
+        case METHODID_PRE_SIGN_URL:
+          serviceImpl.preSignUrl((io.nitric.proto.storage.v1.StoragePreSignUrlRequest) request,
+              (io.grpc.stub.StreamObserver<io.nitric.proto.storage.v1.StoragePreSignUrlResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -465,6 +550,7 @@ public final class StorageServiceGrpc {
               .addMethod(getReadMethod())
               .addMethod(getWriteMethod())
               .addMethod(getDeleteMethod())
+              .addMethod(getPreSignUrlMethod())
               .build();
         }
       }

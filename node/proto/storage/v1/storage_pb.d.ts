@@ -136,3 +136,62 @@ export namespace StorageDeleteResponse {
   }
 }
 
+export class StoragePreSignUrlRequest extends jspb.Message {
+  getBucketName(): string;
+  setBucketName(value: string): void;
+
+  getKey(): string;
+  setKey(value: string): void;
+
+  getOperation(): StoragePreSignUrlRequest.OperationMap[keyof StoragePreSignUrlRequest.OperationMap];
+  setOperation(value: StoragePreSignUrlRequest.OperationMap[keyof StoragePreSignUrlRequest.OperationMap]): void;
+
+  getExpiry(): number;
+  setExpiry(value: number): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): StoragePreSignUrlRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: StoragePreSignUrlRequest): StoragePreSignUrlRequest.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: StoragePreSignUrlRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): StoragePreSignUrlRequest;
+  static deserializeBinaryFromReader(message: StoragePreSignUrlRequest, reader: jspb.BinaryReader): StoragePreSignUrlRequest;
+}
+
+export namespace StoragePreSignUrlRequest {
+  export type AsObject = {
+    bucketName: string,
+    key: string,
+    operation: StoragePreSignUrlRequest.OperationMap[keyof StoragePreSignUrlRequest.OperationMap],
+    expiry: number,
+  }
+
+  export interface OperationMap {
+    READ: 0;
+    WRITE: 1;
+  }
+
+  export const Operation: OperationMap;
+}
+
+export class StoragePreSignUrlResponse extends jspb.Message {
+  getUrl(): string;
+  setUrl(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): StoragePreSignUrlResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: StoragePreSignUrlResponse): StoragePreSignUrlResponse.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: StoragePreSignUrlResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): StoragePreSignUrlResponse;
+  static deserializeBinaryFromReader(message: StoragePreSignUrlResponse, reader: jspb.BinaryReader): StoragePreSignUrlResponse;
+}
+
+export namespace StoragePreSignUrlResponse {
+  export type AsObject = {
+    url: string,
+  }
+}
+

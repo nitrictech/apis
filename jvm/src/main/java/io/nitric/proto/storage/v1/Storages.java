@@ -44,6 +44,16 @@ public final class Storages {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_nitric_storage_v1_StorageDeleteResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_nitric_storage_v1_StoragePreSignUrlRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_nitric_storage_v1_StoragePreSignUrlRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_nitric_storage_v1_StoragePreSignUrlResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_nitric_storage_v1_StoragePreSignUrlResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -63,17 +73,26 @@ public final class Storages {
       "\001(\t\"#\n\023StorageReadResponse\022\014\n\004body\030\001 \001(\014" +
       "\"T\n\024StorageDeleteRequest\022/\n\013bucket_name\030" +
       "\001 \001(\tB\032\372B\027r\025(\200\0022\020^\\w+([.\\-]\\w+)*$\022\013\n\003key" +
-      "\030\002 \001(\t\"\027\n\025StorageDeleteResponse2\236\002\n\016Stor" +
-      "ageService\022U\n\004Read\022%.nitric.storage.v1.S" +
-      "torageReadRequest\032&.nitric.storage.v1.St" +
-      "orageReadResponse\022X\n\005Write\022&.nitric.stor" +
-      "age.v1.StorageWriteRequest\032\'.nitric.stor" +
-      "age.v1.StorageWriteResponse\022[\n\006Delete\022\'." +
-      "nitric.storage.v1.StorageDeleteRequest\032(" +
-      ".nitric.storage.v1.StorageDeleteResponse" +
-      "Bj\n\032io.nitric.proto.storage.v1B\010Storages" +
-      "P\001Z\014nitric/v1;v1\252\002\027Nitric.Proto.Storage." +
-      "v1\312\002\027Nitric\\Proto\\Storage\\V1b\006proto3"
+      "\030\002 \001(\t\"\027\n\025StorageDeleteResponse\"\270\001\n\030Stor" +
+      "agePreSignUrlRequest\022\023\n\013bucket_name\030\001 \001(" +
+      "\t\022\013\n\003key\030\002 \001(\t\022H\n\toperation\030\003 \001(\01625.nitr" +
+      "ic.storage.v1.StoragePreSignUrlRequest.O" +
+      "peration\022\016\n\006expiry\030\004 \001(\r\" \n\tOperation\022\010\n" +
+      "\004READ\020\000\022\t\n\005WRITE\020\001\"(\n\031StoragePreSignUrlR" +
+      "esponse\022\013\n\003url\030\001 \001(\t2\207\003\n\016StorageService\022" +
+      "U\n\004Read\022%.nitric.storage.v1.StorageReadR" +
+      "equest\032&.nitric.storage.v1.StorageReadRe" +
+      "sponse\022X\n\005Write\022&.nitric.storage.v1.Stor" +
+      "ageWriteRequest\032\'.nitric.storage.v1.Stor" +
+      "ageWriteResponse\022[\n\006Delete\022\'.nitric.stor" +
+      "age.v1.StorageDeleteRequest\032(.nitric.sto" +
+      "rage.v1.StorageDeleteResponse\022g\n\nPreSign" +
+      "Url\022+.nitric.storage.v1.StoragePreSignUr" +
+      "lRequest\032,.nitric.storage.v1.StoragePreS" +
+      "ignUrlResponseBj\n\032io.nitric.proto.storag" +
+      "e.v1B\010StoragesP\001Z\014nitric/v1;v1\252\002\027Nitric." +
+      "Proto.Storage.v1\312\002\027Nitric\\Proto\\Storage\\" +
+      "V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -116,6 +135,18 @@ public final class Storages {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_nitric_storage_v1_StorageDeleteResponse_descriptor,
         new java.lang.String[] { });
+    internal_static_nitric_storage_v1_StoragePreSignUrlRequest_descriptor =
+      getDescriptor().getMessageTypes().get(6);
+    internal_static_nitric_storage_v1_StoragePreSignUrlRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_nitric_storage_v1_StoragePreSignUrlRequest_descriptor,
+        new java.lang.String[] { "BucketName", "Key", "Operation", "Expiry", });
+    internal_static_nitric_storage_v1_StoragePreSignUrlResponse_descriptor =
+      getDescriptor().getMessageTypes().get(7);
+    internal_static_nitric_storage_v1_StoragePreSignUrlResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_nitric_storage_v1_StoragePreSignUrlResponse_descriptor,
+        new java.lang.String[] { "Url", });
     com.google.protobuf.ExtensionRegistry registry =
         com.google.protobuf.ExtensionRegistry.newInstance();
     registry.add(io.envoyproxy.pgv.validate.Validate.rules);

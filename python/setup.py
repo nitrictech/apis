@@ -29,7 +29,7 @@ setuptools.setup(
     description="The Nitric base SDK for Python 3",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/nitrictech/python-sdk",
+    url="https://github.com/nitrictech/apis",
     packages=setuptools.find_packages(exclude=["tests", "tests.*"]),
     license_files=("LICENSE.txt",),
     classifiers=[

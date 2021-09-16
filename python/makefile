@@ -2,7 +2,7 @@ install:
 	@echo Installing Project Dependencies
 	@pip3 install -e .[dev]
 
-OUTPUT="."
+OUTPUT="./nitricapi"
 CONTRACTS="../contracts"
 
 grpc-client: install

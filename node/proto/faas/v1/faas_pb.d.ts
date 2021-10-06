@@ -180,6 +180,28 @@ export namespace HeaderValue {
   }
 }
 
+export class QueryValue extends jspb.Message {
+  clearValueList(): void;
+  getValueList(): Array<string>;
+  setValueList(value: Array<string>): void;
+  addValue(value: string, index?: number): string;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): QueryValue.AsObject;
+  static toObject(includeInstance: boolean, msg: QueryValue): QueryValue.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: QueryValue, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): QueryValue;
+  static deserializeBinaryFromReader(message: QueryValue, reader: jspb.BinaryReader): QueryValue;
+}
+
+export namespace QueryValue {
+  export type AsObject = {
+    valueList: Array<string>,
+  }
+}
+
 export class HttpTriggerContext extends jspb.Message {
   getMethod(): string;
   setMethod(value: string): void;
@@ -189,10 +211,12 @@ export class HttpTriggerContext extends jspb.Message {
 
   getHeadersOldMap(): jspb.Map<string, string>;
   clearHeadersOldMap(): void;
-  getQueryParamsMap(): jspb.Map<string, string>;
-  clearQueryParamsMap(): void;
+  getQueryParamsOldMap(): jspb.Map<string, string>;
+  clearQueryParamsOldMap(): void;
   getHeadersMap(): jspb.Map<string, HeaderValue>;
   clearHeadersMap(): void;
+  getQueryParamsMap(): jspb.Map<string, QueryValue>;
+  clearQueryParamsMap(): void;
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): HttpTriggerContext.AsObject;
   static toObject(includeInstance: boolean, msg: HttpTriggerContext): HttpTriggerContext.AsObject;
@@ -208,8 +232,9 @@ export namespace HttpTriggerContext {
     method: string,
     path: string,
     headersOldMap: Array<[string, string]>,
-    queryParamsMap: Array<[string, string]>,
+    queryParamsOldMap: Array<[string, string]>,
     headersMap: Array<[string, HeaderValue.AsObject]>,
+    queryParamsMap: Array<[string, QueryValue.AsObject]>,
   }
 }
 

@@ -78,15 +78,15 @@ private static final long serialVersionUID = 0L;
           }
           case 34: {
             if (!((mutable_bitField0_ & 0x00000002) != 0)) {
-              queryParams_ = com.google.protobuf.MapField.newMapField(
-                  QueryParamsDefaultEntryHolder.defaultEntry);
+              queryParamsOld_ = com.google.protobuf.MapField.newMapField(
+                  QueryParamsOldDefaultEntryHolder.defaultEntry);
               mutable_bitField0_ |= 0x00000002;
             }
             com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
-            queryParams__ = input.readMessage(
-                QueryParamsDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
-            queryParams_.getMutableMap().put(
-                queryParams__.getKey(), queryParams__.getValue());
+            queryParamsOld__ = input.readMessage(
+                QueryParamsOldDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
+            queryParamsOld_.getMutableMap().put(
+                queryParamsOld__.getKey(), queryParamsOld__.getValue());
             break;
           }
           case 42: {
@@ -100,6 +100,19 @@ private static final long serialVersionUID = 0L;
                 HeadersDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
             headers_.getMutableMap().put(
                 headers__.getKey(), headers__.getValue());
+            break;
+          }
+          case 50: {
+            if (!((mutable_bitField0_ & 0x00000008) != 0)) {
+              queryParams_ = com.google.protobuf.MapField.newMapField(
+                  QueryParamsDefaultEntryHolder.defaultEntry);
+              mutable_bitField0_ |= 0x00000008;
+            }
+            com.google.protobuf.MapEntry<java.lang.String, io.nitric.proto.faas.v1.QueryValue>
+            queryParams__ = input.readMessage(
+                QueryParamsDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
+            queryParams_.getMutableMap().put(
+                queryParams__.getKey(), queryParams__.getValue());
             break;
           }
           default: {
@@ -134,9 +147,11 @@ private static final long serialVersionUID = 0L;
       case 3:
         return internalGetHeadersOld();
       case 4:
-        return internalGetQueryParams();
+        return internalGetQueryParamsOld();
       case 5:
         return internalGetHeaders();
+      case 6:
+        return internalGetQueryParams();
       default:
         throw new RuntimeException(
             "Invalid map field number: " + number);
@@ -343,97 +358,101 @@ private static final long serialVersionUID = 0L;
     return map.get(key);
   }
 
-  public static final int QUERY_PARAMS_FIELD_NUMBER = 4;
-  private static final class QueryParamsDefaultEntryHolder {
+  public static final int QUERY_PARAMS_OLD_FIELD_NUMBER = 4;
+  private static final class QueryParamsOldDefaultEntryHolder {
     static final com.google.protobuf.MapEntry<
         java.lang.String, java.lang.String> defaultEntry =
             com.google.protobuf.MapEntry
             .<java.lang.String, java.lang.String>newDefaultInstance(
-                io.nitric.proto.faas.v1.NitricFaas.internal_static_nitric_faas_v1_HttpTriggerContext_QueryParamsEntry_descriptor, 
+                io.nitric.proto.faas.v1.NitricFaas.internal_static_nitric_faas_v1_HttpTriggerContext_QueryParamsOldEntry_descriptor, 
                 com.google.protobuf.WireFormat.FieldType.STRING,
                 "",
                 com.google.protobuf.WireFormat.FieldType.STRING,
                 "");
   }
   private com.google.protobuf.MapField<
-      java.lang.String, java.lang.String> queryParams_;
+      java.lang.String, java.lang.String> queryParamsOld_;
   private com.google.protobuf.MapField<java.lang.String, java.lang.String>
-  internalGetQueryParams() {
-    if (queryParams_ == null) {
+  internalGetQueryParamsOld() {
+    if (queryParamsOld_ == null) {
       return com.google.protobuf.MapField.emptyMapField(
-          QueryParamsDefaultEntryHolder.defaultEntry);
+          QueryParamsOldDefaultEntryHolder.defaultEntry);
     }
-    return queryParams_;
+    return queryParamsOld_;
   }
-
-  public int getQueryParamsCount() {
-    return internalGetQueryParams().getMap().size();
+  @java.lang.Deprecated 
+  public int getQueryParamsOldCount() {
+    return internalGetQueryParamsOld().getMap().size();
   }
   /**
    * <pre>
-   * The query params (if parseable by the membrane)
+   * The old query params (preserving for backwards compatibility)
+   * TODO: Remove in 1.0
    * </pre>
    *
-   * <code>map&lt;string, string&gt; query_params = 4;</code>
+   * <code>map&lt;string, string&gt; query_params_old = 4 [deprecated = true];</code>
    */
-
+  @java.lang.Deprecated 
   @java.lang.Override
-  public boolean containsQueryParams(
+  public boolean containsQueryParamsOld(
       java.lang.String key) {
     if (key == null) { throw new java.lang.NullPointerException(); }
-    return internalGetQueryParams().getMap().containsKey(key);
+    return internalGetQueryParamsOld().getMap().containsKey(key);
   }
   /**
-   * Use {@link #getQueryParamsMap()} instead.
+   * Use {@link #getQueryParamsOldMap()} instead.
    */
   @java.lang.Override
   @java.lang.Deprecated
-  public java.util.Map<java.lang.String, java.lang.String> getQueryParams() {
-    return getQueryParamsMap();
+  public java.util.Map<java.lang.String, java.lang.String> getQueryParamsOld() {
+    return getQueryParamsOldMap();
   }
   /**
    * <pre>
-   * The query params (if parseable by the membrane)
+   * The old query params (preserving for backwards compatibility)
+   * TODO: Remove in 1.0
    * </pre>
    *
-   * <code>map&lt;string, string&gt; query_params = 4;</code>
+   * <code>map&lt;string, string&gt; query_params_old = 4 [deprecated = true];</code>
    */
   @java.lang.Override
-
-  public java.util.Map<java.lang.String, java.lang.String> getQueryParamsMap() {
-    return internalGetQueryParams().getMap();
+  @java.lang.Deprecated 
+  public java.util.Map<java.lang.String, java.lang.String> getQueryParamsOldMap() {
+    return internalGetQueryParamsOld().getMap();
   }
   /**
    * <pre>
-   * The query params (if parseable by the membrane)
+   * The old query params (preserving for backwards compatibility)
+   * TODO: Remove in 1.0
    * </pre>
    *
-   * <code>map&lt;string, string&gt; query_params = 4;</code>
+   * <code>map&lt;string, string&gt; query_params_old = 4 [deprecated = true];</code>
    */
   @java.lang.Override
-
-  public java.lang.String getQueryParamsOrDefault(
+  @java.lang.Deprecated 
+  public java.lang.String getQueryParamsOldOrDefault(
       java.lang.String key,
       java.lang.String defaultValue) {
     if (key == null) { throw new java.lang.NullPointerException(); }
     java.util.Map<java.lang.String, java.lang.String> map =
-        internalGetQueryParams().getMap();
+        internalGetQueryParamsOld().getMap();
     return map.containsKey(key) ? map.get(key) : defaultValue;
   }
   /**
    * <pre>
-   * The query params (if parseable by the membrane)
+   * The old query params (preserving for backwards compatibility)
+   * TODO: Remove in 1.0
    * </pre>
    *
-   * <code>map&lt;string, string&gt; query_params = 4;</code>
+   * <code>map&lt;string, string&gt; query_params_old = 4 [deprecated = true];</code>
    */
   @java.lang.Override
-
-  public java.lang.String getQueryParamsOrThrow(
+  @java.lang.Deprecated 
+  public java.lang.String getQueryParamsOldOrThrow(
       java.lang.String key) {
     if (key == null) { throw new java.lang.NullPointerException(); }
     java.util.Map<java.lang.String, java.lang.String> map =
-        internalGetQueryParams().getMap();
+        internalGetQueryParamsOld().getMap();
     if (!map.containsKey(key)) {
       throw new java.lang.IllegalArgumentException();
     }
@@ -537,6 +556,103 @@ private static final long serialVersionUID = 0L;
     return map.get(key);
   }
 
+  public static final int QUERY_PARAMS_FIELD_NUMBER = 6;
+  private static final class QueryParamsDefaultEntryHolder {
+    static final com.google.protobuf.MapEntry<
+        java.lang.String, io.nitric.proto.faas.v1.QueryValue> defaultEntry =
+            com.google.protobuf.MapEntry
+            .<java.lang.String, io.nitric.proto.faas.v1.QueryValue>newDefaultInstance(
+                io.nitric.proto.faas.v1.NitricFaas.internal_static_nitric_faas_v1_HttpTriggerContext_QueryParamsEntry_descriptor, 
+                com.google.protobuf.WireFormat.FieldType.STRING,
+                "",
+                com.google.protobuf.WireFormat.FieldType.MESSAGE,
+                io.nitric.proto.faas.v1.QueryValue.getDefaultInstance());
+  }
+  private com.google.protobuf.MapField<
+      java.lang.String, io.nitric.proto.faas.v1.QueryValue> queryParams_;
+  private com.google.protobuf.MapField<java.lang.String, io.nitric.proto.faas.v1.QueryValue>
+  internalGetQueryParams() {
+    if (queryParams_ == null) {
+      return com.google.protobuf.MapField.emptyMapField(
+          QueryParamsDefaultEntryHolder.defaultEntry);
+    }
+    return queryParams_;
+  }
+
+  public int getQueryParamsCount() {
+    return internalGetQueryParams().getMap().size();
+  }
+  /**
+   * <pre>
+   * HTTP Query params
+   * </pre>
+   *
+   * <code>map&lt;string, .nitric.faas.v1.QueryValue&gt; query_params = 6;</code>
+   */
+
+  @java.lang.Override
+  public boolean containsQueryParams(
+      java.lang.String key) {
+    if (key == null) { throw new java.lang.NullPointerException(); }
+    return internalGetQueryParams().getMap().containsKey(key);
+  }
+  /**
+   * Use {@link #getQueryParamsMap()} instead.
+   */
+  @java.lang.Override
+  @java.lang.Deprecated
+  public java.util.Map<java.lang.String, io.nitric.proto.faas.v1.QueryValue> getQueryParams() {
+    return getQueryParamsMap();
+  }
+  /**
+   * <pre>
+   * HTTP Query params
+   * </pre>
+   *
+   * <code>map&lt;string, .nitric.faas.v1.QueryValue&gt; query_params = 6;</code>
+   */
+  @java.lang.Override
+
+  public java.util.Map<java.lang.String, io.nitric.proto.faas.v1.QueryValue> getQueryParamsMap() {
+    return internalGetQueryParams().getMap();
+  }
+  /**
+   * <pre>
+   * HTTP Query params
+   * </pre>
+   *
+   * <code>map&lt;string, .nitric.faas.v1.QueryValue&gt; query_params = 6;</code>
+   */
+  @java.lang.Override
+
+  public io.nitric.proto.faas.v1.QueryValue getQueryParamsOrDefault(
+      java.lang.String key,
+      io.nitric.proto.faas.v1.QueryValue defaultValue) {
+    if (key == null) { throw new java.lang.NullPointerException(); }
+    java.util.Map<java.lang.String, io.nitric.proto.faas.v1.QueryValue> map =
+        internalGetQueryParams().getMap();
+    return map.containsKey(key) ? map.get(key) : defaultValue;
+  }
+  /**
+   * <pre>
+   * HTTP Query params
+   * </pre>
+   *
+   * <code>map&lt;string, .nitric.faas.v1.QueryValue&gt; query_params = 6;</code>
+   */
+  @java.lang.Override
+
+  public io.nitric.proto.faas.v1.QueryValue getQueryParamsOrThrow(
+      java.lang.String key) {
+    if (key == null) { throw new java.lang.NullPointerException(); }
+    java.util.Map<java.lang.String, io.nitric.proto.faas.v1.QueryValue> map =
+        internalGetQueryParams().getMap();
+    if (!map.containsKey(key)) {
+      throw new java.lang.IllegalArgumentException();
+    }
+    return map.get(key);
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -566,8 +682,8 @@ private static final long serialVersionUID = 0L;
     com.google.protobuf.GeneratedMessageV3
       .serializeStringMapTo(
         output,
-        internalGetQueryParams(),
-        QueryParamsDefaultEntryHolder.defaultEntry,
+        internalGetQueryParamsOld(),
+        QueryParamsOldDefaultEntryHolder.defaultEntry,
         4);
     com.google.protobuf.GeneratedMessageV3
       .serializeStringMapTo(
@@ -575,6 +691,12 @@ private static final long serialVersionUID = 0L;
         internalGetHeaders(),
         HeadersDefaultEntryHolder.defaultEntry,
         5);
+    com.google.protobuf.GeneratedMessageV3
+      .serializeStringMapTo(
+        output,
+        internalGetQueryParams(),
+        QueryParamsDefaultEntryHolder.defaultEntry,
+        6);
     unknownFields.writeTo(output);
   }
 
@@ -601,14 +723,14 @@ private static final long serialVersionUID = 0L;
           .computeMessageSize(3, headersOld__);
     }
     for (java.util.Map.Entry<java.lang.String, java.lang.String> entry
-         : internalGetQueryParams().getMap().entrySet()) {
+         : internalGetQueryParamsOld().getMap().entrySet()) {
       com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
-      queryParams__ = QueryParamsDefaultEntryHolder.defaultEntry.newBuilderForType()
+      queryParamsOld__ = QueryParamsOldDefaultEntryHolder.defaultEntry.newBuilderForType()
           .setKey(entry.getKey())
           .setValue(entry.getValue())
           .build();
       size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, queryParams__);
+          .computeMessageSize(4, queryParamsOld__);
     }
     for (java.util.Map.Entry<java.lang.String, io.nitric.proto.faas.v1.HeaderValue> entry
          : internalGetHeaders().getMap().entrySet()) {
@@ -619,6 +741,16 @@ private static final long serialVersionUID = 0L;
           .build();
       size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(5, headers__);
+    }
+    for (java.util.Map.Entry<java.lang.String, io.nitric.proto.faas.v1.QueryValue> entry
+         : internalGetQueryParams().getMap().entrySet()) {
+      com.google.protobuf.MapEntry<java.lang.String, io.nitric.proto.faas.v1.QueryValue>
+      queryParams__ = QueryParamsDefaultEntryHolder.defaultEntry.newBuilderForType()
+          .setKey(entry.getKey())
+          .setValue(entry.getValue())
+          .build();
+      size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(6, queryParams__);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -641,10 +773,12 @@ private static final long serialVersionUID = 0L;
         .equals(other.getPath())) return false;
     if (!internalGetHeadersOld().equals(
         other.internalGetHeadersOld())) return false;
-    if (!internalGetQueryParams().equals(
-        other.internalGetQueryParams())) return false;
+    if (!internalGetQueryParamsOld().equals(
+        other.internalGetQueryParamsOld())) return false;
     if (!internalGetHeaders().equals(
         other.internalGetHeaders())) return false;
+    if (!internalGetQueryParams().equals(
+        other.internalGetQueryParams())) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -664,13 +798,17 @@ private static final long serialVersionUID = 0L;
       hash = (37 * hash) + HEADERS_OLD_FIELD_NUMBER;
       hash = (53 * hash) + internalGetHeadersOld().hashCode();
     }
-    if (!internalGetQueryParams().getMap().isEmpty()) {
-      hash = (37 * hash) + QUERY_PARAMS_FIELD_NUMBER;
-      hash = (53 * hash) + internalGetQueryParams().hashCode();
+    if (!internalGetQueryParamsOld().getMap().isEmpty()) {
+      hash = (37 * hash) + QUERY_PARAMS_OLD_FIELD_NUMBER;
+      hash = (53 * hash) + internalGetQueryParamsOld().hashCode();
     }
     if (!internalGetHeaders().getMap().isEmpty()) {
       hash = (37 * hash) + HEADERS_FIELD_NUMBER;
       hash = (53 * hash) + internalGetHeaders().hashCode();
+    }
+    if (!internalGetQueryParams().getMap().isEmpty()) {
+      hash = (37 * hash) + QUERY_PARAMS_FIELD_NUMBER;
+      hash = (53 * hash) + internalGetQueryParams().hashCode();
     }
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
@@ -786,9 +924,11 @@ private static final long serialVersionUID = 0L;
         case 3:
           return internalGetHeadersOld();
         case 4:
-          return internalGetQueryParams();
+          return internalGetQueryParamsOld();
         case 5:
           return internalGetHeaders();
+        case 6:
+          return internalGetQueryParams();
         default:
           throw new RuntimeException(
               "Invalid map field number: " + number);
@@ -801,9 +941,11 @@ private static final long serialVersionUID = 0L;
         case 3:
           return internalGetMutableHeadersOld();
         case 4:
-          return internalGetMutableQueryParams();
+          return internalGetMutableQueryParamsOld();
         case 5:
           return internalGetMutableHeaders();
+        case 6:
+          return internalGetMutableQueryParams();
         default:
           throw new RuntimeException(
               "Invalid map field number: " + number);
@@ -840,8 +982,9 @@ private static final long serialVersionUID = 0L;
       path_ = "";
 
       internalGetMutableHeadersOld().clear();
-      internalGetMutableQueryParams().clear();
+      internalGetMutableQueryParamsOld().clear();
       internalGetMutableHeaders().clear();
+      internalGetMutableQueryParams().clear();
       return this;
     }
 
@@ -873,10 +1016,12 @@ private static final long serialVersionUID = 0L;
       result.path_ = path_;
       result.headersOld_ = internalGetHeadersOld();
       result.headersOld_.makeImmutable();
-      result.queryParams_ = internalGetQueryParams();
-      result.queryParams_.makeImmutable();
+      result.queryParamsOld_ = internalGetQueryParamsOld();
+      result.queryParamsOld_.makeImmutable();
       result.headers_ = internalGetHeaders();
       result.headers_.makeImmutable();
+      result.queryParams_ = internalGetQueryParams();
+      result.queryParams_.makeImmutable();
       onBuilt();
       return result;
     }
@@ -935,10 +1080,12 @@ private static final long serialVersionUID = 0L;
       }
       internalGetMutableHeadersOld().mergeFrom(
           other.internalGetHeadersOld());
-      internalGetMutableQueryParams().mergeFrom(
-          other.internalGetQueryParams());
+      internalGetMutableQueryParamsOld().mergeFrom(
+          other.internalGetQueryParamsOld());
       internalGetMutableHeaders().mergeFrom(
           other.internalGetHeaders());
+      internalGetMutableQueryParams().mergeFrom(
+          other.internalGetQueryParams());
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
       return this;
@@ -1325,119 +1472,124 @@ private static final long serialVersionUID = 0L;
     }
 
     private com.google.protobuf.MapField<
-        java.lang.String, java.lang.String> queryParams_;
+        java.lang.String, java.lang.String> queryParamsOld_;
     private com.google.protobuf.MapField<java.lang.String, java.lang.String>
-    internalGetQueryParams() {
-      if (queryParams_ == null) {
+    internalGetQueryParamsOld() {
+      if (queryParamsOld_ == null) {
         return com.google.protobuf.MapField.emptyMapField(
-            QueryParamsDefaultEntryHolder.defaultEntry);
+            QueryParamsOldDefaultEntryHolder.defaultEntry);
       }
-      return queryParams_;
+      return queryParamsOld_;
     }
     private com.google.protobuf.MapField<java.lang.String, java.lang.String>
-    internalGetMutableQueryParams() {
+    internalGetMutableQueryParamsOld() {
       onChanged();;
-      if (queryParams_ == null) {
-        queryParams_ = com.google.protobuf.MapField.newMapField(
-            QueryParamsDefaultEntryHolder.defaultEntry);
+      if (queryParamsOld_ == null) {
+        queryParamsOld_ = com.google.protobuf.MapField.newMapField(
+            QueryParamsOldDefaultEntryHolder.defaultEntry);
       }
-      if (!queryParams_.isMutable()) {
-        queryParams_ = queryParams_.copy();
+      if (!queryParamsOld_.isMutable()) {
+        queryParamsOld_ = queryParamsOld_.copy();
       }
-      return queryParams_;
+      return queryParamsOld_;
     }
-
-    public int getQueryParamsCount() {
-      return internalGetQueryParams().getMap().size();
+    @java.lang.Deprecated 
+    public int getQueryParamsOldCount() {
+      return internalGetQueryParamsOld().getMap().size();
     }
     /**
      * <pre>
-     * The query params (if parseable by the membrane)
+     * The old query params (preserving for backwards compatibility)
+     * TODO: Remove in 1.0
      * </pre>
      *
-     * <code>map&lt;string, string&gt; query_params = 4;</code>
+     * <code>map&lt;string, string&gt; query_params_old = 4 [deprecated = true];</code>
      */
-
+    @java.lang.Deprecated 
     @java.lang.Override
-    public boolean containsQueryParams(
+    public boolean containsQueryParamsOld(
         java.lang.String key) {
       if (key == null) { throw new java.lang.NullPointerException(); }
-      return internalGetQueryParams().getMap().containsKey(key);
+      return internalGetQueryParamsOld().getMap().containsKey(key);
     }
     /**
-     * Use {@link #getQueryParamsMap()} instead.
+     * Use {@link #getQueryParamsOldMap()} instead.
      */
     @java.lang.Override
     @java.lang.Deprecated
-    public java.util.Map<java.lang.String, java.lang.String> getQueryParams() {
-      return getQueryParamsMap();
+    public java.util.Map<java.lang.String, java.lang.String> getQueryParamsOld() {
+      return getQueryParamsOldMap();
     }
     /**
      * <pre>
-     * The query params (if parseable by the membrane)
+     * The old query params (preserving for backwards compatibility)
+     * TODO: Remove in 1.0
      * </pre>
      *
-     * <code>map&lt;string, string&gt; query_params = 4;</code>
+     * <code>map&lt;string, string&gt; query_params_old = 4 [deprecated = true];</code>
      */
     @java.lang.Override
-
-    public java.util.Map<java.lang.String, java.lang.String> getQueryParamsMap() {
-      return internalGetQueryParams().getMap();
+    @java.lang.Deprecated 
+    public java.util.Map<java.lang.String, java.lang.String> getQueryParamsOldMap() {
+      return internalGetQueryParamsOld().getMap();
     }
     /**
      * <pre>
-     * The query params (if parseable by the membrane)
+     * The old query params (preserving for backwards compatibility)
+     * TODO: Remove in 1.0
      * </pre>
      *
-     * <code>map&lt;string, string&gt; query_params = 4;</code>
+     * <code>map&lt;string, string&gt; query_params_old = 4 [deprecated = true];</code>
      */
     @java.lang.Override
-
-    public java.lang.String getQueryParamsOrDefault(
+    @java.lang.Deprecated 
+    public java.lang.String getQueryParamsOldOrDefault(
         java.lang.String key,
         java.lang.String defaultValue) {
       if (key == null) { throw new java.lang.NullPointerException(); }
       java.util.Map<java.lang.String, java.lang.String> map =
-          internalGetQueryParams().getMap();
+          internalGetQueryParamsOld().getMap();
       return map.containsKey(key) ? map.get(key) : defaultValue;
     }
     /**
      * <pre>
-     * The query params (if parseable by the membrane)
+     * The old query params (preserving for backwards compatibility)
+     * TODO: Remove in 1.0
      * </pre>
      *
-     * <code>map&lt;string, string&gt; query_params = 4;</code>
+     * <code>map&lt;string, string&gt; query_params_old = 4 [deprecated = true];</code>
      */
     @java.lang.Override
-
-    public java.lang.String getQueryParamsOrThrow(
+    @java.lang.Deprecated 
+    public java.lang.String getQueryParamsOldOrThrow(
         java.lang.String key) {
       if (key == null) { throw new java.lang.NullPointerException(); }
       java.util.Map<java.lang.String, java.lang.String> map =
-          internalGetQueryParams().getMap();
+          internalGetQueryParamsOld().getMap();
       if (!map.containsKey(key)) {
         throw new java.lang.IllegalArgumentException();
       }
       return map.get(key);
     }
-
-    public Builder clearQueryParams() {
-      internalGetMutableQueryParams().getMutableMap()
+    @java.lang.Deprecated 
+    public Builder clearQueryParamsOld() {
+      internalGetMutableQueryParamsOld().getMutableMap()
           .clear();
       return this;
     }
     /**
      * <pre>
-     * The query params (if parseable by the membrane)
+     * The old query params (preserving for backwards compatibility)
+     * TODO: Remove in 1.0
      * </pre>
      *
-     * <code>map&lt;string, string&gt; query_params = 4;</code>
+     * <code>map&lt;string, string&gt; query_params_old = 4 [deprecated = true];</code>
      */
-
-    public Builder removeQueryParams(
+    @java.lang.Deprecated 
+    public Builder removeQueryParamsOld(
         java.lang.String key) {
       if (key == null) { throw new java.lang.NullPointerException(); }
-      internalGetMutableQueryParams().getMutableMap()
+      internalGetMutableQueryParamsOld().getMutableMap()
           .remove(key);
       return this;
     }
@@ -1446,36 +1598,38 @@ private static final long serialVersionUID = 0L;
      */
     @java.lang.Deprecated
     public java.util.Map<java.lang.String, java.lang.String>
-    getMutableQueryParams() {
-      return internalGetMutableQueryParams().getMutableMap();
+    getMutableQueryParamsOld() {
+      return internalGetMutableQueryParamsOld().getMutableMap();
     }
     /**
      * <pre>
-     * The query params (if parseable by the membrane)
+     * The old query params (preserving for backwards compatibility)
+     * TODO: Remove in 1.0
      * </pre>
      *
-     * <code>map&lt;string, string&gt; query_params = 4;</code>
+     * <code>map&lt;string, string&gt; query_params_old = 4 [deprecated = true];</code>
      */
-    public Builder putQueryParams(
+    @java.lang.Deprecated public Builder putQueryParamsOld(
         java.lang.String key,
         java.lang.String value) {
       if (key == null) { throw new java.lang.NullPointerException(); }
       if (value == null) { throw new java.lang.NullPointerException(); }
-      internalGetMutableQueryParams().getMutableMap()
+      internalGetMutableQueryParamsOld().getMutableMap()
           .put(key, value);
       return this;
     }
     /**
      * <pre>
-     * The query params (if parseable by the membrane)
+     * The old query params (preserving for backwards compatibility)
+     * TODO: Remove in 1.0
      * </pre>
      *
-     * <code>map&lt;string, string&gt; query_params = 4;</code>
+     * <code>map&lt;string, string&gt; query_params_old = 4 [deprecated = true];</code>
      */
-
-    public Builder putAllQueryParams(
+    @java.lang.Deprecated 
+    public Builder putAllQueryParamsOld(
         java.util.Map<java.lang.String, java.lang.String> values) {
-      internalGetMutableQueryParams().getMutableMap()
+      internalGetMutableQueryParamsOld().getMutableMap()
           .putAll(values);
       return this;
     }
@@ -1632,6 +1786,162 @@ private static final long serialVersionUID = 0L;
     public Builder putAllHeaders(
         java.util.Map<java.lang.String, io.nitric.proto.faas.v1.HeaderValue> values) {
       internalGetMutableHeaders().getMutableMap()
+          .putAll(values);
+      return this;
+    }
+
+    private com.google.protobuf.MapField<
+        java.lang.String, io.nitric.proto.faas.v1.QueryValue> queryParams_;
+    private com.google.protobuf.MapField<java.lang.String, io.nitric.proto.faas.v1.QueryValue>
+    internalGetQueryParams() {
+      if (queryParams_ == null) {
+        return com.google.protobuf.MapField.emptyMapField(
+            QueryParamsDefaultEntryHolder.defaultEntry);
+      }
+      return queryParams_;
+    }
+    private com.google.protobuf.MapField<java.lang.String, io.nitric.proto.faas.v1.QueryValue>
+    internalGetMutableQueryParams() {
+      onChanged();;
+      if (queryParams_ == null) {
+        queryParams_ = com.google.protobuf.MapField.newMapField(
+            QueryParamsDefaultEntryHolder.defaultEntry);
+      }
+      if (!queryParams_.isMutable()) {
+        queryParams_ = queryParams_.copy();
+      }
+      return queryParams_;
+    }
+
+    public int getQueryParamsCount() {
+      return internalGetQueryParams().getMap().size();
+    }
+    /**
+     * <pre>
+     * HTTP Query params
+     * </pre>
+     *
+     * <code>map&lt;string, .nitric.faas.v1.QueryValue&gt; query_params = 6;</code>
+     */
+
+    @java.lang.Override
+    public boolean containsQueryParams(
+        java.lang.String key) {
+      if (key == null) { throw new java.lang.NullPointerException(); }
+      return internalGetQueryParams().getMap().containsKey(key);
+    }
+    /**
+     * Use {@link #getQueryParamsMap()} instead.
+     */
+    @java.lang.Override
+    @java.lang.Deprecated
+    public java.util.Map<java.lang.String, io.nitric.proto.faas.v1.QueryValue> getQueryParams() {
+      return getQueryParamsMap();
+    }
+    /**
+     * <pre>
+     * HTTP Query params
+     * </pre>
+     *
+     * <code>map&lt;string, .nitric.faas.v1.QueryValue&gt; query_params = 6;</code>
+     */
+    @java.lang.Override
+
+    public java.util.Map<java.lang.String, io.nitric.proto.faas.v1.QueryValue> getQueryParamsMap() {
+      return internalGetQueryParams().getMap();
+    }
+    /**
+     * <pre>
+     * HTTP Query params
+     * </pre>
+     *
+     * <code>map&lt;string, .nitric.faas.v1.QueryValue&gt; query_params = 6;</code>
+     */
+    @java.lang.Override
+
+    public io.nitric.proto.faas.v1.QueryValue getQueryParamsOrDefault(
+        java.lang.String key,
+        io.nitric.proto.faas.v1.QueryValue defaultValue) {
+      if (key == null) { throw new java.lang.NullPointerException(); }
+      java.util.Map<java.lang.String, io.nitric.proto.faas.v1.QueryValue> map =
+          internalGetQueryParams().getMap();
+      return map.containsKey(key) ? map.get(key) : defaultValue;
+    }
+    /**
+     * <pre>
+     * HTTP Query params
+     * </pre>
+     *
+     * <code>map&lt;string, .nitric.faas.v1.QueryValue&gt; query_params = 6;</code>
+     */
+    @java.lang.Override
+
+    public io.nitric.proto.faas.v1.QueryValue getQueryParamsOrThrow(
+        java.lang.String key) {
+      if (key == null) { throw new java.lang.NullPointerException(); }
+      java.util.Map<java.lang.String, io.nitric.proto.faas.v1.QueryValue> map =
+          internalGetQueryParams().getMap();
+      if (!map.containsKey(key)) {
+        throw new java.lang.IllegalArgumentException();
+      }
+      return map.get(key);
+    }
+
+    public Builder clearQueryParams() {
+      internalGetMutableQueryParams().getMutableMap()
+          .clear();
+      return this;
+    }
+    /**
+     * <pre>
+     * HTTP Query params
+     * </pre>
+     *
+     * <code>map&lt;string, .nitric.faas.v1.QueryValue&gt; query_params = 6;</code>
+     */
+
+    public Builder removeQueryParams(
+        java.lang.String key) {
+      if (key == null) { throw new java.lang.NullPointerException(); }
+      internalGetMutableQueryParams().getMutableMap()
+          .remove(key);
+      return this;
+    }
+    /**
+     * Use alternate mutation accessors instead.
+     */
+    @java.lang.Deprecated
+    public java.util.Map<java.lang.String, io.nitric.proto.faas.v1.QueryValue>
+    getMutableQueryParams() {
+      return internalGetMutableQueryParams().getMutableMap();
+    }
+    /**
+     * <pre>
+     * HTTP Query params
+     * </pre>
+     *
+     * <code>map&lt;string, .nitric.faas.v1.QueryValue&gt; query_params = 6;</code>
+     */
+    public Builder putQueryParams(
+        java.lang.String key,
+        io.nitric.proto.faas.v1.QueryValue value) {
+      if (key == null) { throw new java.lang.NullPointerException(); }
+      if (value == null) { throw new java.lang.NullPointerException(); }
+      internalGetMutableQueryParams().getMutableMap()
+          .put(key, value);
+      return this;
+    }
+    /**
+     * <pre>
+     * HTTP Query params
+     * </pre>
+     *
+     * <code>map&lt;string, .nitric.faas.v1.QueryValue&gt; query_params = 6;</code>
+     */
+
+    public Builder putAllQueryParams(
+        java.util.Map<java.lang.String, io.nitric.proto.faas.v1.QueryValue> values) {
+      internalGetMutableQueryParams().getMutableMap()
           .putAll(values);
       return this;
     }

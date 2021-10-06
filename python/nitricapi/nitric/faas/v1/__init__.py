@@ -66,6 +66,11 @@ class HeaderValue(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class QueryValue(betterproto.Message):
+    value: List[str] = betterproto.string_field(1)
+
+
+@dataclass(eq=False, repr=False)
 class HttpTriggerContext(betterproto.Message):
     # The request method
     method: str = betterproto.string_field(1)
@@ -76,13 +81,18 @@ class HttpTriggerContext(betterproto.Message):
     headers_old: Dict[str, str] = betterproto.map_field(
         3, betterproto.TYPE_STRING, betterproto.TYPE_STRING
     )
-    # The query params (if parseable by the membrane)
-    query_params: Dict[str, str] = betterproto.map_field(
+    # The old query params (preserving for backwards compatibility) TODO: Remove
+    # in 1.0
+    query_params_old: Dict[str, str] = betterproto.map_field(
         4, betterproto.TYPE_STRING, betterproto.TYPE_STRING
     )
     # HTTP request headers
     headers: Dict[str, "HeaderValue"] = betterproto.map_field(
         5, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE
+    )
+    # HTTP Query params
+    query_params: Dict[str, "QueryValue"] = betterproto.map_field(
+        6, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE
     )
 
     def __post_init__(self) -> None:
@@ -90,6 +100,10 @@ class HttpTriggerContext(betterproto.Message):
         if self.headers_old:
             warnings.warn(
                 "HttpTriggerContext.headers_old is deprecated", DeprecationWarning
+            )
+        if self.query_params_old:
+            warnings.warn(
+                "HttpTriggerContext.query_params_old is deprecated", DeprecationWarning
             )
 
 

@@ -45,6 +45,11 @@ public final class NitricFaas {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_nitric_faas_v1_HeaderValue_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_nitric_faas_v1_QueryValue_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_nitric_faas_v1_QueryValue_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_nitric_faas_v1_HttpTriggerContext_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -55,15 +60,20 @@ public final class NitricFaas {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_nitric_faas_v1_HttpTriggerContext_HeadersOldEntry_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_nitric_faas_v1_HttpTriggerContext_QueryParamsEntry_descriptor;
+    internal_static_nitric_faas_v1_HttpTriggerContext_QueryParamsOldEntry_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_nitric_faas_v1_HttpTriggerContext_QueryParamsEntry_fieldAccessorTable;
+      internal_static_nitric_faas_v1_HttpTriggerContext_QueryParamsOldEntry_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
     internal_static_nitric_faas_v1_HttpTriggerContext_HeadersEntry_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_nitric_faas_v1_HttpTriggerContext_HeadersEntry_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_nitric_faas_v1_HttpTriggerContext_QueryParamsEntry_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_nitric_faas_v1_HttpTriggerContext_QueryParamsEntry_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
     internal_static_nitric_faas_v1_TopicTriggerContext_descriptor;
   static final 
@@ -117,37 +127,42 @@ public final class NitricFaas {
       "ttp\030\003 \001(\0132\".nitric.faas.v1.HttpTriggerCo" +
       "ntextH\000\0224\n\005topic\030\004 \001(\0132#.nitric.faas.v1." +
       "TopicTriggerContextH\000B\t\n\007context\"\034\n\013Head" +
-      "erValue\022\r\n\005value\030\001 \003(\t\"\300\003\n\022HttpTriggerCo" +
-      "ntext\022\016\n\006method\030\001 \001(\t\022\014\n\004path\030\002 \001(\t\022K\n\013h" +
-      "eaders_old\030\003 \003(\01322.nitric.faas.v1.HttpTr" +
-      "iggerContext.HeadersOldEntryB\002\030\001\022I\n\014quer" +
-      "y_params\030\004 \003(\01323.nitric.faas.v1.HttpTrig" +
-      "gerContext.QueryParamsEntry\022@\n\007headers\030\005" +
+      "erValue\022\r\n\005value\030\001 \003(\t\"\033\n\nQueryValue\022\r\n\005" +
+      "value\030\001 \003(\t\"\351\004\n\022HttpTriggerContext\022\016\n\006me" +
+      "thod\030\001 \001(\t\022\014\n\004path\030\002 \001(\t\022K\n\013headers_old\030" +
+      "\003 \003(\01322.nitric.faas.v1.HttpTriggerContex" +
+      "t.HeadersOldEntryB\002\030\001\022T\n\020query_params_ol" +
+      "d\030\004 \003(\01326.nitric.faas.v1.HttpTriggerCont" +
+      "ext.QueryParamsOldEntryB\002\030\001\022@\n\007headers\030\005" +
       " \003(\0132/.nitric.faas.v1.HttpTriggerContext" +
-      ".HeadersEntry\0321\n\017HeadersOldEntry\022\013\n\003key\030" +
-      "\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\0322\n\020QueryParamsE" +
-      "ntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\032K\n\014" +
-      "HeadersEntry\022\013\n\003key\030\001 \001(\t\022*\n\005value\030\002 \001(\013" +
-      "2\033.nitric.faas.v1.HeaderValue:\0028\001\"$\n\023Top" +
-      "icTriggerContext\022\r\n\005topic\030\001 \001(\t\"\226\001\n\017Trig" +
-      "gerResponse\022\014\n\004data\030\001 \001(\014\0223\n\004http\030\n \001(\0132" +
-      "#.nitric.faas.v1.HttpResponseContextH\000\0225" +
-      "\n\005topic\030\013 \001(\0132$.nitric.faas.v1.TopicResp" +
-      "onseContextH\000B\t\n\007context\"\266\002\n\023HttpRespons" +
-      "eContext\022L\n\013headers_old\030\001 \003(\01323.nitric.f" +
-      "aas.v1.HttpResponseContext.HeadersOldEnt" +
-      "ryB\002\030\001\022\016\n\006status\030\002 \001(\005\022A\n\007headers\030\003 \003(\0132" +
-      "0.nitric.faas.v1.HttpResponseContext.Hea" +
-      "dersEntry\0321\n\017HeadersOldEntry\022\013\n\003key\030\001 \001(" +
-      "\t\022\r\n\005value\030\002 \001(\t:\0028\001\032K\n\014HeadersEntry\022\013\n\003" +
-      "key\030\001 \001(\t\022*\n\005value\030\002 \001(\0132\033.nitric.faas.v" +
-      "1.HeaderValue:\0028\001\"\'\n\024TopicResponseContex" +
-      "t\022\017\n\007success\030\001 \001(\0102`\n\013FaasService\022Q\n\rTri" +
-      "ggerStream\022\035.nitric.faas.v1.ClientMessag" +
-      "e\032\035.nitric.faas.v1.ServerMessage(\0010\001Bc\n\027" +
-      "io.nitric.proto.faas.v1B\nNitricFaasP\001Z\014n" +
-      "itric/v1;v1\252\002\024Nitric.Proto.Faas.v1\312\002\024Nit" +
-      "ric\\Proto\\Faas\\V1b\006proto3"
+      ".HeadersEntry\022I\n\014query_params\030\006 \003(\01323.ni" +
+      "tric.faas.v1.HttpTriggerContext.QueryPar" +
+      "amsEntry\0321\n\017HeadersOldEntry\022\013\n\003key\030\001 \001(\t" +
+      "\022\r\n\005value\030\002 \001(\t:\0028\001\0325\n\023QueryParamsOldEnt" +
+      "ry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\032K\n\014He" +
+      "adersEntry\022\013\n\003key\030\001 \001(\t\022*\n\005value\030\002 \001(\0132\033" +
+      ".nitric.faas.v1.HeaderValue:\0028\001\032N\n\020Query" +
+      "ParamsEntry\022\013\n\003key\030\001 \001(\t\022)\n\005value\030\002 \001(\0132" +
+      "\032.nitric.faas.v1.QueryValue:\0028\001\"$\n\023Topic" +
+      "TriggerContext\022\r\n\005topic\030\001 \001(\t\"\226\001\n\017Trigge" +
+      "rResponse\022\014\n\004data\030\001 \001(\014\0223\n\004http\030\n \001(\0132#." +
+      "nitric.faas.v1.HttpResponseContextH\000\0225\n\005" +
+      "topic\030\013 \001(\0132$.nitric.faas.v1.TopicRespon" +
+      "seContextH\000B\t\n\007context\"\266\002\n\023HttpResponseC" +
+      "ontext\022L\n\013headers_old\030\001 \003(\01323.nitric.faa" +
+      "s.v1.HttpResponseContext.HeadersOldEntry" +
+      "B\002\030\001\022\016\n\006status\030\002 \001(\005\022A\n\007headers\030\003 \003(\01320." +
+      "nitric.faas.v1.HttpResponseContext.Heade" +
+      "rsEntry\0321\n\017HeadersOldEntry\022\013\n\003key\030\001 \001(\t\022" +
+      "\r\n\005value\030\002 \001(\t:\0028\001\032K\n\014HeadersEntry\022\013\n\003ke" +
+      "y\030\001 \001(\t\022*\n\005value\030\002 \001(\0132\033.nitric.faas.v1." +
+      "HeaderValue:\0028\001\"\'\n\024TopicResponseContext\022" +
+      "\017\n\007success\030\001 \001(\0102`\n\013FaasService\022Q\n\rTrigg" +
+      "erStream\022\035.nitric.faas.v1.ClientMessage\032" +
+      "\035.nitric.faas.v1.ServerMessage(\0010\001Bc\n\027io" +
+      ".nitric.proto.faas.v1B\nNitricFaasP\001Z\014nit" +
+      "ric/v1;v1\252\002\024Nitric.Proto.Faas.v1\312\002\024Nitri" +
+      "c\\Proto\\Faas\\V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -189,23 +204,29 @@ public final class NitricFaas {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_nitric_faas_v1_HeaderValue_descriptor,
         new java.lang.String[] { "Value", });
-    internal_static_nitric_faas_v1_HttpTriggerContext_descriptor =
+    internal_static_nitric_faas_v1_QueryValue_descriptor =
       getDescriptor().getMessageTypes().get(6);
+    internal_static_nitric_faas_v1_QueryValue_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_nitric_faas_v1_QueryValue_descriptor,
+        new java.lang.String[] { "Value", });
+    internal_static_nitric_faas_v1_HttpTriggerContext_descriptor =
+      getDescriptor().getMessageTypes().get(7);
     internal_static_nitric_faas_v1_HttpTriggerContext_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_nitric_faas_v1_HttpTriggerContext_descriptor,
-        new java.lang.String[] { "Method", "Path", "HeadersOld", "QueryParams", "Headers", });
+        new java.lang.String[] { "Method", "Path", "HeadersOld", "QueryParamsOld", "Headers", "QueryParams", });
     internal_static_nitric_faas_v1_HttpTriggerContext_HeadersOldEntry_descriptor =
       internal_static_nitric_faas_v1_HttpTriggerContext_descriptor.getNestedTypes().get(0);
     internal_static_nitric_faas_v1_HttpTriggerContext_HeadersOldEntry_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_nitric_faas_v1_HttpTriggerContext_HeadersOldEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
-    internal_static_nitric_faas_v1_HttpTriggerContext_QueryParamsEntry_descriptor =
+    internal_static_nitric_faas_v1_HttpTriggerContext_QueryParamsOldEntry_descriptor =
       internal_static_nitric_faas_v1_HttpTriggerContext_descriptor.getNestedTypes().get(1);
-    internal_static_nitric_faas_v1_HttpTriggerContext_QueryParamsEntry_fieldAccessorTable = new
+    internal_static_nitric_faas_v1_HttpTriggerContext_QueryParamsOldEntry_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_nitric_faas_v1_HttpTriggerContext_QueryParamsEntry_descriptor,
+        internal_static_nitric_faas_v1_HttpTriggerContext_QueryParamsOldEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
     internal_static_nitric_faas_v1_HttpTriggerContext_HeadersEntry_descriptor =
       internal_static_nitric_faas_v1_HttpTriggerContext_descriptor.getNestedTypes().get(2);
@@ -213,20 +234,26 @@ public final class NitricFaas {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_nitric_faas_v1_HttpTriggerContext_HeadersEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
+    internal_static_nitric_faas_v1_HttpTriggerContext_QueryParamsEntry_descriptor =
+      internal_static_nitric_faas_v1_HttpTriggerContext_descriptor.getNestedTypes().get(3);
+    internal_static_nitric_faas_v1_HttpTriggerContext_QueryParamsEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_nitric_faas_v1_HttpTriggerContext_QueryParamsEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
     internal_static_nitric_faas_v1_TopicTriggerContext_descriptor =
-      getDescriptor().getMessageTypes().get(7);
+      getDescriptor().getMessageTypes().get(8);
     internal_static_nitric_faas_v1_TopicTriggerContext_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_nitric_faas_v1_TopicTriggerContext_descriptor,
         new java.lang.String[] { "Topic", });
     internal_static_nitric_faas_v1_TriggerResponse_descriptor =
-      getDescriptor().getMessageTypes().get(8);
+      getDescriptor().getMessageTypes().get(9);
     internal_static_nitric_faas_v1_TriggerResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_nitric_faas_v1_TriggerResponse_descriptor,
         new java.lang.String[] { "Data", "Http", "Topic", "Context", });
     internal_static_nitric_faas_v1_HttpResponseContext_descriptor =
-      getDescriptor().getMessageTypes().get(9);
+      getDescriptor().getMessageTypes().get(10);
     internal_static_nitric_faas_v1_HttpResponseContext_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_nitric_faas_v1_HttpResponseContext_descriptor,
@@ -244,7 +271,7 @@ public final class NitricFaas {
         internal_static_nitric_faas_v1_HttpResponseContext_HeadersEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
     internal_static_nitric_faas_v1_TopicResponseContext_descriptor =
-      getDescriptor().getMessageTypes().get(10);
+      getDescriptor().getMessageTypes().get(11);
     internal_static_nitric_faas_v1_TopicResponseContext_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_nitric_faas_v1_TopicResponseContext_descriptor,

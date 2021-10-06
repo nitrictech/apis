@@ -108,56 +108,61 @@ public interface HttpTriggerContextOrBuilder extends
 
   /**
    * <pre>
-   * The query params (if parseable by the membrane)
+   * The old query params (preserving for backwards compatibility)
+   * TODO: Remove in 1.0
    * </pre>
    *
-   * <code>map&lt;string, string&gt; query_params = 4;</code>
+   * <code>map&lt;string, string&gt; query_params_old = 4 [deprecated = true];</code>
    */
-  int getQueryParamsCount();
+  @java.lang.Deprecated int getQueryParamsOldCount();
   /**
    * <pre>
-   * The query params (if parseable by the membrane)
+   * The old query params (preserving for backwards compatibility)
+   * TODO: Remove in 1.0
    * </pre>
    *
-   * <code>map&lt;string, string&gt; query_params = 4;</code>
+   * <code>map&lt;string, string&gt; query_params_old = 4 [deprecated = true];</code>
    */
-  boolean containsQueryParams(
+  @java.lang.Deprecated boolean containsQueryParamsOld(
       java.lang.String key);
   /**
-   * Use {@link #getQueryParamsMap()} instead.
+   * Use {@link #getQueryParamsOldMap()} instead.
    */
   @java.lang.Deprecated
   java.util.Map<java.lang.String, java.lang.String>
-  getQueryParams();
+  getQueryParamsOld();
   /**
    * <pre>
-   * The query params (if parseable by the membrane)
+   * The old query params (preserving for backwards compatibility)
+   * TODO: Remove in 1.0
    * </pre>
    *
-   * <code>map&lt;string, string&gt; query_params = 4;</code>
+   * <code>map&lt;string, string&gt; query_params_old = 4 [deprecated = true];</code>
    */
-  java.util.Map<java.lang.String, java.lang.String>
-  getQueryParamsMap();
+  @java.lang.Deprecated java.util.Map<java.lang.String, java.lang.String>
+  getQueryParamsOldMap();
   /**
    * <pre>
-   * The query params (if parseable by the membrane)
+   * The old query params (preserving for backwards compatibility)
+   * TODO: Remove in 1.0
    * </pre>
    *
-   * <code>map&lt;string, string&gt; query_params = 4;</code>
+   * <code>map&lt;string, string&gt; query_params_old = 4 [deprecated = true];</code>
    */
-
-  java.lang.String getQueryParamsOrDefault(
+  @java.lang.Deprecated 
+  java.lang.String getQueryParamsOldOrDefault(
       java.lang.String key,
       java.lang.String defaultValue);
   /**
    * <pre>
-   * The query params (if parseable by the membrane)
+   * The old query params (preserving for backwards compatibility)
+   * TODO: Remove in 1.0
    * </pre>
    *
-   * <code>map&lt;string, string&gt; query_params = 4;</code>
+   * <code>map&lt;string, string&gt; query_params_old = 4 [deprecated = true];</code>
    */
-
-  java.lang.String getQueryParamsOrThrow(
+  @java.lang.Deprecated 
+  java.lang.String getQueryParamsOldOrThrow(
       java.lang.String key);
 
   /**
@@ -212,5 +217,59 @@ public interface HttpTriggerContextOrBuilder extends
    */
 
   io.nitric.proto.faas.v1.HeaderValue getHeadersOrThrow(
+      java.lang.String key);
+
+  /**
+   * <pre>
+   * HTTP Query params
+   * </pre>
+   *
+   * <code>map&lt;string, .nitric.faas.v1.QueryValue&gt; query_params = 6;</code>
+   */
+  int getQueryParamsCount();
+  /**
+   * <pre>
+   * HTTP Query params
+   * </pre>
+   *
+   * <code>map&lt;string, .nitric.faas.v1.QueryValue&gt; query_params = 6;</code>
+   */
+  boolean containsQueryParams(
+      java.lang.String key);
+  /**
+   * Use {@link #getQueryParamsMap()} instead.
+   */
+  @java.lang.Deprecated
+  java.util.Map<java.lang.String, io.nitric.proto.faas.v1.QueryValue>
+  getQueryParams();
+  /**
+   * <pre>
+   * HTTP Query params
+   * </pre>
+   *
+   * <code>map&lt;string, .nitric.faas.v1.QueryValue&gt; query_params = 6;</code>
+   */
+  java.util.Map<java.lang.String, io.nitric.proto.faas.v1.QueryValue>
+  getQueryParamsMap();
+  /**
+   * <pre>
+   * HTTP Query params
+   * </pre>
+   *
+   * <code>map&lt;string, .nitric.faas.v1.QueryValue&gt; query_params = 6;</code>
+   */
+
+  io.nitric.proto.faas.v1.QueryValue getQueryParamsOrDefault(
+      java.lang.String key,
+      io.nitric.proto.faas.v1.QueryValue defaultValue);
+  /**
+   * <pre>
+   * HTTP Query params
+   * </pre>
+   *
+   * <code>map&lt;string, .nitric.faas.v1.QueryValue&gt; query_params = 6;</code>
+   */
+
+  io.nitric.proto.faas.v1.QueryValue getQueryParamsOrThrow(
       java.lang.String key);
 }

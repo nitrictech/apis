@@ -1,0 +1,42 @@
+name: Publish Node.js base SDK to npm
+on: 
+  release:
+     types: [published]
+
+defaults:
+  run:
+    shell: bash
+    working-directory: node
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Use Node 14
+      uses: actions/setup-node@v1
+      with:
+        node-version: 14
+        registry-url: 'https://registry.npmjs.org'
+        always-auth: true
+
+    # No need to sanitise the version npm version will already do that for us
+    - name: Set version
+      run: npm version ${{ github.event.release.tag_name }}
+
+    # Release Production
+    - name: Publish latest to NPM
+      if: "!github.event.release.prerelease"
+      run: npm publish
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+    # release RC
+    - name: Publish latest RC to NPM
+      if: "github.event.release.prerelease"
+      run: npm publish --access public --tag rc-latest
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

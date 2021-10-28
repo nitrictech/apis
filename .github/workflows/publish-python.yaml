@@ -1,0 +1,32 @@
+name: Publish Python base SDK
+
+on:
+  release:
+     types: [published]
+
+defaults:
+  run:
+    shell: bash
+    working-directory: python
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2.3.1
+
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - name: Build distribution
+      run: make build-dist
+
+    - name: Publish to PyPI
+      uses: pypa/gh-action-pypi-publish@master
+      with:
+        packages_dir: python/dist
+        password: ${{ secrets.PYPI_API_TOKEN }}
+    

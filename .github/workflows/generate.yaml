@@ -95,7 +95,7 @@ jobs:
         if: "!github.event.client_payload.prerelease"
         run: |
           git checkout main
-          git merge --no-ff -m "Release ${{ github.event.client_payload.tag_name }}" develop
+          git merge --no-ff --allow-unrelated-histories -m "Release ${{ github.event.client_payload.tag_name }}" develop
           git tag ${{ github.event.client_payload.tag_name }}
           git push origin main develop ${{ github.event.client_payload.tag_name }}
 

@@ -1,3 +1,6 @@
 contracts/
-
 contracts.tgz
+
+jvm/.classpath
+jvm/.project
+jvm/.settings/

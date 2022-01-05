@@ -81,7 +81,152 @@ export namespace ServerMessage {
   }
 }
 
+export class ApiWorker extends jspb.Message {
+  getApi(): string;
+  setApi(value: string): void;
+
+  getPath(): string;
+  setPath(value: string): void;
+
+  clearMethodsList(): void;
+  getMethodsList(): Array<string>;
+  setMethodsList(value: Array<string>): void;
+  addMethods(value: string, index?: number): string;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): ApiWorker.AsObject;
+  static toObject(includeInstance: boolean, msg: ApiWorker): ApiWorker.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: ApiWorker, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ApiWorker;
+  static deserializeBinaryFromReader(message: ApiWorker, reader: jspb.BinaryReader): ApiWorker;
+}
+
+export namespace ApiWorker {
+  export type AsObject = {
+    api: string,
+    path: string,
+    methodsList: Array<string>,
+  }
+}
+
+export class SubscriptionWorker extends jspb.Message {
+  getTopic(): string;
+  setTopic(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): SubscriptionWorker.AsObject;
+  static toObject(includeInstance: boolean, msg: SubscriptionWorker): SubscriptionWorker.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: SubscriptionWorker, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): SubscriptionWorker;
+  static deserializeBinaryFromReader(message: SubscriptionWorker, reader: jspb.BinaryReader): SubscriptionWorker;
+}
+
+export namespace SubscriptionWorker {
+  export type AsObject = {
+    topic: string,
+  }
+}
+
+export class ScheduleWorker extends jspb.Message {
+  getKey(): string;
+  setKey(value: string): void;
+
+  hasRate(): boolean;
+  clearRate(): void;
+  getRate(): ScheduleRate | undefined;
+  setRate(value?: ScheduleRate): void;
+
+  hasCron(): boolean;
+  clearCron(): void;
+  getCron(): ScheduleCron | undefined;
+  setCron(value?: ScheduleCron): void;
+
+  getCadenceCase(): ScheduleWorker.CadenceCase;
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): ScheduleWorker.AsObject;
+  static toObject(includeInstance: boolean, msg: ScheduleWorker): ScheduleWorker.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: ScheduleWorker, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ScheduleWorker;
+  static deserializeBinaryFromReader(message: ScheduleWorker, reader: jspb.BinaryReader): ScheduleWorker;
+}
+
+export namespace ScheduleWorker {
+  export type AsObject = {
+    key: string,
+    rate?: ScheduleRate.AsObject,
+    cron?: ScheduleCron.AsObject,
+  }
+
+  export enum CadenceCase {
+    CADENCE_NOT_SET = 0,
+    RATE = 10,
+    CRON = 11,
+  }
+}
+
+export class ScheduleRate extends jspb.Message {
+  getRate(): string;
+  setRate(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): ScheduleRate.AsObject;
+  static toObject(includeInstance: boolean, msg: ScheduleRate): ScheduleRate.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: ScheduleRate, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ScheduleRate;
+  static deserializeBinaryFromReader(message: ScheduleRate, reader: jspb.BinaryReader): ScheduleRate;
+}
+
+export namespace ScheduleRate {
+  export type AsObject = {
+    rate: string,
+  }
+}
+
+export class ScheduleCron extends jspb.Message {
+  getCron(): string;
+  setCron(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): ScheduleCron.AsObject;
+  static toObject(includeInstance: boolean, msg: ScheduleCron): ScheduleCron.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: ScheduleCron, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ScheduleCron;
+  static deserializeBinaryFromReader(message: ScheduleCron, reader: jspb.BinaryReader): ScheduleCron;
+}
+
+export namespace ScheduleCron {
+  export type AsObject = {
+    cron: string,
+  }
+}
+
 export class InitRequest extends jspb.Message {
+  hasApi(): boolean;
+  clearApi(): void;
+  getApi(): ApiWorker | undefined;
+  setApi(value?: ApiWorker): void;
+
+  hasSubscription(): boolean;
+  clearSubscription(): void;
+  getSubscription(): SubscriptionWorker | undefined;
+  setSubscription(value?: SubscriptionWorker): void;
+
+  hasSchedule(): boolean;
+  clearSchedule(): void;
+  getSchedule(): ScheduleWorker | undefined;
+  setSchedule(value?: ScheduleWorker): void;
+
+  getWorkerCase(): InitRequest.WorkerCase;
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): InitRequest.AsObject;
   static toObject(includeInstance: boolean, msg: InitRequest): InitRequest.AsObject;
@@ -94,6 +239,16 @@ export class InitRequest extends jspb.Message {
 
 export namespace InitRequest {
   export type AsObject = {
+    api?: ApiWorker.AsObject,
+    subscription?: SubscriptionWorker.AsObject,
+    schedule?: ScheduleWorker.AsObject,
+  }
+
+  export enum WorkerCase {
+    WORKER_NOT_SET = 0,
+    API = 10,
+    SUBSCRIPTION = 11,
+    SCHEDULE = 12,
   }
 }
 

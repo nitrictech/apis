@@ -6,4 +6,51 @@ package io.nitric.proto.faas.v1;
 public interface InitRequestOrBuilder extends
     // @@protoc_insertion_point(interface_extends:nitric.faas.v1.InitRequest)
     com.google.protobuf.MessageOrBuilder {
+
+  /**
+   * <code>.nitric.faas.v1.ApiWorker api = 10;</code>
+   * @return Whether the api field is set.
+   */
+  boolean hasApi();
+  /**
+   * <code>.nitric.faas.v1.ApiWorker api = 10;</code>
+   * @return The api.
+   */
+  io.nitric.proto.faas.v1.ApiWorker getApi();
+  /**
+   * <code>.nitric.faas.v1.ApiWorker api = 10;</code>
+   */
+  io.nitric.proto.faas.v1.ApiWorkerOrBuilder getApiOrBuilder();
+
+  /**
+   * <code>.nitric.faas.v1.SubscriptionWorker subscription = 11;</code>
+   * @return Whether the subscription field is set.
+   */
+  boolean hasSubscription();
+  /**
+   * <code>.nitric.faas.v1.SubscriptionWorker subscription = 11;</code>
+   * @return The subscription.
+   */
+  io.nitric.proto.faas.v1.SubscriptionWorker getSubscription();
+  /**
+   * <code>.nitric.faas.v1.SubscriptionWorker subscription = 11;</code>
+   */
+  io.nitric.proto.faas.v1.SubscriptionWorkerOrBuilder getSubscriptionOrBuilder();
+
+  /**
+   * <code>.nitric.faas.v1.ScheduleWorker schedule = 12;</code>
+   * @return Whether the schedule field is set.
+   */
+  boolean hasSchedule();
+  /**
+   * <code>.nitric.faas.v1.ScheduleWorker schedule = 12;</code>
+   * @return The schedule.
+   */
+  io.nitric.proto.faas.v1.ScheduleWorker getSchedule();
+  /**
+   * <code>.nitric.faas.v1.ScheduleWorker schedule = 12;</code>
+   */
+  io.nitric.proto.faas.v1.ScheduleWorkerOrBuilder getScheduleOrBuilder();
+
+  public io.nitric.proto.faas.v1.InitRequest.WorkerCase getWorkerCase();
 }

@@ -5,7 +5,9 @@ package io.nitric.proto.faas.v1;
 
 /**
  * <pre>
- * Placeholder message
+ * InitRequest - Identifies a worker as ready to recieve triggers
+ * This message will contain information on the type of triggers that
+ * a worker is capable of handling
  * </pre>
  *
  * Protobuf type {@code nitric.faas.v1.InitRequest}
@@ -52,6 +54,48 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
+          case 82: {
+            io.nitric.proto.faas.v1.ApiWorker.Builder subBuilder = null;
+            if (workerCase_ == 10) {
+              subBuilder = ((io.nitric.proto.faas.v1.ApiWorker) worker_).toBuilder();
+            }
+            worker_ =
+                input.readMessage(io.nitric.proto.faas.v1.ApiWorker.parser(), extensionRegistry);
+            if (subBuilder != null) {
+              subBuilder.mergeFrom((io.nitric.proto.faas.v1.ApiWorker) worker_);
+              worker_ = subBuilder.buildPartial();
+            }
+            workerCase_ = 10;
+            break;
+          }
+          case 90: {
+            io.nitric.proto.faas.v1.SubscriptionWorker.Builder subBuilder = null;
+            if (workerCase_ == 11) {
+              subBuilder = ((io.nitric.proto.faas.v1.SubscriptionWorker) worker_).toBuilder();
+            }
+            worker_ =
+                input.readMessage(io.nitric.proto.faas.v1.SubscriptionWorker.parser(), extensionRegistry);
+            if (subBuilder != null) {
+              subBuilder.mergeFrom((io.nitric.proto.faas.v1.SubscriptionWorker) worker_);
+              worker_ = subBuilder.buildPartial();
+            }
+            workerCase_ = 11;
+            break;
+          }
+          case 98: {
+            io.nitric.proto.faas.v1.ScheduleWorker.Builder subBuilder = null;
+            if (workerCase_ == 12) {
+              subBuilder = ((io.nitric.proto.faas.v1.ScheduleWorker) worker_).toBuilder();
+            }
+            worker_ =
+                input.readMessage(io.nitric.proto.faas.v1.ScheduleWorker.parser(), extensionRegistry);
+            if (subBuilder != null) {
+              subBuilder.mergeFrom((io.nitric.proto.faas.v1.ScheduleWorker) worker_);
+              worker_ = subBuilder.buildPartial();
+            }
+            workerCase_ = 12;
+            break;
+          }
           default: {
             if (!parseUnknownField(
                 input, unknownFields, extensionRegistry, tag)) {
@@ -84,6 +128,142 @@ private static final long serialVersionUID = 0L;
             io.nitric.proto.faas.v1.InitRequest.class, io.nitric.proto.faas.v1.InitRequest.Builder.class);
   }
 
+  private int workerCase_ = 0;
+  private java.lang.Object worker_;
+  public enum WorkerCase
+      implements com.google.protobuf.Internal.EnumLite,
+          com.google.protobuf.AbstractMessage.InternalOneOfEnum {
+    API(10),
+    SUBSCRIPTION(11),
+    SCHEDULE(12),
+    WORKER_NOT_SET(0);
+    private final int value;
+    private WorkerCase(int value) {
+      this.value = value;
+    }
+    /**
+     * @param value The number of the enum to look for.
+     * @return The enum associated with the given number.
+     * @deprecated Use {@link #forNumber(int)} instead.
+     */
+    @java.lang.Deprecated
+    public static WorkerCase valueOf(int value) {
+      return forNumber(value);
+    }
+
+    public static WorkerCase forNumber(int value) {
+      switch (value) {
+        case 10: return API;
+        case 11: return SUBSCRIPTION;
+        case 12: return SCHEDULE;
+        case 0: return WORKER_NOT_SET;
+        default: return null;
+      }
+    }
+    public int getNumber() {
+      return this.value;
+    }
+  };
+
+  public WorkerCase
+  getWorkerCase() {
+    return WorkerCase.forNumber(
+        workerCase_);
+  }
+
+  public static final int API_FIELD_NUMBER = 10;
+  /**
+   * <code>.nitric.faas.v1.ApiWorker api = 10;</code>
+   * @return Whether the api field is set.
+   */
+  @java.lang.Override
+  public boolean hasApi() {
+    return workerCase_ == 10;
+  }
+  /**
+   * <code>.nitric.faas.v1.ApiWorker api = 10;</code>
+   * @return The api.
+   */
+  @java.lang.Override
+  public io.nitric.proto.faas.v1.ApiWorker getApi() {
+    if (workerCase_ == 10) {
+       return (io.nitric.proto.faas.v1.ApiWorker) worker_;
+    }
+    return io.nitric.proto.faas.v1.ApiWorker.getDefaultInstance();
+  }
+  /**
+   * <code>.nitric.faas.v1.ApiWorker api = 10;</code>
+   */
+  @java.lang.Override
+  public io.nitric.proto.faas.v1.ApiWorkerOrBuilder getApiOrBuilder() {
+    if (workerCase_ == 10) {
+       return (io.nitric.proto.faas.v1.ApiWorker) worker_;
+    }
+    return io.nitric.proto.faas.v1.ApiWorker.getDefaultInstance();
+  }
+
+  public static final int SUBSCRIPTION_FIELD_NUMBER = 11;
+  /**
+   * <code>.nitric.faas.v1.SubscriptionWorker subscription = 11;</code>
+   * @return Whether the subscription field is set.
+   */
+  @java.lang.Override
+  public boolean hasSubscription() {
+    return workerCase_ == 11;
+  }
+  /**
+   * <code>.nitric.faas.v1.SubscriptionWorker subscription = 11;</code>
+   * @return The subscription.
+   */
+  @java.lang.Override
+  public io.nitric.proto.faas.v1.SubscriptionWorker getSubscription() {
+    if (workerCase_ == 11) {
+       return (io.nitric.proto.faas.v1.SubscriptionWorker) worker_;
+    }
+    return io.nitric.proto.faas.v1.SubscriptionWorker.getDefaultInstance();
+  }
+  /**
+   * <code>.nitric.faas.v1.SubscriptionWorker subscription = 11;</code>
+   */
+  @java.lang.Override
+  public io.nitric.proto.faas.v1.SubscriptionWorkerOrBuilder getSubscriptionOrBuilder() {
+    if (workerCase_ == 11) {
+       return (io.nitric.proto.faas.v1.SubscriptionWorker) worker_;
+    }
+    return io.nitric.proto.faas.v1.SubscriptionWorker.getDefaultInstance();
+  }
+
+  public static final int SCHEDULE_FIELD_NUMBER = 12;
+  /**
+   * <code>.nitric.faas.v1.ScheduleWorker schedule = 12;</code>
+   * @return Whether the schedule field is set.
+   */
+  @java.lang.Override
+  public boolean hasSchedule() {
+    return workerCase_ == 12;
+  }
+  /**
+   * <code>.nitric.faas.v1.ScheduleWorker schedule = 12;</code>
+   * @return The schedule.
+   */
+  @java.lang.Override
+  public io.nitric.proto.faas.v1.ScheduleWorker getSchedule() {
+    if (workerCase_ == 12) {
+       return (io.nitric.proto.faas.v1.ScheduleWorker) worker_;
+    }
+    return io.nitric.proto.faas.v1.ScheduleWorker.getDefaultInstance();
+  }
+  /**
+   * <code>.nitric.faas.v1.ScheduleWorker schedule = 12;</code>
+   */
+  @java.lang.Override
+  public io.nitric.proto.faas.v1.ScheduleWorkerOrBuilder getScheduleOrBuilder() {
+    if (workerCase_ == 12) {
+       return (io.nitric.proto.faas.v1.ScheduleWorker) worker_;
+    }
+    return io.nitric.proto.faas.v1.ScheduleWorker.getDefaultInstance();
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -98,6 +278,15 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
+    if (workerCase_ == 10) {
+      output.writeMessage(10, (io.nitric.proto.faas.v1.ApiWorker) worker_);
+    }
+    if (workerCase_ == 11) {
+      output.writeMessage(11, (io.nitric.proto.faas.v1.SubscriptionWorker) worker_);
+    }
+    if (workerCase_ == 12) {
+      output.writeMessage(12, (io.nitric.proto.faas.v1.ScheduleWorker) worker_);
+    }
     unknownFields.writeTo(output);
   }
 
@@ -107,6 +296,18 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
+    if (workerCase_ == 10) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(10, (io.nitric.proto.faas.v1.ApiWorker) worker_);
+    }
+    if (workerCase_ == 11) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(11, (io.nitric.proto.faas.v1.SubscriptionWorker) worker_);
+    }
+    if (workerCase_ == 12) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(12, (io.nitric.proto.faas.v1.ScheduleWorker) worker_);
+    }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
     return size;
@@ -122,6 +323,23 @@ private static final long serialVersionUID = 0L;
     }
     io.nitric.proto.faas.v1.InitRequest other = (io.nitric.proto.faas.v1.InitRequest) obj;
 
+    if (!getWorkerCase().equals(other.getWorkerCase())) return false;
+    switch (workerCase_) {
+      case 10:
+        if (!getApi()
+            .equals(other.getApi())) return false;
+        break;
+      case 11:
+        if (!getSubscription()
+            .equals(other.getSubscription())) return false;
+        break;
+      case 12:
+        if (!getSchedule()
+            .equals(other.getSchedule())) return false;
+        break;
+      case 0:
+      default:
+    }
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -133,6 +351,22 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
+    switch (workerCase_) {
+      case 10:
+        hash = (37 * hash) + API_FIELD_NUMBER;
+        hash = (53 * hash) + getApi().hashCode();
+        break;
+      case 11:
+        hash = (37 * hash) + SUBSCRIPTION_FIELD_NUMBER;
+        hash = (53 * hash) + getSubscription().hashCode();
+        break;
+      case 12:
+        hash = (37 * hash) + SCHEDULE_FIELD_NUMBER;
+        hash = (53 * hash) + getSchedule().hashCode();
+        break;
+      case 0:
+      default:
+    }
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -230,7 +464,9 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Placeholder message
+   * InitRequest - Identifies a worker as ready to recieve triggers
+   * This message will contain information on the type of triggers that
+   * a worker is capable of handling
    * </pre>
    *
    * Protobuf type {@code nitric.faas.v1.InitRequest}
@@ -270,6 +506,8 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
+      workerCase_ = 0;
+      worker_ = null;
       return this;
     }
 
@@ -296,6 +534,28 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public io.nitric.proto.faas.v1.InitRequest buildPartial() {
       io.nitric.proto.faas.v1.InitRequest result = new io.nitric.proto.faas.v1.InitRequest(this);
+      if (workerCase_ == 10) {
+        if (apiBuilder_ == null) {
+          result.worker_ = worker_;
+        } else {
+          result.worker_ = apiBuilder_.build();
+        }
+      }
+      if (workerCase_ == 11) {
+        if (subscriptionBuilder_ == null) {
+          result.worker_ = worker_;
+        } else {
+          result.worker_ = subscriptionBuilder_.build();
+        }
+      }
+      if (workerCase_ == 12) {
+        if (scheduleBuilder_ == null) {
+          result.worker_ = worker_;
+        } else {
+          result.worker_ = scheduleBuilder_.build();
+        }
+      }
+      result.workerCase_ = workerCase_;
       onBuilt();
       return result;
     }
@@ -344,6 +604,23 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(io.nitric.proto.faas.v1.InitRequest other) {
       if (other == io.nitric.proto.faas.v1.InitRequest.getDefaultInstance()) return this;
+      switch (other.getWorkerCase()) {
+        case API: {
+          mergeApi(other.getApi());
+          break;
+        }
+        case SUBSCRIPTION: {
+          mergeSubscription(other.getSubscription());
+          break;
+        }
+        case SCHEDULE: {
+          mergeSchedule(other.getSchedule());
+          break;
+        }
+        case WORKER_NOT_SET: {
+          break;
+        }
+      }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
       return this;
@@ -371,6 +648,444 @@ private static final long serialVersionUID = 0L;
         }
       }
       return this;
+    }
+    private int workerCase_ = 0;
+    private java.lang.Object worker_;
+    public WorkerCase
+        getWorkerCase() {
+      return WorkerCase.forNumber(
+          workerCase_);
+    }
+
+    public Builder clearWorker() {
+      workerCase_ = 0;
+      worker_ = null;
+      onChanged();
+      return this;
+    }
+
+
+    private com.google.protobuf.SingleFieldBuilderV3<
+        io.nitric.proto.faas.v1.ApiWorker, io.nitric.proto.faas.v1.ApiWorker.Builder, io.nitric.proto.faas.v1.ApiWorkerOrBuilder> apiBuilder_;
+    /**
+     * <code>.nitric.faas.v1.ApiWorker api = 10;</code>
+     * @return Whether the api field is set.
+     */
+    @java.lang.Override
+    public boolean hasApi() {
+      return workerCase_ == 10;
+    }
+    /**
+     * <code>.nitric.faas.v1.ApiWorker api = 10;</code>
+     * @return The api.
+     */
+    @java.lang.Override
+    public io.nitric.proto.faas.v1.ApiWorker getApi() {
+      if (apiBuilder_ == null) {
+        if (workerCase_ == 10) {
+          return (io.nitric.proto.faas.v1.ApiWorker) worker_;
+        }
+        return io.nitric.proto.faas.v1.ApiWorker.getDefaultInstance();
+      } else {
+        if (workerCase_ == 10) {
+          return apiBuilder_.getMessage();
+        }
+        return io.nitric.proto.faas.v1.ApiWorker.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.nitric.faas.v1.ApiWorker api = 10;</code>
+     */
+    public Builder setApi(io.nitric.proto.faas.v1.ApiWorker value) {
+      if (apiBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        worker_ = value;
+        onChanged();
+      } else {
+        apiBuilder_.setMessage(value);
+      }
+      workerCase_ = 10;
+      return this;
+    }
+    /**
+     * <code>.nitric.faas.v1.ApiWorker api = 10;</code>
+     */
+    public Builder setApi(
+        io.nitric.proto.faas.v1.ApiWorker.Builder builderForValue) {
+      if (apiBuilder_ == null) {
+        worker_ = builderForValue.build();
+        onChanged();
+      } else {
+        apiBuilder_.setMessage(builderForValue.build());
+      }
+      workerCase_ = 10;
+      return this;
+    }
+    /**
+     * <code>.nitric.faas.v1.ApiWorker api = 10;</code>
+     */
+    public Builder mergeApi(io.nitric.proto.faas.v1.ApiWorker value) {
+      if (apiBuilder_ == null) {
+        if (workerCase_ == 10 &&
+            worker_ != io.nitric.proto.faas.v1.ApiWorker.getDefaultInstance()) {
+          worker_ = io.nitric.proto.faas.v1.ApiWorker.newBuilder((io.nitric.proto.faas.v1.ApiWorker) worker_)
+              .mergeFrom(value).buildPartial();
+        } else {
+          worker_ = value;
+        }
+        onChanged();
+      } else {
+        if (workerCase_ == 10) {
+          apiBuilder_.mergeFrom(value);
+        }
+        apiBuilder_.setMessage(value);
+      }
+      workerCase_ = 10;
+      return this;
+    }
+    /**
+     * <code>.nitric.faas.v1.ApiWorker api = 10;</code>
+     */
+    public Builder clearApi() {
+      if (apiBuilder_ == null) {
+        if (workerCase_ == 10) {
+          workerCase_ = 0;
+          worker_ = null;
+          onChanged();
+        }
+      } else {
+        if (workerCase_ == 10) {
+          workerCase_ = 0;
+          worker_ = null;
+        }
+        apiBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>.nitric.faas.v1.ApiWorker api = 10;</code>
+     */
+    public io.nitric.proto.faas.v1.ApiWorker.Builder getApiBuilder() {
+      return getApiFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.nitric.faas.v1.ApiWorker api = 10;</code>
+     */
+    @java.lang.Override
+    public io.nitric.proto.faas.v1.ApiWorkerOrBuilder getApiOrBuilder() {
+      if ((workerCase_ == 10) && (apiBuilder_ != null)) {
+        return apiBuilder_.getMessageOrBuilder();
+      } else {
+        if (workerCase_ == 10) {
+          return (io.nitric.proto.faas.v1.ApiWorker) worker_;
+        }
+        return io.nitric.proto.faas.v1.ApiWorker.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.nitric.faas.v1.ApiWorker api = 10;</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        io.nitric.proto.faas.v1.ApiWorker, io.nitric.proto.faas.v1.ApiWorker.Builder, io.nitric.proto.faas.v1.ApiWorkerOrBuilder> 
+        getApiFieldBuilder() {
+      if (apiBuilder_ == null) {
+        if (!(workerCase_ == 10)) {
+          worker_ = io.nitric.proto.faas.v1.ApiWorker.getDefaultInstance();
+        }
+        apiBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            io.nitric.proto.faas.v1.ApiWorker, io.nitric.proto.faas.v1.ApiWorker.Builder, io.nitric.proto.faas.v1.ApiWorkerOrBuilder>(
+                (io.nitric.proto.faas.v1.ApiWorker) worker_,
+                getParentForChildren(),
+                isClean());
+        worker_ = null;
+      }
+      workerCase_ = 10;
+      onChanged();;
+      return apiBuilder_;
+    }
+
+    private com.google.protobuf.SingleFieldBuilderV3<
+        io.nitric.proto.faas.v1.SubscriptionWorker, io.nitric.proto.faas.v1.SubscriptionWorker.Builder, io.nitric.proto.faas.v1.SubscriptionWorkerOrBuilder> subscriptionBuilder_;
+    /**
+     * <code>.nitric.faas.v1.SubscriptionWorker subscription = 11;</code>
+     * @return Whether the subscription field is set.
+     */
+    @java.lang.Override
+    public boolean hasSubscription() {
+      return workerCase_ == 11;
+    }
+    /**
+     * <code>.nitric.faas.v1.SubscriptionWorker subscription = 11;</code>
+     * @return The subscription.
+     */
+    @java.lang.Override
+    public io.nitric.proto.faas.v1.SubscriptionWorker getSubscription() {
+      if (subscriptionBuilder_ == null) {
+        if (workerCase_ == 11) {
+          return (io.nitric.proto.faas.v1.SubscriptionWorker) worker_;
+        }
+        return io.nitric.proto.faas.v1.SubscriptionWorker.getDefaultInstance();
+      } else {
+        if (workerCase_ == 11) {
+          return subscriptionBuilder_.getMessage();
+        }
+        return io.nitric.proto.faas.v1.SubscriptionWorker.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.nitric.faas.v1.SubscriptionWorker subscription = 11;</code>
+     */
+    public Builder setSubscription(io.nitric.proto.faas.v1.SubscriptionWorker value) {
+      if (subscriptionBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        worker_ = value;
+        onChanged();
+      } else {
+        subscriptionBuilder_.setMessage(value);
+      }
+      workerCase_ = 11;
+      return this;
+    }
+    /**
+     * <code>.nitric.faas.v1.SubscriptionWorker subscription = 11;</code>
+     */
+    public Builder setSubscription(
+        io.nitric.proto.faas.v1.SubscriptionWorker.Builder builderForValue) {
+      if (subscriptionBuilder_ == null) {
+        worker_ = builderForValue.build();
+        onChanged();
+      } else {
+        subscriptionBuilder_.setMessage(builderForValue.build());
+      }
+      workerCase_ = 11;
+      return this;
+    }
+    /**
+     * <code>.nitric.faas.v1.SubscriptionWorker subscription = 11;</code>
+     */
+    public Builder mergeSubscription(io.nitric.proto.faas.v1.SubscriptionWorker value) {
+      if (subscriptionBuilder_ == null) {
+        if (workerCase_ == 11 &&
+            worker_ != io.nitric.proto.faas.v1.SubscriptionWorker.getDefaultInstance()) {
+          worker_ = io.nitric.proto.faas.v1.SubscriptionWorker.newBuilder((io.nitric.proto.faas.v1.SubscriptionWorker) worker_)
+              .mergeFrom(value).buildPartial();
+        } else {
+          worker_ = value;
+        }
+        onChanged();
+      } else {
+        if (workerCase_ == 11) {
+          subscriptionBuilder_.mergeFrom(value);
+        }
+        subscriptionBuilder_.setMessage(value);
+      }
+      workerCase_ = 11;
+      return this;
+    }
+    /**
+     * <code>.nitric.faas.v1.SubscriptionWorker subscription = 11;</code>
+     */
+    public Builder clearSubscription() {
+      if (subscriptionBuilder_ == null) {
+        if (workerCase_ == 11) {
+          workerCase_ = 0;
+          worker_ = null;
+          onChanged();
+        }
+      } else {
+        if (workerCase_ == 11) {
+          workerCase_ = 0;
+          worker_ = null;
+        }
+        subscriptionBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>.nitric.faas.v1.SubscriptionWorker subscription = 11;</code>
+     */
+    public io.nitric.proto.faas.v1.SubscriptionWorker.Builder getSubscriptionBuilder() {
+      return getSubscriptionFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.nitric.faas.v1.SubscriptionWorker subscription = 11;</code>
+     */
+    @java.lang.Override
+    public io.nitric.proto.faas.v1.SubscriptionWorkerOrBuilder getSubscriptionOrBuilder() {
+      if ((workerCase_ == 11) && (subscriptionBuilder_ != null)) {
+        return subscriptionBuilder_.getMessageOrBuilder();
+      } else {
+        if (workerCase_ == 11) {
+          return (io.nitric.proto.faas.v1.SubscriptionWorker) worker_;
+        }
+        return io.nitric.proto.faas.v1.SubscriptionWorker.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.nitric.faas.v1.SubscriptionWorker subscription = 11;</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        io.nitric.proto.faas.v1.SubscriptionWorker, io.nitric.proto.faas.v1.SubscriptionWorker.Builder, io.nitric.proto.faas.v1.SubscriptionWorkerOrBuilder> 
+        getSubscriptionFieldBuilder() {
+      if (subscriptionBuilder_ == null) {
+        if (!(workerCase_ == 11)) {
+          worker_ = io.nitric.proto.faas.v1.SubscriptionWorker.getDefaultInstance();
+        }
+        subscriptionBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            io.nitric.proto.faas.v1.SubscriptionWorker, io.nitric.proto.faas.v1.SubscriptionWorker.Builder, io.nitric.proto.faas.v1.SubscriptionWorkerOrBuilder>(
+                (io.nitric.proto.faas.v1.SubscriptionWorker) worker_,
+                getParentForChildren(),
+                isClean());
+        worker_ = null;
+      }
+      workerCase_ = 11;
+      onChanged();;
+      return subscriptionBuilder_;
+    }
+
+    private com.google.protobuf.SingleFieldBuilderV3<
+        io.nitric.proto.faas.v1.ScheduleWorker, io.nitric.proto.faas.v1.ScheduleWorker.Builder, io.nitric.proto.faas.v1.ScheduleWorkerOrBuilder> scheduleBuilder_;
+    /**
+     * <code>.nitric.faas.v1.ScheduleWorker schedule = 12;</code>
+     * @return Whether the schedule field is set.
+     */
+    @java.lang.Override
+    public boolean hasSchedule() {
+      return workerCase_ == 12;
+    }
+    /**
+     * <code>.nitric.faas.v1.ScheduleWorker schedule = 12;</code>
+     * @return The schedule.
+     */
+    @java.lang.Override
+    public io.nitric.proto.faas.v1.ScheduleWorker getSchedule() {
+      if (scheduleBuilder_ == null) {
+        if (workerCase_ == 12) {
+          return (io.nitric.proto.faas.v1.ScheduleWorker) worker_;
+        }
+        return io.nitric.proto.faas.v1.ScheduleWorker.getDefaultInstance();
+      } else {
+        if (workerCase_ == 12) {
+          return scheduleBuilder_.getMessage();
+        }
+        return io.nitric.proto.faas.v1.ScheduleWorker.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.nitric.faas.v1.ScheduleWorker schedule = 12;</code>
+     */
+    public Builder setSchedule(io.nitric.proto.faas.v1.ScheduleWorker value) {
+      if (scheduleBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        worker_ = value;
+        onChanged();
+      } else {
+        scheduleBuilder_.setMessage(value);
+      }
+      workerCase_ = 12;
+      return this;
+    }
+    /**
+     * <code>.nitric.faas.v1.ScheduleWorker schedule = 12;</code>
+     */
+    public Builder setSchedule(
+        io.nitric.proto.faas.v1.ScheduleWorker.Builder builderForValue) {
+      if (scheduleBuilder_ == null) {
+        worker_ = builderForValue.build();
+        onChanged();
+      } else {
+        scheduleBuilder_.setMessage(builderForValue.build());
+      }
+      workerCase_ = 12;
+      return this;
+    }
+    /**
+     * <code>.nitric.faas.v1.ScheduleWorker schedule = 12;</code>
+     */
+    public Builder mergeSchedule(io.nitric.proto.faas.v1.ScheduleWorker value) {
+      if (scheduleBuilder_ == null) {
+        if (workerCase_ == 12 &&
+            worker_ != io.nitric.proto.faas.v1.ScheduleWorker.getDefaultInstance()) {
+          worker_ = io.nitric.proto.faas.v1.ScheduleWorker.newBuilder((io.nitric.proto.faas.v1.ScheduleWorker) worker_)
+              .mergeFrom(value).buildPartial();
+        } else {
+          worker_ = value;
+        }
+        onChanged();
+      } else {
+        if (workerCase_ == 12) {
+          scheduleBuilder_.mergeFrom(value);
+        }
+        scheduleBuilder_.setMessage(value);
+      }
+      workerCase_ = 12;
+      return this;
+    }
+    /**
+     * <code>.nitric.faas.v1.ScheduleWorker schedule = 12;</code>
+     */
+    public Builder clearSchedule() {
+      if (scheduleBuilder_ == null) {
+        if (workerCase_ == 12) {
+          workerCase_ = 0;
+          worker_ = null;
+          onChanged();
+        }
+      } else {
+        if (workerCase_ == 12) {
+          workerCase_ = 0;
+          worker_ = null;
+        }
+        scheduleBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>.nitric.faas.v1.ScheduleWorker schedule = 12;</code>
+     */
+    public io.nitric.proto.faas.v1.ScheduleWorker.Builder getScheduleBuilder() {
+      return getScheduleFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.nitric.faas.v1.ScheduleWorker schedule = 12;</code>
+     */
+    @java.lang.Override
+    public io.nitric.proto.faas.v1.ScheduleWorkerOrBuilder getScheduleOrBuilder() {
+      if ((workerCase_ == 12) && (scheduleBuilder_ != null)) {
+        return scheduleBuilder_.getMessageOrBuilder();
+      } else {
+        if (workerCase_ == 12) {
+          return (io.nitric.proto.faas.v1.ScheduleWorker) worker_;
+        }
+        return io.nitric.proto.faas.v1.ScheduleWorker.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.nitric.faas.v1.ScheduleWorker schedule = 12;</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        io.nitric.proto.faas.v1.ScheduleWorker, io.nitric.proto.faas.v1.ScheduleWorker.Builder, io.nitric.proto.faas.v1.ScheduleWorkerOrBuilder> 
+        getScheduleFieldBuilder() {
+      if (scheduleBuilder_ == null) {
+        if (!(workerCase_ == 12)) {
+          worker_ = io.nitric.proto.faas.v1.ScheduleWorker.getDefaultInstance();
+        }
+        scheduleBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            io.nitric.proto.faas.v1.ScheduleWorker, io.nitric.proto.faas.v1.ScheduleWorker.Builder, io.nitric.proto.faas.v1.ScheduleWorkerOrBuilder>(
+                (io.nitric.proto.faas.v1.ScheduleWorker) worker_,
+                getParentForChildren(),
+                isClean());
+        worker_ = null;
+      }
+      workerCase_ = 12;
+      onChanged();;
+      return scheduleBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

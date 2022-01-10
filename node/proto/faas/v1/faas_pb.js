@@ -2817,7 +2817,8 @@ proto.nitric.faas.v1.HttpTriggerContext.toObject = function(includeInstance, msg
     headersOldMap: (f = msg.getHeadersOldMap()) ? f.toObject(includeInstance, undefined) : [],
     queryParamsOldMap: (f = msg.getQueryParamsOldMap()) ? f.toObject(includeInstance, undefined) : [],
     headersMap: (f = msg.getHeadersMap()) ? f.toObject(includeInstance, proto.nitric.faas.v1.HeaderValue.toObject) : [],
-    queryParamsMap: (f = msg.getQueryParamsMap()) ? f.toObject(includeInstance, proto.nitric.faas.v1.QueryValue.toObject) : []
+    queryParamsMap: (f = msg.getQueryParamsMap()) ? f.toObject(includeInstance, proto.nitric.faas.v1.QueryValue.toObject) : [],
+    pathParamsMap: (f = msg.getPathParamsMap()) ? f.toObject(includeInstance, undefined) : []
   };
 
   if (includeInstance) {
@@ -2886,6 +2887,12 @@ proto.nitric.faas.v1.HttpTriggerContext.deserializeBinaryFromReader = function(m
         jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readMessage, proto.nitric.faas.v1.QueryValue.deserializeBinaryFromReader, "", new proto.nitric.faas.v1.QueryValue());
          });
       break;
+    case 7:
+      var value = msg.getPathParamsMap();
+      reader.readMessage(value, function(message, reader) {
+        jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readString, null, "", "");
+         });
+      break;
     default:
       reader.skipField();
       break;
@@ -2944,6 +2951,10 @@ proto.nitric.faas.v1.HttpTriggerContext.serializeBinaryToWriter = function(messa
   f = message.getQueryParamsMap(true);
   if (f && f.getLength() > 0) {
     f.serializeBinary(6, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeMessage, proto.nitric.faas.v1.QueryValue.serializeBinaryToWriter);
+  }
+  f = message.getPathParamsMap(true);
+  if (f && f.getLength() > 0) {
+    f.serializeBinary(7, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeString);
   }
 };
 
@@ -3069,6 +3080,28 @@ proto.nitric.faas.v1.HttpTriggerContext.prototype.getQueryParamsMap = function(o
  */
 proto.nitric.faas.v1.HttpTriggerContext.prototype.clearQueryParamsMap = function() {
   this.getQueryParamsMap().clear();
+  return this;};
+
+
+/**
+ * map<string, string> path_params = 7;
+ * @param {boolean=} opt_noLazyCreate Do not create the map if
+ * empty, instead returning `undefined`
+ * @return {!jspb.Map<string,string>}
+ */
+proto.nitric.faas.v1.HttpTriggerContext.prototype.getPathParamsMap = function(opt_noLazyCreate) {
+  return /** @type {!jspb.Map<string,string>} */ (
+      jspb.Message.getMapField(this, 7, opt_noLazyCreate,
+      null));
+};
+
+
+/**
+ * Clears values from the map. The map will be non-null.
+ * @return {!proto.nitric.faas.v1.HttpTriggerContext} returns this
+ */
+proto.nitric.faas.v1.HttpTriggerContext.prototype.clearPathParamsMap = function() {
+  this.getPathParamsMap().clear();
   return this;};
 
 

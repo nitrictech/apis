@@ -115,6 +115,19 @@ private static final long serialVersionUID = 0L;
                 queryParams__.getKey(), queryParams__.getValue());
             break;
           }
+          case 58: {
+            if (!((mutable_bitField0_ & 0x00000010) != 0)) {
+              pathParams_ = com.google.protobuf.MapField.newMapField(
+                  PathParamsDefaultEntryHolder.defaultEntry);
+              mutable_bitField0_ |= 0x00000010;
+            }
+            com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
+            pathParams__ = input.readMessage(
+                PathParamsDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
+            pathParams_.getMutableMap().put(
+                pathParams__.getKey(), pathParams__.getValue());
+            break;
+          }
           default: {
             if (!parseUnknownField(
                 input, unknownFields, extensionRegistry, tag)) {
@@ -152,6 +165,8 @@ private static final long serialVersionUID = 0L;
         return internalGetHeaders();
       case 6:
         return internalGetQueryParams();
+      case 7:
+        return internalGetPathParams();
       default:
         throw new RuntimeException(
             "Invalid map field number: " + number);
@@ -653,6 +668,103 @@ private static final long serialVersionUID = 0L;
     return map.get(key);
   }
 
+  public static final int PATH_PARAMS_FIELD_NUMBER = 7;
+  private static final class PathParamsDefaultEntryHolder {
+    static final com.google.protobuf.MapEntry<
+        java.lang.String, java.lang.String> defaultEntry =
+            com.google.protobuf.MapEntry
+            .<java.lang.String, java.lang.String>newDefaultInstance(
+                io.nitric.proto.faas.v1.NitricFaas.internal_static_nitric_faas_v1_HttpTriggerContext_PathParamsEntry_descriptor, 
+                com.google.protobuf.WireFormat.FieldType.STRING,
+                "",
+                com.google.protobuf.WireFormat.FieldType.STRING,
+                "");
+  }
+  private com.google.protobuf.MapField<
+      java.lang.String, java.lang.String> pathParams_;
+  private com.google.protobuf.MapField<java.lang.String, java.lang.String>
+  internalGetPathParams() {
+    if (pathParams_ == null) {
+      return com.google.protobuf.MapField.emptyMapField(
+          PathParamsDefaultEntryHolder.defaultEntry);
+    }
+    return pathParams_;
+  }
+
+  public int getPathParamsCount() {
+    return internalGetPathParams().getMap().size();
+  }
+  /**
+   * <pre>
+   * HTTP Path parameters
+   * </pre>
+   *
+   * <code>map&lt;string, string&gt; path_params = 7;</code>
+   */
+
+  @java.lang.Override
+  public boolean containsPathParams(
+      java.lang.String key) {
+    if (key == null) { throw new java.lang.NullPointerException(); }
+    return internalGetPathParams().getMap().containsKey(key);
+  }
+  /**
+   * Use {@link #getPathParamsMap()} instead.
+   */
+  @java.lang.Override
+  @java.lang.Deprecated
+  public java.util.Map<java.lang.String, java.lang.String> getPathParams() {
+    return getPathParamsMap();
+  }
+  /**
+   * <pre>
+   * HTTP Path parameters
+   * </pre>
+   *
+   * <code>map&lt;string, string&gt; path_params = 7;</code>
+   */
+  @java.lang.Override
+
+  public java.util.Map<java.lang.String, java.lang.String> getPathParamsMap() {
+    return internalGetPathParams().getMap();
+  }
+  /**
+   * <pre>
+   * HTTP Path parameters
+   * </pre>
+   *
+   * <code>map&lt;string, string&gt; path_params = 7;</code>
+   */
+  @java.lang.Override
+
+  public java.lang.String getPathParamsOrDefault(
+      java.lang.String key,
+      java.lang.String defaultValue) {
+    if (key == null) { throw new java.lang.NullPointerException(); }
+    java.util.Map<java.lang.String, java.lang.String> map =
+        internalGetPathParams().getMap();
+    return map.containsKey(key) ? map.get(key) : defaultValue;
+  }
+  /**
+   * <pre>
+   * HTTP Path parameters
+   * </pre>
+   *
+   * <code>map&lt;string, string&gt; path_params = 7;</code>
+   */
+  @java.lang.Override
+
+  public java.lang.String getPathParamsOrThrow(
+      java.lang.String key) {
+    if (key == null) { throw new java.lang.NullPointerException(); }
+    java.util.Map<java.lang.String, java.lang.String> map =
+        internalGetPathParams().getMap();
+    if (!map.containsKey(key)) {
+      throw new java.lang.IllegalArgumentException();
+    }
+    return map.get(key);
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -697,6 +809,12 @@ private static final long serialVersionUID = 0L;
         internalGetQueryParams(),
         QueryParamsDefaultEntryHolder.defaultEntry,
         6);
+    com.google.protobuf.GeneratedMessageV3
+      .serializeStringMapTo(
+        output,
+        internalGetPathParams(),
+        PathParamsDefaultEntryHolder.defaultEntry,
+        7);
     unknownFields.writeTo(output);
   }
 
@@ -752,6 +870,16 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(6, queryParams__);
     }
+    for (java.util.Map.Entry<java.lang.String, java.lang.String> entry
+         : internalGetPathParams().getMap().entrySet()) {
+      com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
+      pathParams__ = PathParamsDefaultEntryHolder.defaultEntry.newBuilderForType()
+          .setKey(entry.getKey())
+          .setValue(entry.getValue())
+          .build();
+      size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(7, pathParams__);
+    }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
     return size;
@@ -779,6 +907,8 @@ private static final long serialVersionUID = 0L;
         other.internalGetHeaders())) return false;
     if (!internalGetQueryParams().equals(
         other.internalGetQueryParams())) return false;
+    if (!internalGetPathParams().equals(
+        other.internalGetPathParams())) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -809,6 +939,10 @@ private static final long serialVersionUID = 0L;
     if (!internalGetQueryParams().getMap().isEmpty()) {
       hash = (37 * hash) + QUERY_PARAMS_FIELD_NUMBER;
       hash = (53 * hash) + internalGetQueryParams().hashCode();
+    }
+    if (!internalGetPathParams().getMap().isEmpty()) {
+      hash = (37 * hash) + PATH_PARAMS_FIELD_NUMBER;
+      hash = (53 * hash) + internalGetPathParams().hashCode();
     }
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
@@ -929,6 +1063,8 @@ private static final long serialVersionUID = 0L;
           return internalGetHeaders();
         case 6:
           return internalGetQueryParams();
+        case 7:
+          return internalGetPathParams();
         default:
           throw new RuntimeException(
               "Invalid map field number: " + number);
@@ -946,6 +1082,8 @@ private static final long serialVersionUID = 0L;
           return internalGetMutableHeaders();
         case 6:
           return internalGetMutableQueryParams();
+        case 7:
+          return internalGetMutablePathParams();
         default:
           throw new RuntimeException(
               "Invalid map field number: " + number);
@@ -985,6 +1123,7 @@ private static final long serialVersionUID = 0L;
       internalGetMutableQueryParamsOld().clear();
       internalGetMutableHeaders().clear();
       internalGetMutableQueryParams().clear();
+      internalGetMutablePathParams().clear();
       return this;
     }
 
@@ -1022,6 +1161,8 @@ private static final long serialVersionUID = 0L;
       result.headers_.makeImmutable();
       result.queryParams_ = internalGetQueryParams();
       result.queryParams_.makeImmutable();
+      result.pathParams_ = internalGetPathParams();
+      result.pathParams_.makeImmutable();
       onBuilt();
       return result;
     }
@@ -1086,6 +1227,8 @@ private static final long serialVersionUID = 0L;
           other.internalGetHeaders());
       internalGetMutableQueryParams().mergeFrom(
           other.internalGetQueryParams());
+      internalGetMutablePathParams().mergeFrom(
+          other.internalGetPathParams());
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
       return this;
@@ -1942,6 +2085,162 @@ private static final long serialVersionUID = 0L;
     public Builder putAllQueryParams(
         java.util.Map<java.lang.String, io.nitric.proto.faas.v1.QueryValue> values) {
       internalGetMutableQueryParams().getMutableMap()
+          .putAll(values);
+      return this;
+    }
+
+    private com.google.protobuf.MapField<
+        java.lang.String, java.lang.String> pathParams_;
+    private com.google.protobuf.MapField<java.lang.String, java.lang.String>
+    internalGetPathParams() {
+      if (pathParams_ == null) {
+        return com.google.protobuf.MapField.emptyMapField(
+            PathParamsDefaultEntryHolder.defaultEntry);
+      }
+      return pathParams_;
+    }
+    private com.google.protobuf.MapField<java.lang.String, java.lang.String>
+    internalGetMutablePathParams() {
+      onChanged();;
+      if (pathParams_ == null) {
+        pathParams_ = com.google.protobuf.MapField.newMapField(
+            PathParamsDefaultEntryHolder.defaultEntry);
+      }
+      if (!pathParams_.isMutable()) {
+        pathParams_ = pathParams_.copy();
+      }
+      return pathParams_;
+    }
+
+    public int getPathParamsCount() {
+      return internalGetPathParams().getMap().size();
+    }
+    /**
+     * <pre>
+     * HTTP Path parameters
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; path_params = 7;</code>
+     */
+
+    @java.lang.Override
+    public boolean containsPathParams(
+        java.lang.String key) {
+      if (key == null) { throw new java.lang.NullPointerException(); }
+      return internalGetPathParams().getMap().containsKey(key);
+    }
+    /**
+     * Use {@link #getPathParamsMap()} instead.
+     */
+    @java.lang.Override
+    @java.lang.Deprecated
+    public java.util.Map<java.lang.String, java.lang.String> getPathParams() {
+      return getPathParamsMap();
+    }
+    /**
+     * <pre>
+     * HTTP Path parameters
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; path_params = 7;</code>
+     */
+    @java.lang.Override
+
+    public java.util.Map<java.lang.String, java.lang.String> getPathParamsMap() {
+      return internalGetPathParams().getMap();
+    }
+    /**
+     * <pre>
+     * HTTP Path parameters
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; path_params = 7;</code>
+     */
+    @java.lang.Override
+
+    public java.lang.String getPathParamsOrDefault(
+        java.lang.String key,
+        java.lang.String defaultValue) {
+      if (key == null) { throw new java.lang.NullPointerException(); }
+      java.util.Map<java.lang.String, java.lang.String> map =
+          internalGetPathParams().getMap();
+      return map.containsKey(key) ? map.get(key) : defaultValue;
+    }
+    /**
+     * <pre>
+     * HTTP Path parameters
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; path_params = 7;</code>
+     */
+    @java.lang.Override
+
+    public java.lang.String getPathParamsOrThrow(
+        java.lang.String key) {
+      if (key == null) { throw new java.lang.NullPointerException(); }
+      java.util.Map<java.lang.String, java.lang.String> map =
+          internalGetPathParams().getMap();
+      if (!map.containsKey(key)) {
+        throw new java.lang.IllegalArgumentException();
+      }
+      return map.get(key);
+    }
+
+    public Builder clearPathParams() {
+      internalGetMutablePathParams().getMutableMap()
+          .clear();
+      return this;
+    }
+    /**
+     * <pre>
+     * HTTP Path parameters
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; path_params = 7;</code>
+     */
+
+    public Builder removePathParams(
+        java.lang.String key) {
+      if (key == null) { throw new java.lang.NullPointerException(); }
+      internalGetMutablePathParams().getMutableMap()
+          .remove(key);
+      return this;
+    }
+    /**
+     * Use alternate mutation accessors instead.
+     */
+    @java.lang.Deprecated
+    public java.util.Map<java.lang.String, java.lang.String>
+    getMutablePathParams() {
+      return internalGetMutablePathParams().getMutableMap();
+    }
+    /**
+     * <pre>
+     * HTTP Path parameters
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; path_params = 7;</code>
+     */
+    public Builder putPathParams(
+        java.lang.String key,
+        java.lang.String value) {
+      if (key == null) { throw new java.lang.NullPointerException(); }
+      if (value == null) { throw new java.lang.NullPointerException(); }
+      internalGetMutablePathParams().getMutableMap()
+          .put(key, value);
+      return this;
+    }
+    /**
+     * <pre>
+     * HTTP Path parameters
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; path_params = 7;</code>
+     */
+
+    public Builder putAllPathParams(
+        java.util.Map<java.lang.String, java.lang.String> values) {
+      internalGetMutablePathParams().getMutableMap()
           .putAll(values);
       return this;
     }

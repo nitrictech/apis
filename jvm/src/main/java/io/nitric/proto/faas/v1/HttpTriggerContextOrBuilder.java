@@ -272,4 +272,58 @@ public interface HttpTriggerContextOrBuilder extends
 
   io.nitric.proto.faas.v1.QueryValue getQueryParamsOrThrow(
       java.lang.String key);
+
+  /**
+   * <pre>
+   * HTTP Path parameters
+   * </pre>
+   *
+   * <code>map&lt;string, string&gt; path_params = 7;</code>
+   */
+  int getPathParamsCount();
+  /**
+   * <pre>
+   * HTTP Path parameters
+   * </pre>
+   *
+   * <code>map&lt;string, string&gt; path_params = 7;</code>
+   */
+  boolean containsPathParams(
+      java.lang.String key);
+  /**
+   * Use {@link #getPathParamsMap()} instead.
+   */
+  @java.lang.Deprecated
+  java.util.Map<java.lang.String, java.lang.String>
+  getPathParams();
+  /**
+   * <pre>
+   * HTTP Path parameters
+   * </pre>
+   *
+   * <code>map&lt;string, string&gt; path_params = 7;</code>
+   */
+  java.util.Map<java.lang.String, java.lang.String>
+  getPathParamsMap();
+  /**
+   * <pre>
+   * HTTP Path parameters
+   * </pre>
+   *
+   * <code>map&lt;string, string&gt; path_params = 7;</code>
+   */
+
+  java.lang.String getPathParamsOrDefault(
+      java.lang.String key,
+      java.lang.String defaultValue);
+  /**
+   * <pre>
+   * HTTP Path parameters
+   * </pre>
+   *
+   * <code>map&lt;string, string&gt; path_params = 7;</code>
+   */
+
+  java.lang.String getPathParamsOrThrow(
+      java.lang.String key);
 }

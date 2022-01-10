@@ -372,6 +372,8 @@ export class HttpTriggerContext extends jspb.Message {
   clearHeadersMap(): void;
   getQueryParamsMap(): jspb.Map<string, QueryValue>;
   clearQueryParamsMap(): void;
+  getPathParamsMap(): jspb.Map<string, string>;
+  clearPathParamsMap(): void;
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): HttpTriggerContext.AsObject;
   static toObject(includeInstance: boolean, msg: HttpTriggerContext): HttpTriggerContext.AsObject;
@@ -390,6 +392,7 @@ export namespace HttpTriggerContext {
     queryParamsOldMap: Array<[string, string]>,
     headersMap: Array<[string, HeaderValue.AsObject]>,
     queryParamsMap: Array<[string, QueryValue.AsObject]>,
+    pathParamsMap: Array<[string, string]>,
   }
 }
 

@@ -16,7 +16,8 @@ class ClientMessage(betterproto.Message):
 
     # Client message ID, used to pair requests/responses
     id: str = betterproto.string_field(1)
-    # Client initialisation request
+    # Client initialisation request A worker will not be eligible for triggers
+    # until it has identified itself
     init_request: "InitRequest" = betterproto.message_field(2, group="content")
     # Client responsding with result of a trigger
     trigger_response: "TriggerResponse" = betterproto.message_field(3, group="content")
@@ -128,6 +129,10 @@ class HttpTriggerContext(betterproto.Message):
     # HTTP Query params
     query_params: Dict[str, "QueryValue"] = betterproto.map_field(
         6, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE
+    )
+    # HTTP Path parameters
+    path_params: Dict[str, str] = betterproto.map_field(
+        7, betterproto.TYPE_STRING, betterproto.TYPE_STRING
     )
 
     def __post_init__(self) -> None:

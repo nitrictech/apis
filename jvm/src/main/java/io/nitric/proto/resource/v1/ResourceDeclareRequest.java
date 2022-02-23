@@ -131,6 +131,20 @@ private static final long serialVersionUID = 0L;
             configCase_ = 14;
             break;
           }
+          case 122: {
+            io.nitric.proto.resource.v1.SecretResource.Builder subBuilder = null;
+            if (configCase_ == 15) {
+              subBuilder = ((io.nitric.proto.resource.v1.SecretResource) config_).toBuilder();
+            }
+            config_ =
+                input.readMessage(io.nitric.proto.resource.v1.SecretResource.parser(), extensionRegistry);
+            if (subBuilder != null) {
+              subBuilder.mergeFrom((io.nitric.proto.resource.v1.SecretResource) config_);
+              config_ = subBuilder.buildPartial();
+            }
+            configCase_ = 15;
+            break;
+          }
           default: {
             if (!parseUnknownField(
                 input, unknownFields, extensionRegistry, tag)) {
@@ -173,6 +187,7 @@ private static final long serialVersionUID = 0L;
     QUEUE(12),
     TOPIC(13),
     COLLECTION(14),
+    SECRET(15),
     CONFIG_NOT_SET(0);
     private final int value;
     private ConfigCase(int value) {
@@ -195,6 +210,7 @@ private static final long serialVersionUID = 0L;
         case 12: return QUEUE;
         case 13: return TOPIC;
         case 14: return COLLECTION;
+        case 15: return SECRET;
         case 0: return CONFIG_NOT_SET;
         default: return null;
       }
@@ -391,6 +407,37 @@ private static final long serialVersionUID = 0L;
     return io.nitric.proto.resource.v1.CollectionResource.getDefaultInstance();
   }
 
+  public static final int SECRET_FIELD_NUMBER = 15;
+  /**
+   * <code>.nitric.resource.v1.SecretResource secret = 15;</code>
+   * @return Whether the secret field is set.
+   */
+  @java.lang.Override
+  public boolean hasSecret() {
+    return configCase_ == 15;
+  }
+  /**
+   * <code>.nitric.resource.v1.SecretResource secret = 15;</code>
+   * @return The secret.
+   */
+  @java.lang.Override
+  public io.nitric.proto.resource.v1.SecretResource getSecret() {
+    if (configCase_ == 15) {
+       return (io.nitric.proto.resource.v1.SecretResource) config_;
+    }
+    return io.nitric.proto.resource.v1.SecretResource.getDefaultInstance();
+  }
+  /**
+   * <code>.nitric.resource.v1.SecretResource secret = 15;</code>
+   */
+  @java.lang.Override
+  public io.nitric.proto.resource.v1.SecretResourceOrBuilder getSecretOrBuilder() {
+    if (configCase_ == 15) {
+       return (io.nitric.proto.resource.v1.SecretResource) config_;
+    }
+    return io.nitric.proto.resource.v1.SecretResource.getDefaultInstance();
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -422,6 +469,9 @@ private static final long serialVersionUID = 0L;
     }
     if (configCase_ == 14) {
       output.writeMessage(14, (io.nitric.proto.resource.v1.CollectionResource) config_);
+    }
+    if (configCase_ == 15) {
+      output.writeMessage(15, (io.nitric.proto.resource.v1.SecretResource) config_);
     }
     unknownFields.writeTo(output);
   }
@@ -455,6 +505,10 @@ private static final long serialVersionUID = 0L;
     if (configCase_ == 14) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(14, (io.nitric.proto.resource.v1.CollectionResource) config_);
+    }
+    if (configCase_ == 15) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(15, (io.nitric.proto.resource.v1.SecretResource) config_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -498,6 +552,10 @@ private static final long serialVersionUID = 0L;
         if (!getCollection()
             .equals(other.getCollection())) return false;
         break;
+      case 15:
+        if (!getSecret()
+            .equals(other.getSecret())) return false;
+        break;
       case 0:
       default:
     }
@@ -536,6 +594,10 @@ private static final long serialVersionUID = 0L;
       case 14:
         hash = (37 * hash) + COLLECTION_FIELD_NUMBER;
         hash = (53 * hash) + getCollection().hashCode();
+        break;
+      case 15:
+        hash = (37 * hash) + SECRET_FIELD_NUMBER;
+        hash = (53 * hash) + getSecret().hashCode();
         break;
       case 0:
       default:
@@ -747,6 +809,13 @@ private static final long serialVersionUID = 0L;
           result.config_ = collectionBuilder_.build();
         }
       }
+      if (configCase_ == 15) {
+        if (secretBuilder_ == null) {
+          result.config_ = config_;
+        } else {
+          result.config_ = secretBuilder_.build();
+        }
+      }
       result.configCase_ = configCase_;
       onBuilt();
       return result;
@@ -818,6 +887,10 @@ private static final long serialVersionUID = 0L;
         }
         case COLLECTION: {
           mergeCollection(other.getCollection());
+          break;
+        }
+        case SECRET: {
+          mergeSecret(other.getSecret());
           break;
         }
         case CONFIG_NOT_SET: {
@@ -1690,6 +1763,147 @@ private static final long serialVersionUID = 0L;
       configCase_ = 14;
       onChanged();;
       return collectionBuilder_;
+    }
+
+    private com.google.protobuf.SingleFieldBuilderV3<
+        io.nitric.proto.resource.v1.SecretResource, io.nitric.proto.resource.v1.SecretResource.Builder, io.nitric.proto.resource.v1.SecretResourceOrBuilder> secretBuilder_;
+    /**
+     * <code>.nitric.resource.v1.SecretResource secret = 15;</code>
+     * @return Whether the secret field is set.
+     */
+    @java.lang.Override
+    public boolean hasSecret() {
+      return configCase_ == 15;
+    }
+    /**
+     * <code>.nitric.resource.v1.SecretResource secret = 15;</code>
+     * @return The secret.
+     */
+    @java.lang.Override
+    public io.nitric.proto.resource.v1.SecretResource getSecret() {
+      if (secretBuilder_ == null) {
+        if (configCase_ == 15) {
+          return (io.nitric.proto.resource.v1.SecretResource) config_;
+        }
+        return io.nitric.proto.resource.v1.SecretResource.getDefaultInstance();
+      } else {
+        if (configCase_ == 15) {
+          return secretBuilder_.getMessage();
+        }
+        return io.nitric.proto.resource.v1.SecretResource.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.nitric.resource.v1.SecretResource secret = 15;</code>
+     */
+    public Builder setSecret(io.nitric.proto.resource.v1.SecretResource value) {
+      if (secretBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        config_ = value;
+        onChanged();
+      } else {
+        secretBuilder_.setMessage(value);
+      }
+      configCase_ = 15;
+      return this;
+    }
+    /**
+     * <code>.nitric.resource.v1.SecretResource secret = 15;</code>
+     */
+    public Builder setSecret(
+        io.nitric.proto.resource.v1.SecretResource.Builder builderForValue) {
+      if (secretBuilder_ == null) {
+        config_ = builderForValue.build();
+        onChanged();
+      } else {
+        secretBuilder_.setMessage(builderForValue.build());
+      }
+      configCase_ = 15;
+      return this;
+    }
+    /**
+     * <code>.nitric.resource.v1.SecretResource secret = 15;</code>
+     */
+    public Builder mergeSecret(io.nitric.proto.resource.v1.SecretResource value) {
+      if (secretBuilder_ == null) {
+        if (configCase_ == 15 &&
+            config_ != io.nitric.proto.resource.v1.SecretResource.getDefaultInstance()) {
+          config_ = io.nitric.proto.resource.v1.SecretResource.newBuilder((io.nitric.proto.resource.v1.SecretResource) config_)
+              .mergeFrom(value).buildPartial();
+        } else {
+          config_ = value;
+        }
+        onChanged();
+      } else {
+        if (configCase_ == 15) {
+          secretBuilder_.mergeFrom(value);
+        }
+        secretBuilder_.setMessage(value);
+      }
+      configCase_ = 15;
+      return this;
+    }
+    /**
+     * <code>.nitric.resource.v1.SecretResource secret = 15;</code>
+     */
+    public Builder clearSecret() {
+      if (secretBuilder_ == null) {
+        if (configCase_ == 15) {
+          configCase_ = 0;
+          config_ = null;
+          onChanged();
+        }
+      } else {
+        if (configCase_ == 15) {
+          configCase_ = 0;
+          config_ = null;
+        }
+        secretBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>.nitric.resource.v1.SecretResource secret = 15;</code>
+     */
+    public io.nitric.proto.resource.v1.SecretResource.Builder getSecretBuilder() {
+      return getSecretFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.nitric.resource.v1.SecretResource secret = 15;</code>
+     */
+    @java.lang.Override
+    public io.nitric.proto.resource.v1.SecretResourceOrBuilder getSecretOrBuilder() {
+      if ((configCase_ == 15) && (secretBuilder_ != null)) {
+        return secretBuilder_.getMessageOrBuilder();
+      } else {
+        if (configCase_ == 15) {
+          return (io.nitric.proto.resource.v1.SecretResource) config_;
+        }
+        return io.nitric.proto.resource.v1.SecretResource.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.nitric.resource.v1.SecretResource secret = 15;</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        io.nitric.proto.resource.v1.SecretResource, io.nitric.proto.resource.v1.SecretResource.Builder, io.nitric.proto.resource.v1.SecretResourceOrBuilder> 
+        getSecretFieldBuilder() {
+      if (secretBuilder_ == null) {
+        if (!(configCase_ == 15)) {
+          config_ = io.nitric.proto.resource.v1.SecretResource.getDefaultInstance();
+        }
+        secretBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            io.nitric.proto.resource.v1.SecretResource, io.nitric.proto.resource.v1.SecretResource.Builder, io.nitric.proto.resource.v1.SecretResourceOrBuilder>(
+                (io.nitric.proto.resource.v1.SecretResource) config_,
+                getParentForChildren(),
+                isClean());
+        config_ = null;
+      }
+      configCase_ = 15;
+      onChanged();;
+      return secretBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

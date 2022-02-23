@@ -44,6 +44,10 @@ public enum ResourceType
    * <code>Policy = 8;</code>
    */
   Policy(8),
+  /**
+   * <code>Secret = 9;</code>
+   */
+  Secret(9),
   UNRECOGNIZED(-1),
   ;
 
@@ -83,6 +87,10 @@ public enum ResourceType
    * <code>Policy = 8;</code>
    */
   public static final int Policy_VALUE = 8;
+  /**
+   * <code>Secret = 9;</code>
+   */
+  public static final int Secret_VALUE = 9;
 
 
   public final int getNumber() {
@@ -118,6 +126,7 @@ public enum ResourceType
       case 6: return Subscription;
       case 7: return Collection;
       case 8: return Policy;
+      case 9: return Secret;
       default: return null;
     }
   }

@@ -50,6 +50,11 @@ public final class Resources {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_nitric_resource_v1_CollectionResource_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_nitric_resource_v1_SecretResource_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_nitric_resource_v1_SecretResource_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_nitric_resource_v1_ResourceDeclareResponse_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -70,7 +75,7 @@ public final class Resources {
       "\002 \003(\0162\032.nitric.resource.v1.Action\022/\n\tres" +
       "ources\030\003 \003(\0132\034.nitric.resource.v1.Resour" +
       "ce\"H\n\010Resource\022.\n\004type\030\001 \001(\0162 .nitric.re" +
-      "source.v1.ResourceType\022\014\n\004name\030\002 \001(\t\"\344\002\n" +
+      "source.v1.ResourceType\022\014\n\004name\030\002 \001(\t\"\232\003\n" +
       "\026ResourceDeclareRequest\022.\n\010resource\030\001 \001(" +
       "\0132\034.nitric.resource.v1.Resource\0224\n\006polic" +
       "y\030\n \001(\0132\".nitric.resource.v1.PolicyResou" +
@@ -79,28 +84,31 @@ public final class Resources {
       "ric.resource.v1.QueueResourceH\000\0222\n\005topic" +
       "\030\r \001(\0132!.nitric.resource.v1.TopicResourc" +
       "eH\000\022<\n\ncollection\030\016 \001(\0132&.nitric.resourc" +
-      "e.v1.CollectionResourceH\000B\010\n\006config\"\020\n\016B" +
-      "ucketResource\"\017\n\rQueueResource\"\017\n\rTopicR" +
-      "esource\"\024\n\022CollectionResource\"\031\n\027Resourc" +
-      "eDeclareResponse*\203\001\n\014ResourceType\022\007\n\003Api" +
-      "\020\000\022\014\n\010Function\020\001\022\n\n\006Bucket\020\002\022\t\n\005Queue\020\003\022" +
-      "\t\n\005Topic\020\004\022\014\n\010Schedule\020\005\022\020\n\014Subscription" +
-      "\020\006\022\016\n\nCollection\020\007\022\n\n\006Policy\020\010*\334\002\n\006Actio" +
-      "n\022\022\n\016BucketFileList\020\000\022\021\n\rBucketFileGet\020\001" +
-      "\022\021\n\rBucketFilePut\020\002\022\024\n\020BucketFileDelete\020" +
-      "\003\022\016\n\tTopicList\020\310\001\022\020\n\013TopicDetail\020\311\001\022\026\n\021T" +
-      "opicEventPublish\020\312\001\022\016\n\tQueueSend\020\254\002\022\021\n\014Q" +
-      "ueueReceive\020\255\002\022\016\n\tQueueList\020\256\002\022\020\n\013QueueD" +
-      "etail\020\257\002\022\033\n\026CollectionDocumentRead\020\220\003\022\034\n" +
-      "\027CollectionDocumentWrite\020\221\003\022\035\n\030Collectio" +
-      "nDocumentDelete\020\222\003\022\024\n\017CollectionQuery\020\223\003" +
-      "\022\023\n\016CollectionList\020\224\0032u\n\017ResourceService" +
-      "\022b\n\007Declare\022*.nitric.resource.v1.Resourc" +
-      "eDeclareRequest\032+.nitric.resource.v1.Res" +
-      "ourceDeclareResponseBn\n\033io.nitric.proto." +
-      "resource.v1B\tResourcesP\001Z\014nitric/v1;v1\252\002" +
-      "\030Nitric.Proto.Resource.v1\312\002\030Nitric\\Proto" +
-      "\\Resource\\V1b\006proto3"
+      "e.v1.CollectionResourceH\000\0224\n\006secret\030\017 \001(" +
+      "\0132\".nitric.resource.v1.SecretResourceH\000B" +
+      "\010\n\006config\"\020\n\016BucketResource\"\017\n\rQueueReso" +
+      "urce\"\017\n\rTopicResource\"\024\n\022CollectionResou" +
+      "rce\"\020\n\016SecretResource\"\031\n\027ResourceDeclare" +
+      "Response*\217\001\n\014ResourceType\022\007\n\003Api\020\000\022\014\n\010Fu" +
+      "nction\020\001\022\n\n\006Bucket\020\002\022\t\n\005Queue\020\003\022\t\n\005Topic" +
+      "\020\004\022\014\n\010Schedule\020\005\022\020\n\014Subscription\020\006\022\016\n\nCo" +
+      "llection\020\007\022\n\n\006Policy\020\010\022\n\n\006Secret\020\t*\377\002\n\006A" +
+      "ction\022\022\n\016BucketFileList\020\000\022\021\n\rBucketFileG" +
+      "et\020\001\022\021\n\rBucketFilePut\020\002\022\024\n\020BucketFileDel" +
+      "ete\020\003\022\016\n\tTopicList\020\310\001\022\020\n\013TopicDetail\020\311\001\022" +
+      "\026\n\021TopicEventPublish\020\312\001\022\016\n\tQueueSend\020\254\002\022" +
+      "\021\n\014QueueReceive\020\255\002\022\016\n\tQueueList\020\256\002\022\020\n\013Qu" +
+      "eueDetail\020\257\002\022\033\n\026CollectionDocumentRead\020\220" +
+      "\003\022\034\n\027CollectionDocumentWrite\020\221\003\022\035\n\030Colle" +
+      "ctionDocumentDelete\020\222\003\022\024\n\017CollectionQuer" +
+      "y\020\223\003\022\023\n\016CollectionList\020\224\003\022\016\n\tSecretPut\020\364" +
+      "\003\022\021\n\014SecretAccess\020\365\0032u\n\017ResourceService\022" +
+      "b\n\007Declare\022*.nitric.resource.v1.Resource" +
+      "DeclareRequest\032+.nitric.resource.v1.Reso" +
+      "urceDeclareResponseBn\n\033io.nitric.proto.r" +
+      "esource.v1B\tResourcesP\001Z\014nitric/v1;v1\252\002\030" +
+      "Nitric.Proto.Resource.v1\312\002\030Nitric\\Proto\\" +
+      "Resource\\V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -124,7 +132,7 @@ public final class Resources {
     internal_static_nitric_resource_v1_ResourceDeclareRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_nitric_resource_v1_ResourceDeclareRequest_descriptor,
-        new java.lang.String[] { "Resource", "Policy", "Bucket", "Queue", "Topic", "Collection", "Config", });
+        new java.lang.String[] { "Resource", "Policy", "Bucket", "Queue", "Topic", "Collection", "Secret", "Config", });
     internal_static_nitric_resource_v1_BucketResource_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_nitric_resource_v1_BucketResource_fieldAccessorTable = new
@@ -149,8 +157,14 @@ public final class Resources {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_nitric_resource_v1_CollectionResource_descriptor,
         new java.lang.String[] { });
-    internal_static_nitric_resource_v1_ResourceDeclareResponse_descriptor =
+    internal_static_nitric_resource_v1_SecretResource_descriptor =
       getDescriptor().getMessageTypes().get(7);
+    internal_static_nitric_resource_v1_SecretResource_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_nitric_resource_v1_SecretResource_descriptor,
+        new java.lang.String[] { });
+    internal_static_nitric_resource_v1_ResourceDeclareResponse_descriptor =
+      getDescriptor().getMessageTypes().get(8);
     internal_static_nitric_resource_v1_ResourceDeclareResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_nitric_resource_v1_ResourceDeclareResponse_descriptor,

@@ -88,6 +88,18 @@ public enum Action
    * <code>CollectionList = 404;</code>
    */
   CollectionList(404),
+  /**
+   * <pre>
+   * Secret Permissions: 5XX
+   * </pre>
+   *
+   * <code>SecretPut = 500;</code>
+   */
+  SecretPut(500),
+  /**
+   * <code>SecretAccess = 501;</code>
+   */
+  SecretAccess(501),
   UNRECOGNIZED(-1),
   ;
 
@@ -171,6 +183,18 @@ public enum Action
    * <code>CollectionList = 404;</code>
    */
   public static final int CollectionList_VALUE = 404;
+  /**
+   * <pre>
+   * Secret Permissions: 5XX
+   * </pre>
+   *
+   * <code>SecretPut = 500;</code>
+   */
+  public static final int SecretPut_VALUE = 500;
+  /**
+   * <code>SecretAccess = 501;</code>
+   */
+  public static final int SecretAccess_VALUE = 501;
 
 
   public final int getNumber() {
@@ -213,6 +237,8 @@ public enum Action
       case 402: return CollectionDocumentDelete;
       case 403: return CollectionQuery;
       case 404: return CollectionList;
+      case 500: return SecretPut;
+      case 501: return SecretAccess;
       default: return null;
     }
   }

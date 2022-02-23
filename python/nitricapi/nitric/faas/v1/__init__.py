@@ -16,7 +16,8 @@ class ClientMessage(betterproto.Message):
 
     # Client message ID, used to pair requests/responses
     id: str = betterproto.string_field(1)
-    # Client initialisation request
+    # Client initialisation request A worker will not be eligible for triggers
+    # until it has identified itself
     init_request: "InitRequest" = betterproto.message_field(2, group="content")
     # Client responsding with result of a trigger
     trigger_response: "TriggerResponse" = betterproto.message_field(3, group="content")
@@ -35,10 +36,45 @@ class ServerMessage(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
-class InitRequest(betterproto.Message):
-    """Placeholder message"""
+class ApiWorker(betterproto.Message):
+    api: str = betterproto.string_field(1)
+    path: str = betterproto.string_field(2)
+    methods: List[str] = betterproto.string_field(3)
 
-    pass
+
+@dataclass(eq=False, repr=False)
+class SubscriptionWorker(betterproto.Message):
+    topic: str = betterproto.string_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class ScheduleWorker(betterproto.Message):
+    key: str = betterproto.string_field(1)
+    rate: "ScheduleRate" = betterproto.message_field(10, group="cadence")
+    cron: "ScheduleCron" = betterproto.message_field(11, group="cadence")
+
+
+@dataclass(eq=False, repr=False)
+class ScheduleRate(betterproto.Message):
+    rate: str = betterproto.string_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class ScheduleCron(betterproto.Message):
+    cron: str = betterproto.string_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class InitRequest(betterproto.Message):
+    """
+    InitRequest - Identifies a worker as ready to recieve triggers This message
+    will contain information on the type of triggers that a worker is capable
+    of handling
+    """
+
+    api: "ApiWorker" = betterproto.message_field(10, group="Worker")
+    subscription: "SubscriptionWorker" = betterproto.message_field(11, group="Worker")
+    schedule: "ScheduleWorker" = betterproto.message_field(12, group="Worker")
 
 
 @dataclass(eq=False, repr=False)
@@ -93,6 +129,10 @@ class HttpTriggerContext(betterproto.Message):
     # HTTP Query params
     query_params: Dict[str, "QueryValue"] = betterproto.map_field(
         6, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE
+    )
+    # HTTP Path parameters
+    path_params: Dict[str, str] = betterproto.map_field(
+        7, betterproto.TYPE_STRING, betterproto.TYPE_STRING
     )
 
     def __post_init__(self) -> None:

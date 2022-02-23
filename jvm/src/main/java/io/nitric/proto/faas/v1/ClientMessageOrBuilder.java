@@ -30,6 +30,8 @@ public interface ClientMessageOrBuilder extends
   /**
    * <pre>
    * Client initialisation request
+   * A worker will not be eligible for triggers
+   * until it has identified itself
    * </pre>
    *
    * <code>.nitric.faas.v1.InitRequest init_request = 2;</code>
@@ -39,6 +41,8 @@ public interface ClientMessageOrBuilder extends
   /**
    * <pre>
    * Client initialisation request
+   * A worker will not be eligible for triggers
+   * until it has identified itself
    * </pre>
    *
    * <code>.nitric.faas.v1.InitRequest init_request = 2;</code>
@@ -48,6 +52,8 @@ public interface ClientMessageOrBuilder extends
   /**
    * <pre>
    * Client initialisation request
+   * A worker will not be eligible for triggers
+   * until it has identified itself
    * </pre>
    *
    * <code>.nitric.faas.v1.InitRequest init_request = 2;</code>

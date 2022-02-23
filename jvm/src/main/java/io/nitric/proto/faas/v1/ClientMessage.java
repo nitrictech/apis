@@ -210,6 +210,8 @@ private static final long serialVersionUID = 0L;
   /**
    * <pre>
    * Client initialisation request
+   * A worker will not be eligible for triggers
+   * until it has identified itself
    * </pre>
    *
    * <code>.nitric.faas.v1.InitRequest init_request = 2;</code>
@@ -222,6 +224,8 @@ private static final long serialVersionUID = 0L;
   /**
    * <pre>
    * Client initialisation request
+   * A worker will not be eligible for triggers
+   * until it has identified itself
    * </pre>
    *
    * <code>.nitric.faas.v1.InitRequest init_request = 2;</code>
@@ -237,6 +241,8 @@ private static final long serialVersionUID = 0L;
   /**
    * <pre>
    * Client initialisation request
+   * A worker will not be eligible for triggers
+   * until it has identified itself
    * </pre>
    *
    * <code>.nitric.faas.v1.InitRequest init_request = 2;</code>
@@ -786,6 +792,8 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * Client initialisation request
+     * A worker will not be eligible for triggers
+     * until it has identified itself
      * </pre>
      *
      * <code>.nitric.faas.v1.InitRequest init_request = 2;</code>
@@ -798,6 +806,8 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * Client initialisation request
+     * A worker will not be eligible for triggers
+     * until it has identified itself
      * </pre>
      *
      * <code>.nitric.faas.v1.InitRequest init_request = 2;</code>
@@ -820,6 +830,8 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * Client initialisation request
+     * A worker will not be eligible for triggers
+     * until it has identified itself
      * </pre>
      *
      * <code>.nitric.faas.v1.InitRequest init_request = 2;</code>
@@ -840,6 +852,8 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * Client initialisation request
+     * A worker will not be eligible for triggers
+     * until it has identified itself
      * </pre>
      *
      * <code>.nitric.faas.v1.InitRequest init_request = 2;</code>
@@ -858,6 +872,8 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * Client initialisation request
+     * A worker will not be eligible for triggers
+     * until it has identified itself
      * </pre>
      *
      * <code>.nitric.faas.v1.InitRequest init_request = 2;</code>
@@ -884,6 +900,8 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * Client initialisation request
+     * A worker will not be eligible for triggers
+     * until it has identified itself
      * </pre>
      *
      * <code>.nitric.faas.v1.InitRequest init_request = 2;</code>
@@ -907,6 +925,8 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * Client initialisation request
+     * A worker will not be eligible for triggers
+     * until it has identified itself
      * </pre>
      *
      * <code>.nitric.faas.v1.InitRequest init_request = 2;</code>
@@ -917,6 +937,8 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * Client initialisation request
+     * A worker will not be eligible for triggers
+     * until it has identified itself
      * </pre>
      *
      * <code>.nitric.faas.v1.InitRequest init_request = 2;</code>
@@ -935,6 +957,8 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * Client initialisation request
+     * A worker will not be eligible for triggers
+     * until it has identified itself
      * </pre>
      *
      * <code>.nitric.faas.v1.InitRequest init_request = 2;</code>

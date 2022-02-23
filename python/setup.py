@@ -38,15 +38,18 @@ setuptools.setup(
     ],
     setup_requires=["wheel"],
     install_requires=[
-        "protobuf==3.13.0",
+        "protobuf==3.19.4",
         "betterproto==2.0.0b3",
         "asyncio",
     ],
     extras_require={
         "dev": [
+            # needed to lock markupsafe to v2.0.1 to avoid build errors.
+            # see: https://github.com/danielgtaylor/python-betterproto/issues/341
+            "markupsafe==2.0.1",
             "betterproto[compiler]==2.0.0b3",
             # "grpcio==1.33.2",
-            "grpcio-tools==1.33.2",
+            "grpcio-tools==1.44.0",
             "twine==3.2.0",
         ]
     },

@@ -19,6 +19,7 @@ class ResourceType(betterproto.Enum):
     Subscription = 6
     Collection = 7
     Policy = 8
+    Secret = 9
 
 
 class Action(betterproto.Enum):
@@ -42,6 +43,9 @@ class Action(betterproto.Enum):
     CollectionDocumentDelete = 402
     CollectionQuery = 403
     CollectionList = 404
+    # Secret Permissions: 5XX
+    SecretPut = 500
+    SecretAccess = 501
 
 
 @dataclass(eq=False, repr=False)
@@ -65,6 +69,7 @@ class ResourceDeclareRequest(betterproto.Message):
     queue: "QueueResource" = betterproto.message_field(12, group="config")
     topic: "TopicResource" = betterproto.message_field(13, group="config")
     collection: "CollectionResource" = betterproto.message_field(14, group="config")
+    secret: "SecretResource" = betterproto.message_field(15, group="config")
 
 
 @dataclass(eq=False, repr=False)
@@ -88,6 +93,11 @@ class CollectionResource(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class SecretResource(betterproto.Message):
+    pass
+
+
+@dataclass(eq=False, repr=False)
 class ResourceDeclareResponse(betterproto.Message):
     pass
 
@@ -102,6 +112,7 @@ class ResourceServiceStub(betterproto.ServiceStub):
         queue: "QueueResource" = None,
         topic: "TopicResource" = None,
         collection: "CollectionResource" = None,
+        secret: "SecretResource" = None,
     ) -> "ResourceDeclareResponse":
 
         request = ResourceDeclareRequest()
@@ -117,6 +128,8 @@ class ResourceServiceStub(betterproto.ServiceStub):
             request.topic = topic
         if collection is not None:
             request.collection = collection
+        if secret is not None:
+            request.secret = secret
 
         return await self._unary_unary(
             "/nitric.resource.v1.ResourceService/Declare",
@@ -134,6 +147,7 @@ class ResourceServiceBase(ServiceBase):
         queue: "QueueResource",
         topic: "TopicResource",
         collection: "CollectionResource",
+        secret: "SecretResource",
     ) -> "ResourceDeclareResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
@@ -147,6 +161,7 @@ class ResourceServiceBase(ServiceBase):
             "queue": request.queue,
             "topic": request.topic,
             "collection": request.collection,
+            "secret": request.secret,
         }
 
         response = await self.declare(**request_kwargs)

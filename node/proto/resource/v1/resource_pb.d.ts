@@ -93,6 +93,11 @@ export class ResourceDeclareRequest extends jspb.Message {
   getCollection(): CollectionResource | undefined;
   setCollection(value?: CollectionResource): void;
 
+  hasSecret(): boolean;
+  clearSecret(): void;
+  getSecret(): SecretResource | undefined;
+  setSecret(value?: SecretResource): void;
+
   getConfigCase(): ResourceDeclareRequest.ConfigCase;
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ResourceDeclareRequest.AsObject;
@@ -112,6 +117,7 @@ export namespace ResourceDeclareRequest {
     queue?: QueueResource.AsObject,
     topic?: TopicResource.AsObject,
     collection?: CollectionResource.AsObject,
+    secret?: SecretResource.AsObject,
   }
 
   export enum ConfigCase {
@@ -121,6 +127,7 @@ export namespace ResourceDeclareRequest {
     QUEUE = 12,
     TOPIC = 13,
     COLLECTION = 14,
+    SECRET = 15,
   }
 }
 
@@ -188,6 +195,22 @@ export namespace CollectionResource {
   }
 }
 
+export class SecretResource extends jspb.Message {
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): SecretResource.AsObject;
+  static toObject(includeInstance: boolean, msg: SecretResource): SecretResource.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: SecretResource, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): SecretResource;
+  static deserializeBinaryFromReader(message: SecretResource, reader: jspb.BinaryReader): SecretResource;
+}
+
+export namespace SecretResource {
+  export type AsObject = {
+  }
+}
+
 export class ResourceDeclareResponse extends jspb.Message {
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ResourceDeclareResponse.AsObject;
@@ -214,6 +237,7 @@ export interface ResourceTypeMap {
   SUBSCRIPTION: 6;
   COLLECTION: 7;
   POLICY: 8;
+  SECRET: 9;
 }
 
 export const ResourceType: ResourceTypeMap;
@@ -235,6 +259,8 @@ export interface ActionMap {
   COLLECTIONDOCUMENTDELETE: 402;
   COLLECTIONQUERY: 403;
   COLLECTIONLIST: 404;
+  SECRETPUT: 500;
+  SECRETACCESS: 501;
 }
 
 export const Action: ActionMap;

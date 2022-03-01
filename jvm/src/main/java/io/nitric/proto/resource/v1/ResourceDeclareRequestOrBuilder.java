@@ -97,5 +97,20 @@ public interface ResourceDeclareRequestOrBuilder extends
    */
   io.nitric.proto.resource.v1.CollectionResourceOrBuilder getCollectionOrBuilder();
 
+  /**
+   * <code>.nitric.resource.v1.SecretResource secret = 15;</code>
+   * @return Whether the secret field is set.
+   */
+  boolean hasSecret();
+  /**
+   * <code>.nitric.resource.v1.SecretResource secret = 15;</code>
+   * @return The secret.
+   */
+  io.nitric.proto.resource.v1.SecretResource getSecret();
+  /**
+   * <code>.nitric.resource.v1.SecretResource secret = 15;</code>
+   */
+  io.nitric.proto.resource.v1.SecretResourceOrBuilder getSecretOrBuilder();
+
   public io.nitric.proto.resource.v1.ResourceDeclareRequest.ConfigCase getConfigCase();
 }

@@ -34,7 +34,7 @@ public interface StorageWriteRequestOrBuilder extends
    * Key to store the item under
    * </pre>
    *
-   * <code>string key = 2;</code>
+   * <code>string key = 2 [(.validate.rules) = { ... }</code>
    * @return The key.
    */
   java.lang.String getKey();
@@ -43,7 +43,7 @@ public interface StorageWriteRequestOrBuilder extends
    * Key to store the item under
    * </pre>
    *
-   * <code>string key = 2;</code>
+   * <code>string key = 2 [(.validate.rules) = { ... }</code>
    * @return The bytes for key.
    */
   com.google.protobuf.ByteString

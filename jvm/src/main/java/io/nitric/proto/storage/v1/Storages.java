@@ -64,35 +64,36 @@ public final class Storages {
   static {
     java.lang.String[] descriptorData = {
       "\n\036proto/storage/v1/storage.proto\022\021nitric" +
-      ".storage.v1\032\027validate/validate.proto\"a\n\023" +
+      ".storage.v1\032\027validate/validate.proto\"j\n\023" +
       "StorageWriteRequest\022/\n\013bucket_name\030\001 \001(\t" +
-      "B\032\372B\027r\025(\200\0022\020^\\w+([.\\-]\\w+)*$\022\013\n\003key\030\002 \001(" +
-      "\t\022\014\n\004body\030\003 \001(\014\"\026\n\024StorageWriteResponse\"" +
-      "R\n\022StorageReadRequest\022/\n\013bucket_name\030\001 \001" +
-      "(\tB\032\372B\027r\025(\200\0022\020^\\w+([.\\-]\\w+)*$\022\013\n\003key\030\002 " +
-      "\001(\t\"#\n\023StorageReadResponse\022\014\n\004body\030\001 \001(\014" +
-      "\"T\n\024StorageDeleteRequest\022/\n\013bucket_name\030" +
-      "\001 \001(\tB\032\372B\027r\025(\200\0022\020^\\w+([.\\-]\\w+)*$\022\013\n\003key" +
-      "\030\002 \001(\t\"\027\n\025StorageDeleteResponse\"\270\001\n\030Stor" +
-      "agePreSignUrlRequest\022\023\n\013bucket_name\030\001 \001(" +
-      "\t\022\013\n\003key\030\002 \001(\t\022H\n\toperation\030\003 \001(\01625.nitr" +
-      "ic.storage.v1.StoragePreSignUrlRequest.O" +
-      "peration\022\016\n\006expiry\030\004 \001(\r\" \n\tOperation\022\010\n" +
-      "\004READ\020\000\022\t\n\005WRITE\020\001\"(\n\031StoragePreSignUrlR" +
-      "esponse\022\013\n\003url\030\001 \001(\t2\207\003\n\016StorageService\022" +
-      "U\n\004Read\022%.nitric.storage.v1.StorageReadR" +
-      "equest\032&.nitric.storage.v1.StorageReadRe" +
-      "sponse\022X\n\005Write\022&.nitric.storage.v1.Stor" +
-      "ageWriteRequest\032\'.nitric.storage.v1.Stor" +
-      "ageWriteResponse\022[\n\006Delete\022\'.nitric.stor" +
-      "age.v1.StorageDeleteRequest\032(.nitric.sto" +
-      "rage.v1.StorageDeleteResponse\022g\n\nPreSign" +
-      "Url\022+.nitric.storage.v1.StoragePreSignUr" +
-      "lRequest\032,.nitric.storage.v1.StoragePreS" +
-      "ignUrlResponseBj\n\032io.nitric.proto.storag" +
-      "e.v1B\010StoragesP\001Z\014nitric/v1;v1\252\002\027Nitric." +
-      "Proto.Storage.v1\312\002\027Nitric\\Proto\\Storage\\" +
-      "V1b\006proto3"
+      "B\032\372B\027r\025(\200\0022\020^\\w+([.\\-]\\w+)*$\022\024\n\003key\030\002 \001(" +
+      "\tB\007\372B\004r\002\020\001\022\014\n\004body\030\003 \001(\014\"\026\n\024StorageWrite" +
+      "Response\"[\n\022StorageReadRequest\022/\n\013bucket" +
+      "_name\030\001 \001(\tB\032\372B\027r\025(\200\0022\020^\\w+([.\\-]\\w+)*$\022" +
+      "\024\n\003key\030\002 \001(\tB\007\372B\004r\002\020\001\"#\n\023StorageReadResp" +
+      "onse\022\014\n\004body\030\001 \001(\014\"]\n\024StorageDeleteReque" +
+      "st\022/\n\013bucket_name\030\001 \001(\tB\032\372B\027r\025(\200\0022\020^\\w+(" +
+      "[.\\-]\\w+)*$\022\024\n\003key\030\002 \001(\tB\007\372B\004r\002\020\001\"\027\n\025Sto" +
+      "rageDeleteResponse\"\335\001\n\030StoragePreSignUrl" +
+      "Request\022/\n\013bucket_name\030\001 \001(\tB\032\372B\027r\025(\200\0022\020" +
+      "^\\w+([.\\-]\\w+)*$\022\024\n\003key\030\002 \001(\tB\007\372B\004r\002\020\001\022H" +
+      "\n\toperation\030\003 \001(\01625.nitric.storage.v1.St" +
+      "oragePreSignUrlRequest.Operation\022\016\n\006expi" +
+      "ry\030\004 \001(\r\" \n\tOperation\022\010\n\004READ\020\000\022\t\n\005WRITE" +
+      "\020\001\"(\n\031StoragePreSignUrlResponse\022\013\n\003url\030\001" +
+      " \001(\t2\207\003\n\016StorageService\022U\n\004Read\022%.nitric" +
+      ".storage.v1.StorageReadRequest\032&.nitric." +
+      "storage.v1.StorageReadResponse\022X\n\005Write\022" +
+      "&.nitric.storage.v1.StorageWriteRequest\032" +
+      "\'.nitric.storage.v1.StorageWriteResponse" +
+      "\022[\n\006Delete\022\'.nitric.storage.v1.StorageDe" +
+      "leteRequest\032(.nitric.storage.v1.StorageD" +
+      "eleteResponse\022g\n\nPreSignUrl\022+.nitric.sto" +
+      "rage.v1.StoragePreSignUrlRequest\032,.nitri" +
+      "c.storage.v1.StoragePreSignUrlResponseBj" +
+      "\n\032io.nitric.proto.storage.v1B\010StoragesP\001" +
+      "Z\014nitric/v1;v1\252\002\027Nitric.Proto.Storage.v1" +
+      "\312\002\027Nitric\\Proto\\Storage\\V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

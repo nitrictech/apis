@@ -13,7 +13,7 @@ public interface StoragePreSignUrlRequestOrBuilder extends
    *  this will be automatically resolved to the provider specific bucket identifier.
    * </pre>
    *
-   * <code>string bucket_name = 1;</code>
+   * <code>string bucket_name = 1 [(.validate.rules) = { ... }</code>
    * @return The bucketName.
    */
   java.lang.String getBucketName();
@@ -23,7 +23,7 @@ public interface StoragePreSignUrlRequestOrBuilder extends
    *  this will be automatically resolved to the provider specific bucket identifier.
    * </pre>
    *
-   * <code>string bucket_name = 1;</code>
+   * <code>string bucket_name = 1 [(.validate.rules) = { ... }</code>
    * @return The bytes for bucketName.
    */
   com.google.protobuf.ByteString
@@ -35,7 +35,7 @@ public interface StoragePreSignUrlRequestOrBuilder extends
    * The URL and the token it contains will only be valid for operations on this resource specifically.
    * </pre>
    *
-   * <code>string key = 2;</code>
+   * <code>string key = 2 [(.validate.rules) = { ... }</code>
    * @return The key.
    */
   java.lang.String getKey();
@@ -45,7 +45,7 @@ public interface StoragePreSignUrlRequestOrBuilder extends
    * The URL and the token it contains will only be valid for operations on this resource specifically.
    * </pre>
    *
-   * <code>string key = 2;</code>
+   * <code>string key = 2 [(.validate.rules) = { ... }</code>
    * @return The bytes for key.
    */
   com.google.protobuf.ByteString

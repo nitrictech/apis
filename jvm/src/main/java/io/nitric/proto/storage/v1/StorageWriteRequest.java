@@ -159,7 +159,7 @@ private static final long serialVersionUID = 0L;
    * Key to store the item under
    * </pre>
    *
-   * <code>string key = 2;</code>
+   * <code>string key = 2 [(.validate.rules) = { ... }</code>
    * @return The key.
    */
   @java.lang.Override
@@ -180,7 +180,7 @@ private static final long serialVersionUID = 0L;
    * Key to store the item under
    * </pre>
    *
-   * <code>string key = 2;</code>
+   * <code>string key = 2 [(.validate.rules) = { ... }</code>
    * @return The bytes for key.
    */
   @java.lang.Override
@@ -660,7 +660,7 @@ private static final long serialVersionUID = 0L;
      * Key to store the item under
      * </pre>
      *
-     * <code>string key = 2;</code>
+     * <code>string key = 2 [(.validate.rules) = { ... }</code>
      * @return The key.
      */
     public java.lang.String getKey() {
@@ -680,7 +680,7 @@ private static final long serialVersionUID = 0L;
      * Key to store the item under
      * </pre>
      *
-     * <code>string key = 2;</code>
+     * <code>string key = 2 [(.validate.rules) = { ... }</code>
      * @return The bytes for key.
      */
     public com.google.protobuf.ByteString
@@ -701,7 +701,7 @@ private static final long serialVersionUID = 0L;
      * Key to store the item under
      * </pre>
      *
-     * <code>string key = 2;</code>
+     * <code>string key = 2 [(.validate.rules) = { ... }</code>
      * @param value The key to set.
      * @return This builder for chaining.
      */
@@ -720,7 +720,7 @@ private static final long serialVersionUID = 0L;
      * Key to store the item under
      * </pre>
      *
-     * <code>string key = 2;</code>
+     * <code>string key = 2 [(.validate.rules) = { ... }</code>
      * @return This builder for chaining.
      */
     public Builder clearKey() {
@@ -734,7 +734,7 @@ private static final long serialVersionUID = 0L;
      * Key to store the item under
      * </pre>
      *
-     * <code>string key = 2;</code>
+     * <code>string key = 2 [(.validate.rules) = { ... }</code>
      * @param value The bytes for key to set.
      * @return This builder for chaining.
      */

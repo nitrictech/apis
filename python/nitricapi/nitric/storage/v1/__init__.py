@@ -2,7 +2,7 @@
 # sources: proto/storage/v1/storage.proto
 # plugin: python-betterproto
 from dataclasses import dataclass
-from typing import Dict
+from typing import Dict, List
 
 import betterproto
 from betterproto.grpc.grpclib_server import ServiceBase
@@ -97,6 +97,22 @@ class StoragePreSignUrlResponse(betterproto.Message):
     url: str = betterproto.string_field(1)
 
 
+@dataclass(eq=False, repr=False)
+class StorageListFilesRequest(betterproto.Message):
+    bucket_name: str = betterproto.string_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class File(betterproto.Message):
+    key: str = betterproto.string_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class StorageListFilesResponse(betterproto.Message):
+    # keys of the files in the bucket
+    files: List["File"] = betterproto.message_field(1)
+
+
 class StorageServiceStub(betterproto.ServiceStub):
     async def read(
         self, *, bucket_name: str = "", key: str = ""
@@ -156,6 +172,17 @@ class StorageServiceStub(betterproto.ServiceStub):
             StoragePreSignUrlResponse,
         )
 
+    async def list_files(self, *, bucket_name: str = "") -> "StorageListFilesResponse":
+
+        request = StorageListFilesRequest()
+        request.bucket_name = bucket_name
+
+        return await self._unary_unary(
+            "/nitric.storage.v1.StorageService/ListFiles",
+            request,
+            StorageListFilesResponse,
+        )
+
 
 class StorageServiceBase(ServiceBase):
     async def read(self, bucket_name: str, key: str) -> "StorageReadResponse":
@@ -176,6 +203,9 @@ class StorageServiceBase(ServiceBase):
         operation: "StoragePreSignUrlRequestOperation",
         expiry: int,
     ) -> "StoragePreSignUrlResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def list_files(self, bucket_name: str) -> "StorageListFilesResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
     async def __rpc_read(self, stream: grpclib.server.Stream) -> None:
@@ -225,6 +255,16 @@ class StorageServiceBase(ServiceBase):
         response = await self.pre_sign_url(**request_kwargs)
         await stream.send_message(response)
 
+    async def __rpc_list_files(self, stream: grpclib.server.Stream) -> None:
+        request = await stream.recv_message()
+
+        request_kwargs = {
+            "bucket_name": request.bucket_name,
+        }
+
+        response = await self.list_files(**request_kwargs)
+        await stream.send_message(response)
+
     def __mapping__(self) -> Dict[str, grpclib.const.Handler]:
         return {
             "/nitric.storage.v1.StorageService/Read": grpclib.const.Handler(
@@ -250,5 +290,11 @@ class StorageServiceBase(ServiceBase):
                 grpclib.const.Cardinality.UNARY_UNARY,
                 StoragePreSignUrlRequest,
                 StoragePreSignUrlResponse,
+            ),
+            "/nitric.storage.v1.StorageService/ListFiles": grpclib.const.Handler(
+                self.__rpc_list_files,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                StorageListFilesRequest,
+                StorageListFilesResponse,
             ),
         }

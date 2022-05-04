@@ -141,6 +141,37 @@ public final class StorageServiceGrpc {
     return getPreSignUrlMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<io.nitric.proto.storage.v1.StorageListFilesRequest,
+      io.nitric.proto.storage.v1.StorageListFilesResponse> getListFilesMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "ListFiles",
+      requestType = io.nitric.proto.storage.v1.StorageListFilesRequest.class,
+      responseType = io.nitric.proto.storage.v1.StorageListFilesResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<io.nitric.proto.storage.v1.StorageListFilesRequest,
+      io.nitric.proto.storage.v1.StorageListFilesResponse> getListFilesMethod() {
+    io.grpc.MethodDescriptor<io.nitric.proto.storage.v1.StorageListFilesRequest, io.nitric.proto.storage.v1.StorageListFilesResponse> getListFilesMethod;
+    if ((getListFilesMethod = StorageServiceGrpc.getListFilesMethod) == null) {
+      synchronized (StorageServiceGrpc.class) {
+        if ((getListFilesMethod = StorageServiceGrpc.getListFilesMethod) == null) {
+          StorageServiceGrpc.getListFilesMethod = getListFilesMethod =
+              io.grpc.MethodDescriptor.<io.nitric.proto.storage.v1.StorageListFilesRequest, io.nitric.proto.storage.v1.StorageListFilesResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "ListFiles"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  io.nitric.proto.storage.v1.StorageListFilesRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  io.nitric.proto.storage.v1.StorageListFilesResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new StorageServiceMethodDescriptorSupplier("ListFiles"))
+              .build();
+        }
+      }
+    }
+    return getListFilesMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -232,6 +263,16 @@ public final class StorageServiceGrpc {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getPreSignUrlMethod(), responseObserver);
     }
 
+    /**
+     * <pre>
+     * List files currently in the bucket
+     * </pre>
+     */
+    public void listFiles(io.nitric.proto.storage.v1.StorageListFilesRequest request,
+        io.grpc.stub.StreamObserver<io.nitric.proto.storage.v1.StorageListFilesResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getListFilesMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -262,6 +303,13 @@ public final class StorageServiceGrpc {
                 io.nitric.proto.storage.v1.StoragePreSignUrlRequest,
                 io.nitric.proto.storage.v1.StoragePreSignUrlResponse>(
                   this, METHODID_PRE_SIGN_URL)))
+          .addMethod(
+            getListFilesMethod(),
+            io.grpc.stub.ServerCalls.asyncUnaryCall(
+              new MethodHandlers<
+                io.nitric.proto.storage.v1.StorageListFilesRequest,
+                io.nitric.proto.storage.v1.StorageListFilesResponse>(
+                  this, METHODID_LIST_FILES)))
           .build();
     }
   }
@@ -326,6 +374,17 @@ public final class StorageServiceGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getPreSignUrlMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     * <pre>
+     * List files currently in the bucket
+     * </pre>
+     */
+    public void listFiles(io.nitric.proto.storage.v1.StorageListFilesRequest request,
+        io.grpc.stub.StreamObserver<io.nitric.proto.storage.v1.StorageListFilesResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getListFilesMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -383,6 +442,16 @@ public final class StorageServiceGrpc {
     public io.nitric.proto.storage.v1.StoragePreSignUrlResponse preSignUrl(io.nitric.proto.storage.v1.StoragePreSignUrlRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getPreSignUrlMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * List files currently in the bucket
+     * </pre>
+     */
+    public io.nitric.proto.storage.v1.StorageListFilesResponse listFiles(io.nitric.proto.storage.v1.StorageListFilesRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getListFilesMethod(), getCallOptions(), request);
     }
   }
 
@@ -446,12 +515,24 @@ public final class StorageServiceGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getPreSignUrlMethod(), getCallOptions()), request);
     }
+
+    /**
+     * <pre>
+     * List files currently in the bucket
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<io.nitric.proto.storage.v1.StorageListFilesResponse> listFiles(
+        io.nitric.proto.storage.v1.StorageListFilesRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getListFilesMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_READ = 0;
   private static final int METHODID_WRITE = 1;
   private static final int METHODID_DELETE = 2;
   private static final int METHODID_PRE_SIGN_URL = 3;
+  private static final int METHODID_LIST_FILES = 4;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -485,6 +566,10 @@ public final class StorageServiceGrpc {
         case METHODID_PRE_SIGN_URL:
           serviceImpl.preSignUrl((io.nitric.proto.storage.v1.StoragePreSignUrlRequest) request,
               (io.grpc.stub.StreamObserver<io.nitric.proto.storage.v1.StoragePreSignUrlResponse>) responseObserver);
+          break;
+        case METHODID_LIST_FILES:
+          serviceImpl.listFiles((io.nitric.proto.storage.v1.StorageListFilesRequest) request,
+              (io.grpc.stub.StreamObserver<io.nitric.proto.storage.v1.StorageListFilesResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -551,6 +636,7 @@ public final class StorageServiceGrpc {
               .addMethod(getWriteMethod())
               .addMethod(getDeleteMethod())
               .addMethod(getPreSignUrlMethod())
+              .addMethod(getListFilesMethod())
               .build();
         }
       }

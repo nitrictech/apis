@@ -195,3 +195,65 @@ export namespace StoragePreSignUrlResponse {
   }
 }
 
+export class StorageListFilesRequest extends jspb.Message {
+  getBucketName(): string;
+  setBucketName(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): StorageListFilesRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: StorageListFilesRequest): StorageListFilesRequest.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: StorageListFilesRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): StorageListFilesRequest;
+  static deserializeBinaryFromReader(message: StorageListFilesRequest, reader: jspb.BinaryReader): StorageListFilesRequest;
+}
+
+export namespace StorageListFilesRequest {
+  export type AsObject = {
+    bucketName: string,
+  }
+}
+
+export class File extends jspb.Message {
+  getKey(): string;
+  setKey(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): File.AsObject;
+  static toObject(includeInstance: boolean, msg: File): File.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: File, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): File;
+  static deserializeBinaryFromReader(message: File, reader: jspb.BinaryReader): File;
+}
+
+export namespace File {
+  export type AsObject = {
+    key: string,
+  }
+}
+
+export class StorageListFilesResponse extends jspb.Message {
+  clearFilesList(): void;
+  getFilesList(): Array<File>;
+  setFilesList(value: Array<File>): void;
+  addFiles(value?: File, index?: number): File;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): StorageListFilesResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: StorageListFilesResponse): StorageListFilesResponse.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: StorageListFilesResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): StorageListFilesResponse;
+  static deserializeBinaryFromReader(message: StorageListFilesResponse, reader: jspb.BinaryReader): StorageListFilesResponse;
+}
+
+export namespace StorageListFilesResponse {
+  export type AsObject = {
+    filesList: Array<File.AsObject>,
+  }
+}
+

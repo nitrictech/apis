@@ -4,23 +4,18 @@
 package io.nitric.proto.storage.v1;
 
 /**
- * <pre>
- * Request to delete a storage item
- * </pre>
- *
- * Protobuf type {@code nitric.storage.v1.StorageDeleteRequest}
+ * Protobuf type {@code nitric.storage.v1.File}
  */
-public final class StorageDeleteRequest extends
+public final class File extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:nitric.storage.v1.StorageDeleteRequest)
-    StorageDeleteRequestOrBuilder {
+    // @@protoc_insertion_point(message_implements:nitric.storage.v1.File)
+    FileOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use StorageDeleteRequest.newBuilder() to construct.
-  private StorageDeleteRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use File.newBuilder() to construct.
+  private File(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private StorageDeleteRequest() {
-    bucketName_ = "";
+  private File() {
     key_ = "";
   }
 
@@ -28,7 +23,7 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings({"unused"})
   protected java.lang.Object newInstance(
       UnusedPrivateParameter unused) {
-    return new StorageDeleteRequest();
+    return new File();
   }
 
   @java.lang.Override
@@ -36,7 +31,7 @@ private static final long serialVersionUID = 0L;
   getUnknownFields() {
     return this.unknownFields;
   }
-  private StorageDeleteRequest(
+  private File(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
@@ -55,12 +50,6 @@ private static final long serialVersionUID = 0L;
             done = true;
             break;
           case 10: {
-            java.lang.String s = input.readStringRequireUtf8();
-
-            bucketName_ = s;
-            break;
-          }
-          case 18: {
             java.lang.String s = input.readStringRequireUtf8();
 
             key_ = s;
@@ -87,71 +76,21 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return io.nitric.proto.storage.v1.Storages.internal_static_nitric_storage_v1_StorageDeleteRequest_descriptor;
+    return io.nitric.proto.storage.v1.Storages.internal_static_nitric_storage_v1_File_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return io.nitric.proto.storage.v1.Storages.internal_static_nitric_storage_v1_StorageDeleteRequest_fieldAccessorTable
+    return io.nitric.proto.storage.v1.Storages.internal_static_nitric_storage_v1_File_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            io.nitric.proto.storage.v1.StorageDeleteRequest.class, io.nitric.proto.storage.v1.StorageDeleteRequest.Builder.class);
+            io.nitric.proto.storage.v1.File.class, io.nitric.proto.storage.v1.File.Builder.class);
   }
 
-  public static final int BUCKET_NAME_FIELD_NUMBER = 1;
-  private volatile java.lang.Object bucketName_;
-  /**
-   * <pre>
-   * Name of the bucket to delete from
-   * </pre>
-   *
-   * <code>string bucket_name = 1 [(.validate.rules) = { ... }</code>
-   * @return The bucketName.
-   */
-  @java.lang.Override
-  public java.lang.String getBucketName() {
-    java.lang.Object ref = bucketName_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      bucketName_ = s;
-      return s;
-    }
-  }
-  /**
-   * <pre>
-   * Name of the bucket to delete from
-   * </pre>
-   *
-   * <code>string bucket_name = 1 [(.validate.rules) = { ... }</code>
-   * @return The bytes for bucketName.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getBucketNameBytes() {
-    java.lang.Object ref = bucketName_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      bucketName_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int KEY_FIELD_NUMBER = 2;
+  public static final int KEY_FIELD_NUMBER = 1;
   private volatile java.lang.Object key_;
   /**
-   * <pre>
-   * Key of item to delete
-   * </pre>
-   *
-   * <code>string key = 2 [(.validate.rules) = { ... }</code>
+   * <code>string key = 1;</code>
    * @return The key.
    */
   @java.lang.Override
@@ -168,11 +107,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <pre>
-   * Key of item to delete
-   * </pre>
-   *
-   * <code>string key = 2 [(.validate.rules) = { ... }</code>
+   * <code>string key = 1;</code>
    * @return The bytes for key.
    */
   @java.lang.Override
@@ -204,11 +139,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!getBucketNameBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, bucketName_);
-    }
     if (!getKeyBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, key_);
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, key_);
     }
     unknownFields.writeTo(output);
   }
@@ -219,11 +151,8 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!getBucketNameBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, bucketName_);
-    }
     if (!getKeyBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, key_);
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, key_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -235,13 +164,11 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof io.nitric.proto.storage.v1.StorageDeleteRequest)) {
+    if (!(obj instanceof io.nitric.proto.storage.v1.File)) {
       return super.equals(obj);
     }
-    io.nitric.proto.storage.v1.StorageDeleteRequest other = (io.nitric.proto.storage.v1.StorageDeleteRequest) obj;
+    io.nitric.proto.storage.v1.File other = (io.nitric.proto.storage.v1.File) obj;
 
-    if (!getBucketName()
-        .equals(other.getBucketName())) return false;
     if (!getKey()
         .equals(other.getKey())) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
@@ -255,8 +182,6 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + BUCKET_NAME_FIELD_NUMBER;
-    hash = (53 * hash) + getBucketName().hashCode();
     hash = (37 * hash) + KEY_FIELD_NUMBER;
     hash = (53 * hash) + getKey().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
@@ -264,69 +189,69 @@ private static final long serialVersionUID = 0L;
     return hash;
   }
 
-  public static io.nitric.proto.storage.v1.StorageDeleteRequest parseFrom(
+  public static io.nitric.proto.storage.v1.File parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static io.nitric.proto.storage.v1.StorageDeleteRequest parseFrom(
+  public static io.nitric.proto.storage.v1.File parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static io.nitric.proto.storage.v1.StorageDeleteRequest parseFrom(
+  public static io.nitric.proto.storage.v1.File parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static io.nitric.proto.storage.v1.StorageDeleteRequest parseFrom(
+  public static io.nitric.proto.storage.v1.File parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static io.nitric.proto.storage.v1.StorageDeleteRequest parseFrom(byte[] data)
+  public static io.nitric.proto.storage.v1.File parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static io.nitric.proto.storage.v1.StorageDeleteRequest parseFrom(
+  public static io.nitric.proto.storage.v1.File parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static io.nitric.proto.storage.v1.StorageDeleteRequest parseFrom(java.io.InputStream input)
+  public static io.nitric.proto.storage.v1.File parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static io.nitric.proto.storage.v1.StorageDeleteRequest parseFrom(
+  public static io.nitric.proto.storage.v1.File parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static io.nitric.proto.storage.v1.StorageDeleteRequest parseDelimitedFrom(java.io.InputStream input)
+  public static io.nitric.proto.storage.v1.File parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static io.nitric.proto.storage.v1.StorageDeleteRequest parseDelimitedFrom(
+  public static io.nitric.proto.storage.v1.File parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static io.nitric.proto.storage.v1.StorageDeleteRequest parseFrom(
+  public static io.nitric.proto.storage.v1.File parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static io.nitric.proto.storage.v1.StorageDeleteRequest parseFrom(
+  public static io.nitric.proto.storage.v1.File parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -339,7 +264,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(io.nitric.proto.storage.v1.StorageDeleteRequest prototype) {
+  public static Builder newBuilder(io.nitric.proto.storage.v1.File prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -355,30 +280,26 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * <pre>
-   * Request to delete a storage item
-   * </pre>
-   *
-   * Protobuf type {@code nitric.storage.v1.StorageDeleteRequest}
+   * Protobuf type {@code nitric.storage.v1.File}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:nitric.storage.v1.StorageDeleteRequest)
-      io.nitric.proto.storage.v1.StorageDeleteRequestOrBuilder {
+      // @@protoc_insertion_point(builder_implements:nitric.storage.v1.File)
+      io.nitric.proto.storage.v1.FileOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return io.nitric.proto.storage.v1.Storages.internal_static_nitric_storage_v1_StorageDeleteRequest_descriptor;
+      return io.nitric.proto.storage.v1.Storages.internal_static_nitric_storage_v1_File_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return io.nitric.proto.storage.v1.Storages.internal_static_nitric_storage_v1_StorageDeleteRequest_fieldAccessorTable
+      return io.nitric.proto.storage.v1.Storages.internal_static_nitric_storage_v1_File_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              io.nitric.proto.storage.v1.StorageDeleteRequest.class, io.nitric.proto.storage.v1.StorageDeleteRequest.Builder.class);
+              io.nitric.proto.storage.v1.File.class, io.nitric.proto.storage.v1.File.Builder.class);
     }
 
-    // Construct using io.nitric.proto.storage.v1.StorageDeleteRequest.newBuilder()
+    // Construct using io.nitric.proto.storage.v1.File.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -396,8 +317,6 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      bucketName_ = "";
-
       key_ = "";
 
       return this;
@@ -406,17 +325,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return io.nitric.proto.storage.v1.Storages.internal_static_nitric_storage_v1_StorageDeleteRequest_descriptor;
+      return io.nitric.proto.storage.v1.Storages.internal_static_nitric_storage_v1_File_descriptor;
     }
 
     @java.lang.Override
-    public io.nitric.proto.storage.v1.StorageDeleteRequest getDefaultInstanceForType() {
-      return io.nitric.proto.storage.v1.StorageDeleteRequest.getDefaultInstance();
+    public io.nitric.proto.storage.v1.File getDefaultInstanceForType() {
+      return io.nitric.proto.storage.v1.File.getDefaultInstance();
     }
 
     @java.lang.Override
-    public io.nitric.proto.storage.v1.StorageDeleteRequest build() {
-      io.nitric.proto.storage.v1.StorageDeleteRequest result = buildPartial();
+    public io.nitric.proto.storage.v1.File build() {
+      io.nitric.proto.storage.v1.File result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -424,9 +343,8 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public io.nitric.proto.storage.v1.StorageDeleteRequest buildPartial() {
-      io.nitric.proto.storage.v1.StorageDeleteRequest result = new io.nitric.proto.storage.v1.StorageDeleteRequest(this);
-      result.bucketName_ = bucketName_;
+    public io.nitric.proto.storage.v1.File buildPartial() {
+      io.nitric.proto.storage.v1.File result = new io.nitric.proto.storage.v1.File(this);
       result.key_ = key_;
       onBuilt();
       return result;
@@ -466,20 +384,16 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof io.nitric.proto.storage.v1.StorageDeleteRequest) {
-        return mergeFrom((io.nitric.proto.storage.v1.StorageDeleteRequest)other);
+      if (other instanceof io.nitric.proto.storage.v1.File) {
+        return mergeFrom((io.nitric.proto.storage.v1.File)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(io.nitric.proto.storage.v1.StorageDeleteRequest other) {
-      if (other == io.nitric.proto.storage.v1.StorageDeleteRequest.getDefaultInstance()) return this;
-      if (!other.getBucketName().isEmpty()) {
-        bucketName_ = other.bucketName_;
-        onChanged();
-      }
+    public Builder mergeFrom(io.nitric.proto.storage.v1.File other) {
+      if (other == io.nitric.proto.storage.v1.File.getDefaultInstance()) return this;
       if (!other.getKey().isEmpty()) {
         key_ = other.key_;
         onChanged();
@@ -499,11 +413,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      io.nitric.proto.storage.v1.StorageDeleteRequest parsedMessage = null;
+      io.nitric.proto.storage.v1.File parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (io.nitric.proto.storage.v1.StorageDeleteRequest) e.getUnfinishedMessage();
+        parsedMessage = (io.nitric.proto.storage.v1.File) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -513,109 +427,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object bucketName_ = "";
-    /**
-     * <pre>
-     * Name of the bucket to delete from
-     * </pre>
-     *
-     * <code>string bucket_name = 1 [(.validate.rules) = { ... }</code>
-     * @return The bucketName.
-     */
-    public java.lang.String getBucketName() {
-      java.lang.Object ref = bucketName_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        bucketName_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <pre>
-     * Name of the bucket to delete from
-     * </pre>
-     *
-     * <code>string bucket_name = 1 [(.validate.rules) = { ... }</code>
-     * @return The bytes for bucketName.
-     */
-    public com.google.protobuf.ByteString
-        getBucketNameBytes() {
-      java.lang.Object ref = bucketName_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        bucketName_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <pre>
-     * Name of the bucket to delete from
-     * </pre>
-     *
-     * <code>string bucket_name = 1 [(.validate.rules) = { ... }</code>
-     * @param value The bucketName to set.
-     * @return This builder for chaining.
-     */
-    public Builder setBucketName(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      bucketName_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <pre>
-     * Name of the bucket to delete from
-     * </pre>
-     *
-     * <code>string bucket_name = 1 [(.validate.rules) = { ... }</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearBucketName() {
-      
-      bucketName_ = getDefaultInstance().getBucketName();
-      onChanged();
-      return this;
-    }
-    /**
-     * <pre>
-     * Name of the bucket to delete from
-     * </pre>
-     *
-     * <code>string bucket_name = 1 [(.validate.rules) = { ... }</code>
-     * @param value The bytes for bucketName to set.
-     * @return This builder for chaining.
-     */
-    public Builder setBucketNameBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      bucketName_ = value;
-      onChanged();
-      return this;
-    }
-
     private java.lang.Object key_ = "";
     /**
-     * <pre>
-     * Key of item to delete
-     * </pre>
-     *
-     * <code>string key = 2 [(.validate.rules) = { ... }</code>
+     * <code>string key = 1;</code>
      * @return The key.
      */
     public java.lang.String getKey() {
@@ -631,11 +445,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <pre>
-     * Key of item to delete
-     * </pre>
-     *
-     * <code>string key = 2 [(.validate.rules) = { ... }</code>
+     * <code>string key = 1;</code>
      * @return The bytes for key.
      */
     public com.google.protobuf.ByteString
@@ -652,11 +462,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <pre>
-     * Key of item to delete
-     * </pre>
-     *
-     * <code>string key = 2 [(.validate.rules) = { ... }</code>
+     * <code>string key = 1;</code>
      * @param value The key to set.
      * @return This builder for chaining.
      */
@@ -671,11 +477,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <pre>
-     * Key of item to delete
-     * </pre>
-     *
-     * <code>string key = 2 [(.validate.rules) = { ... }</code>
+     * <code>string key = 1;</code>
      * @return This builder for chaining.
      */
     public Builder clearKey() {
@@ -685,11 +487,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <pre>
-     * Key of item to delete
-     * </pre>
-     *
-     * <code>string key = 2 [(.validate.rules) = { ... }</code>
+     * <code>string key = 1;</code>
      * @param value The bytes for key to set.
      * @return This builder for chaining.
      */
@@ -717,41 +515,41 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:nitric.storage.v1.StorageDeleteRequest)
+    // @@protoc_insertion_point(builder_scope:nitric.storage.v1.File)
   }
 
-  // @@protoc_insertion_point(class_scope:nitric.storage.v1.StorageDeleteRequest)
-  private static final io.nitric.proto.storage.v1.StorageDeleteRequest DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:nitric.storage.v1.File)
+  private static final io.nitric.proto.storage.v1.File DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new io.nitric.proto.storage.v1.StorageDeleteRequest();
+    DEFAULT_INSTANCE = new io.nitric.proto.storage.v1.File();
   }
 
-  public static io.nitric.proto.storage.v1.StorageDeleteRequest getDefaultInstance() {
+  public static io.nitric.proto.storage.v1.File getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<StorageDeleteRequest>
-      PARSER = new com.google.protobuf.AbstractParser<StorageDeleteRequest>() {
+  private static final com.google.protobuf.Parser<File>
+      PARSER = new com.google.protobuf.AbstractParser<File>() {
     @java.lang.Override
-    public StorageDeleteRequest parsePartialFrom(
+    public File parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return new StorageDeleteRequest(input, extensionRegistry);
+      return new File(input, extensionRegistry);
     }
   };
 
-  public static com.google.protobuf.Parser<StorageDeleteRequest> parser() {
+  public static com.google.protobuf.Parser<File> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<StorageDeleteRequest> getParserForType() {
+  public com.google.protobuf.Parser<File> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public io.nitric.proto.storage.v1.StorageDeleteRequest getDefaultInstanceForType() {
+  public io.nitric.proto.storage.v1.File getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

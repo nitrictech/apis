@@ -34,7 +34,7 @@ public interface StorageReadRequestOrBuilder extends
    * Key of item to retrieve
    * </pre>
    *
-   * <code>string key = 2;</code>
+   * <code>string key = 2 [(.validate.rules) = { ... }</code>
    * @return The key.
    */
   java.lang.String getKey();
@@ -43,7 +43,7 @@ public interface StorageReadRequestOrBuilder extends
    * Key of item to retrieve
    * </pre>
    *
-   * <code>string key = 2;</code>
+   * <code>string key = 2 [(.validate.rules) = { ... }</code>
    * @return The bytes for key.
    */
   com.google.protobuf.ByteString

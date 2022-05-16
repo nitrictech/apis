@@ -27,6 +27,28 @@ function deserialize_nitric_storage_v1_StorageDeleteResponse(buffer_arg) {
   return proto_storage_v1_storage_pb.StorageDeleteResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_nitric_storage_v1_StorageListFilesRequest(arg) {
+  if (!(arg instanceof proto_storage_v1_storage_pb.StorageListFilesRequest)) {
+    throw new Error('Expected argument of type nitric.storage.v1.StorageListFilesRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_nitric_storage_v1_StorageListFilesRequest(buffer_arg) {
+  return proto_storage_v1_storage_pb.StorageListFilesRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_nitric_storage_v1_StorageListFilesResponse(arg) {
+  if (!(arg instanceof proto_storage_v1_storage_pb.StorageListFilesResponse)) {
+    throw new Error('Expected argument of type nitric.storage.v1.StorageListFilesResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_nitric_storage_v1_StorageListFilesResponse(buffer_arg) {
+  return proto_storage_v1_storage_pb.StorageListFilesResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_nitric_storage_v1_StoragePreSignUrlRequest(arg) {
   if (!(arg instanceof proto_storage_v1_storage_pb.StoragePreSignUrlRequest)) {
     throw new Error('Expected argument of type nitric.storage.v1.StoragePreSignUrlRequest');
@@ -143,6 +165,18 @@ preSignUrl: {
     requestDeserialize: deserialize_nitric_storage_v1_StoragePreSignUrlRequest,
     responseSerialize: serialize_nitric_storage_v1_StoragePreSignUrlResponse,
     responseDeserialize: deserialize_nitric_storage_v1_StoragePreSignUrlResponse,
+  },
+  // List files currently in the bucket
+listFiles: {
+    path: '/nitric.storage.v1.StorageService/ListFiles',
+    requestStream: false,
+    responseStream: false,
+    requestType: proto_storage_v1_storage_pb.StorageListFilesRequest,
+    responseType: proto_storage_v1_storage_pb.StorageListFilesResponse,
+    requestSerialize: serialize_nitric_storage_v1_StorageListFilesRequest,
+    requestDeserialize: deserialize_nitric_storage_v1_StorageListFilesRequest,
+    responseSerialize: serialize_nitric_storage_v1_StorageListFilesResponse,
+    responseDeserialize: deserialize_nitric_storage_v1_StorageListFilesResponse,
   },
 };
 

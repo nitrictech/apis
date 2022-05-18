@@ -145,6 +145,20 @@ private static final long serialVersionUID = 0L;
             configCase_ = 15;
             break;
           }
+          case 130: {
+            io.nitric.proto.resource.v1.ApiResource.Builder subBuilder = null;
+            if (configCase_ == 16) {
+              subBuilder = ((io.nitric.proto.resource.v1.ApiResource) config_).toBuilder();
+            }
+            config_ =
+                input.readMessage(io.nitric.proto.resource.v1.ApiResource.parser(), extensionRegistry);
+            if (subBuilder != null) {
+              subBuilder.mergeFrom((io.nitric.proto.resource.v1.ApiResource) config_);
+              config_ = subBuilder.buildPartial();
+            }
+            configCase_ = 16;
+            break;
+          }
           default: {
             if (!parseUnknownField(
                 input, unknownFields, extensionRegistry, tag)) {
@@ -188,6 +202,7 @@ private static final long serialVersionUID = 0L;
     TOPIC(13),
     COLLECTION(14),
     SECRET(15),
+    API(16),
     CONFIG_NOT_SET(0);
     private final int value;
     private ConfigCase(int value) {
@@ -211,6 +226,7 @@ private static final long serialVersionUID = 0L;
         case 13: return TOPIC;
         case 14: return COLLECTION;
         case 15: return SECRET;
+        case 16: return API;
         case 0: return CONFIG_NOT_SET;
         default: return null;
       }
@@ -438,6 +454,37 @@ private static final long serialVersionUID = 0L;
     return io.nitric.proto.resource.v1.SecretResource.getDefaultInstance();
   }
 
+  public static final int API_FIELD_NUMBER = 16;
+  /**
+   * <code>.nitric.resource.v1.ApiResource api = 16;</code>
+   * @return Whether the api field is set.
+   */
+  @java.lang.Override
+  public boolean hasApi() {
+    return configCase_ == 16;
+  }
+  /**
+   * <code>.nitric.resource.v1.ApiResource api = 16;</code>
+   * @return The api.
+   */
+  @java.lang.Override
+  public io.nitric.proto.resource.v1.ApiResource getApi() {
+    if (configCase_ == 16) {
+       return (io.nitric.proto.resource.v1.ApiResource) config_;
+    }
+    return io.nitric.proto.resource.v1.ApiResource.getDefaultInstance();
+  }
+  /**
+   * <code>.nitric.resource.v1.ApiResource api = 16;</code>
+   */
+  @java.lang.Override
+  public io.nitric.proto.resource.v1.ApiResourceOrBuilder getApiOrBuilder() {
+    if (configCase_ == 16) {
+       return (io.nitric.proto.resource.v1.ApiResource) config_;
+    }
+    return io.nitric.proto.resource.v1.ApiResource.getDefaultInstance();
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -472,6 +519,9 @@ private static final long serialVersionUID = 0L;
     }
     if (configCase_ == 15) {
       output.writeMessage(15, (io.nitric.proto.resource.v1.SecretResource) config_);
+    }
+    if (configCase_ == 16) {
+      output.writeMessage(16, (io.nitric.proto.resource.v1.ApiResource) config_);
     }
     unknownFields.writeTo(output);
   }
@@ -509,6 +559,10 @@ private static final long serialVersionUID = 0L;
     if (configCase_ == 15) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(15, (io.nitric.proto.resource.v1.SecretResource) config_);
+    }
+    if (configCase_ == 16) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(16, (io.nitric.proto.resource.v1.ApiResource) config_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -556,6 +610,10 @@ private static final long serialVersionUID = 0L;
         if (!getSecret()
             .equals(other.getSecret())) return false;
         break;
+      case 16:
+        if (!getApi()
+            .equals(other.getApi())) return false;
+        break;
       case 0:
       default:
     }
@@ -598,6 +656,10 @@ private static final long serialVersionUID = 0L;
       case 15:
         hash = (37 * hash) + SECRET_FIELD_NUMBER;
         hash = (53 * hash) + getSecret().hashCode();
+        break;
+      case 16:
+        hash = (37 * hash) + API_FIELD_NUMBER;
+        hash = (53 * hash) + getApi().hashCode();
         break;
       case 0:
       default:
@@ -816,6 +878,13 @@ private static final long serialVersionUID = 0L;
           result.config_ = secretBuilder_.build();
         }
       }
+      if (configCase_ == 16) {
+        if (apiBuilder_ == null) {
+          result.config_ = config_;
+        } else {
+          result.config_ = apiBuilder_.build();
+        }
+      }
       result.configCase_ = configCase_;
       onBuilt();
       return result;
@@ -891,6 +960,10 @@ private static final long serialVersionUID = 0L;
         }
         case SECRET: {
           mergeSecret(other.getSecret());
+          break;
+        }
+        case API: {
+          mergeApi(other.getApi());
           break;
         }
         case CONFIG_NOT_SET: {
@@ -1904,6 +1977,147 @@ private static final long serialVersionUID = 0L;
       configCase_ = 15;
       onChanged();;
       return secretBuilder_;
+    }
+
+    private com.google.protobuf.SingleFieldBuilderV3<
+        io.nitric.proto.resource.v1.ApiResource, io.nitric.proto.resource.v1.ApiResource.Builder, io.nitric.proto.resource.v1.ApiResourceOrBuilder> apiBuilder_;
+    /**
+     * <code>.nitric.resource.v1.ApiResource api = 16;</code>
+     * @return Whether the api field is set.
+     */
+    @java.lang.Override
+    public boolean hasApi() {
+      return configCase_ == 16;
+    }
+    /**
+     * <code>.nitric.resource.v1.ApiResource api = 16;</code>
+     * @return The api.
+     */
+    @java.lang.Override
+    public io.nitric.proto.resource.v1.ApiResource getApi() {
+      if (apiBuilder_ == null) {
+        if (configCase_ == 16) {
+          return (io.nitric.proto.resource.v1.ApiResource) config_;
+        }
+        return io.nitric.proto.resource.v1.ApiResource.getDefaultInstance();
+      } else {
+        if (configCase_ == 16) {
+          return apiBuilder_.getMessage();
+        }
+        return io.nitric.proto.resource.v1.ApiResource.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.nitric.resource.v1.ApiResource api = 16;</code>
+     */
+    public Builder setApi(io.nitric.proto.resource.v1.ApiResource value) {
+      if (apiBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        config_ = value;
+        onChanged();
+      } else {
+        apiBuilder_.setMessage(value);
+      }
+      configCase_ = 16;
+      return this;
+    }
+    /**
+     * <code>.nitric.resource.v1.ApiResource api = 16;</code>
+     */
+    public Builder setApi(
+        io.nitric.proto.resource.v1.ApiResource.Builder builderForValue) {
+      if (apiBuilder_ == null) {
+        config_ = builderForValue.build();
+        onChanged();
+      } else {
+        apiBuilder_.setMessage(builderForValue.build());
+      }
+      configCase_ = 16;
+      return this;
+    }
+    /**
+     * <code>.nitric.resource.v1.ApiResource api = 16;</code>
+     */
+    public Builder mergeApi(io.nitric.proto.resource.v1.ApiResource value) {
+      if (apiBuilder_ == null) {
+        if (configCase_ == 16 &&
+            config_ != io.nitric.proto.resource.v1.ApiResource.getDefaultInstance()) {
+          config_ = io.nitric.proto.resource.v1.ApiResource.newBuilder((io.nitric.proto.resource.v1.ApiResource) config_)
+              .mergeFrom(value).buildPartial();
+        } else {
+          config_ = value;
+        }
+        onChanged();
+      } else {
+        if (configCase_ == 16) {
+          apiBuilder_.mergeFrom(value);
+        }
+        apiBuilder_.setMessage(value);
+      }
+      configCase_ = 16;
+      return this;
+    }
+    /**
+     * <code>.nitric.resource.v1.ApiResource api = 16;</code>
+     */
+    public Builder clearApi() {
+      if (apiBuilder_ == null) {
+        if (configCase_ == 16) {
+          configCase_ = 0;
+          config_ = null;
+          onChanged();
+        }
+      } else {
+        if (configCase_ == 16) {
+          configCase_ = 0;
+          config_ = null;
+        }
+        apiBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>.nitric.resource.v1.ApiResource api = 16;</code>
+     */
+    public io.nitric.proto.resource.v1.ApiResource.Builder getApiBuilder() {
+      return getApiFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.nitric.resource.v1.ApiResource api = 16;</code>
+     */
+    @java.lang.Override
+    public io.nitric.proto.resource.v1.ApiResourceOrBuilder getApiOrBuilder() {
+      if ((configCase_ == 16) && (apiBuilder_ != null)) {
+        return apiBuilder_.getMessageOrBuilder();
+      } else {
+        if (configCase_ == 16) {
+          return (io.nitric.proto.resource.v1.ApiResource) config_;
+        }
+        return io.nitric.proto.resource.v1.ApiResource.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.nitric.resource.v1.ApiResource api = 16;</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        io.nitric.proto.resource.v1.ApiResource, io.nitric.proto.resource.v1.ApiResource.Builder, io.nitric.proto.resource.v1.ApiResourceOrBuilder> 
+        getApiFieldBuilder() {
+      if (apiBuilder_ == null) {
+        if (!(configCase_ == 16)) {
+          config_ = io.nitric.proto.resource.v1.ApiResource.getDefaultInstance();
+        }
+        apiBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            io.nitric.proto.resource.v1.ApiResource, io.nitric.proto.resource.v1.ApiResource.Builder, io.nitric.proto.resource.v1.ApiResourceOrBuilder>(
+                (io.nitric.proto.resource.v1.ApiResource) config_,
+                getParentForChildren(),
+                isClean());
+        config_ = null;
+      }
+      configCase_ = 16;
+      onChanged();;
+      return apiBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

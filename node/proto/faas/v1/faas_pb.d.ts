@@ -81,6 +81,51 @@ export namespace ServerMessage {
   }
 }
 
+export class ApiWorkerScopes extends jspb.Message {
+  clearScopesList(): void;
+  getScopesList(): Array<string>;
+  setScopesList(value: Array<string>): void;
+  addScopes(value: string, index?: number): string;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): ApiWorkerScopes.AsObject;
+  static toObject(includeInstance: boolean, msg: ApiWorkerScopes): ApiWorkerScopes.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: ApiWorkerScopes, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ApiWorkerScopes;
+  static deserializeBinaryFromReader(message: ApiWorkerScopes, reader: jspb.BinaryReader): ApiWorkerScopes;
+}
+
+export namespace ApiWorkerScopes {
+  export type AsObject = {
+    scopesList: Array<string>,
+  }
+}
+
+export class ApiWorkerOptions extends jspb.Message {
+  getSecurityMap(): jspb.Map<string, ApiWorkerScopes>;
+  clearSecurityMap(): void;
+  getSecurityDisabled(): boolean;
+  setSecurityDisabled(value: boolean): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): ApiWorkerOptions.AsObject;
+  static toObject(includeInstance: boolean, msg: ApiWorkerOptions): ApiWorkerOptions.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: ApiWorkerOptions, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ApiWorkerOptions;
+  static deserializeBinaryFromReader(message: ApiWorkerOptions, reader: jspb.BinaryReader): ApiWorkerOptions;
+}
+
+export namespace ApiWorkerOptions {
+  export type AsObject = {
+    securityMap: Array<[string, ApiWorkerScopes.AsObject]>,
+    securityDisabled: boolean,
+  }
+}
+
 export class ApiWorker extends jspb.Message {
   getApi(): string;
   setApi(value: string): void;
@@ -92,6 +137,11 @@ export class ApiWorker extends jspb.Message {
   getMethodsList(): Array<string>;
   setMethodsList(value: Array<string>): void;
   addMethods(value: string, index?: number): string;
+
+  hasOptions(): boolean;
+  clearOptions(): void;
+  getOptions(): ApiWorkerOptions | undefined;
+  setOptions(value?: ApiWorkerOptions): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ApiWorker.AsObject;
@@ -108,6 +158,7 @@ export namespace ApiWorker {
     api: string,
     path: string,
     methodsList: Array<string>,
+    options?: ApiWorkerOptions.AsObject,
   }
 }
 

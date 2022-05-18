@@ -70,6 +70,7 @@ class ResourceDeclareRequest(betterproto.Message):
     topic: "TopicResource" = betterproto.message_field(13, group="config")
     collection: "CollectionResource" = betterproto.message_field(14, group="config")
     secret: "SecretResource" = betterproto.message_field(15, group="config")
+    api: "ApiResource" = betterproto.message_field(16, group="config")
 
 
 @dataclass(eq=False, repr=False)
@@ -98,6 +99,37 @@ class SecretResource(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class ApiSecurityDefinitionJwt(betterproto.Message):
+    """protect your API with JWT authentication"""
+
+    issuer: str = betterproto.string_field(1)
+    audiences: List[str] = betterproto.string_field(2)
+
+
+@dataclass(eq=False, repr=False)
+class ApiSecurityDefinition(betterproto.Message):
+    jwt: "ApiSecurityDefinitionJwt" = betterproto.message_field(1, group="definition")
+
+
+@dataclass(eq=False, repr=False)
+class ApiScopes(betterproto.Message):
+    scopes: List[str] = betterproto.string_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class ApiResource(betterproto.Message):
+    # Security definitions for the api These may be used by registered routes and
+    # operations on the API
+    security_definitions: Dict[str, "ApiSecurityDefinition"] = betterproto.map_field(
+        1, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE
+    )
+    # root level security for this api
+    security: Dict[str, "ApiScopes"] = betterproto.map_field(
+        2, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE
+    )
+
+
+@dataclass(eq=False, repr=False)
 class ResourceDeclareResponse(betterproto.Message):
     pass
 
@@ -113,6 +145,7 @@ class ResourceServiceStub(betterproto.ServiceStub):
         topic: "TopicResource" = None,
         collection: "CollectionResource" = None,
         secret: "SecretResource" = None,
+        api: "ApiResource" = None,
     ) -> "ResourceDeclareResponse":
 
         request = ResourceDeclareRequest()
@@ -130,6 +163,8 @@ class ResourceServiceStub(betterproto.ServiceStub):
             request.collection = collection
         if secret is not None:
             request.secret = secret
+        if api is not None:
+            request.api = api
 
         return await self._unary_unary(
             "/nitric.resource.v1.ResourceService/Declare",
@@ -148,6 +183,7 @@ class ResourceServiceBase(ServiceBase):
         topic: "TopicResource",
         collection: "CollectionResource",
         secret: "SecretResource",
+        api: "ApiResource",
     ) -> "ResourceDeclareResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
@@ -162,6 +198,7 @@ class ResourceServiceBase(ServiceBase):
             "topic": request.topic,
             "collection": request.collection,
             "secret": request.secret,
+            "api": request.api,
         }
 
         response = await self.declare(**request_kwargs)

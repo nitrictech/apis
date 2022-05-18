@@ -112,5 +112,20 @@ public interface ResourceDeclareRequestOrBuilder extends
    */
   io.nitric.proto.resource.v1.SecretResourceOrBuilder getSecretOrBuilder();
 
+  /**
+   * <code>.nitric.resource.v1.ApiResource api = 16;</code>
+   * @return Whether the api field is set.
+   */
+  boolean hasApi();
+  /**
+   * <code>.nitric.resource.v1.ApiResource api = 16;</code>
+   * @return The api.
+   */
+  io.nitric.proto.resource.v1.ApiResource getApi();
+  /**
+   * <code>.nitric.resource.v1.ApiResource api = 16;</code>
+   */
+  io.nitric.proto.resource.v1.ApiResourceOrBuilder getApiOrBuilder();
+
   public io.nitric.proto.resource.v1.ResourceDeclareRequest.ConfigCase getConfigCase();
 }

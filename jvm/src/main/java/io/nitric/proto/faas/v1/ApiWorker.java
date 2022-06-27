@@ -73,6 +73,19 @@ private static final long serialVersionUID = 0L;
             methods_.add(s);
             break;
           }
+          case 34: {
+            io.nitric.proto.faas.v1.ApiWorkerOptions.Builder subBuilder = null;
+            if (options_ != null) {
+              subBuilder = options_.toBuilder();
+            }
+            options_ = input.readMessage(io.nitric.proto.faas.v1.ApiWorkerOptions.parser(), extensionRegistry);
+            if (subBuilder != null) {
+              subBuilder.mergeFrom(options_);
+              options_ = subBuilder.buildPartial();
+            }
+
+            break;
+          }
           default: {
             if (!parseUnknownField(
                 input, unknownFields, extensionRegistry, tag)) {
@@ -219,6 +232,32 @@ private static final long serialVersionUID = 0L;
     return methods_.getByteString(index);
   }
 
+  public static final int OPTIONS_FIELD_NUMBER = 4;
+  private io.nitric.proto.faas.v1.ApiWorkerOptions options_;
+  /**
+   * <code>.nitric.faas.v1.ApiWorkerOptions options = 4;</code>
+   * @return Whether the options field is set.
+   */
+  @java.lang.Override
+  public boolean hasOptions() {
+    return options_ != null;
+  }
+  /**
+   * <code>.nitric.faas.v1.ApiWorkerOptions options = 4;</code>
+   * @return The options.
+   */
+  @java.lang.Override
+  public io.nitric.proto.faas.v1.ApiWorkerOptions getOptions() {
+    return options_ == null ? io.nitric.proto.faas.v1.ApiWorkerOptions.getDefaultInstance() : options_;
+  }
+  /**
+   * <code>.nitric.faas.v1.ApiWorkerOptions options = 4;</code>
+   */
+  @java.lang.Override
+  public io.nitric.proto.faas.v1.ApiWorkerOptionsOrBuilder getOptionsOrBuilder() {
+    return getOptions();
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -241,6 +280,9 @@ private static final long serialVersionUID = 0L;
     }
     for (int i = 0; i < methods_.size(); i++) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 3, methods_.getRaw(i));
+    }
+    if (options_ != null) {
+      output.writeMessage(4, getOptions());
     }
     unknownFields.writeTo(output);
   }
@@ -265,6 +307,10 @@ private static final long serialVersionUID = 0L;
       size += dataSize;
       size += 1 * getMethodsList().size();
     }
+    if (options_ != null) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(4, getOptions());
+    }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
     return size;
@@ -286,6 +332,11 @@ private static final long serialVersionUID = 0L;
         .equals(other.getPath())) return false;
     if (!getMethodsList()
         .equals(other.getMethodsList())) return false;
+    if (hasOptions() != other.hasOptions()) return false;
+    if (hasOptions()) {
+      if (!getOptions()
+          .equals(other.getOptions())) return false;
+    }
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -304,6 +355,10 @@ private static final long serialVersionUID = 0L;
     if (getMethodsCount() > 0) {
       hash = (37 * hash) + METHODS_FIELD_NUMBER;
       hash = (53 * hash) + getMethodsList().hashCode();
+    }
+    if (hasOptions()) {
+      hash = (37 * hash) + OPTIONS_FIELD_NUMBER;
+      hash = (53 * hash) + getOptions().hashCode();
     }
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
@@ -444,6 +499,12 @@ private static final long serialVersionUID = 0L;
 
       methods_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       bitField0_ = (bitField0_ & ~0x00000001);
+      if (optionsBuilder_ == null) {
+        options_ = null;
+      } else {
+        options_ = null;
+        optionsBuilder_ = null;
+      }
       return this;
     }
 
@@ -478,6 +539,11 @@ private static final long serialVersionUID = 0L;
         bitField0_ = (bitField0_ & ~0x00000001);
       }
       result.methods_ = methods_;
+      if (optionsBuilder_ == null) {
+        result.options_ = options_;
+      } else {
+        result.options_ = optionsBuilder_.build();
+      }
       onBuilt();
       return result;
     }
@@ -543,6 +609,9 @@ private static final long serialVersionUID = 0L;
           methods_.addAll(other.methods_);
         }
         onChanged();
+      }
+      if (other.hasOptions()) {
+        mergeOptions(other.getOptions());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -834,6 +903,125 @@ private static final long serialVersionUID = 0L;
       methods_.add(value);
       onChanged();
       return this;
+    }
+
+    private io.nitric.proto.faas.v1.ApiWorkerOptions options_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        io.nitric.proto.faas.v1.ApiWorkerOptions, io.nitric.proto.faas.v1.ApiWorkerOptions.Builder, io.nitric.proto.faas.v1.ApiWorkerOptionsOrBuilder> optionsBuilder_;
+    /**
+     * <code>.nitric.faas.v1.ApiWorkerOptions options = 4;</code>
+     * @return Whether the options field is set.
+     */
+    public boolean hasOptions() {
+      return optionsBuilder_ != null || options_ != null;
+    }
+    /**
+     * <code>.nitric.faas.v1.ApiWorkerOptions options = 4;</code>
+     * @return The options.
+     */
+    public io.nitric.proto.faas.v1.ApiWorkerOptions getOptions() {
+      if (optionsBuilder_ == null) {
+        return options_ == null ? io.nitric.proto.faas.v1.ApiWorkerOptions.getDefaultInstance() : options_;
+      } else {
+        return optionsBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>.nitric.faas.v1.ApiWorkerOptions options = 4;</code>
+     */
+    public Builder setOptions(io.nitric.proto.faas.v1.ApiWorkerOptions value) {
+      if (optionsBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        options_ = value;
+        onChanged();
+      } else {
+        optionsBuilder_.setMessage(value);
+      }
+
+      return this;
+    }
+    /**
+     * <code>.nitric.faas.v1.ApiWorkerOptions options = 4;</code>
+     */
+    public Builder setOptions(
+        io.nitric.proto.faas.v1.ApiWorkerOptions.Builder builderForValue) {
+      if (optionsBuilder_ == null) {
+        options_ = builderForValue.build();
+        onChanged();
+      } else {
+        optionsBuilder_.setMessage(builderForValue.build());
+      }
+
+      return this;
+    }
+    /**
+     * <code>.nitric.faas.v1.ApiWorkerOptions options = 4;</code>
+     */
+    public Builder mergeOptions(io.nitric.proto.faas.v1.ApiWorkerOptions value) {
+      if (optionsBuilder_ == null) {
+        if (options_ != null) {
+          options_ =
+            io.nitric.proto.faas.v1.ApiWorkerOptions.newBuilder(options_).mergeFrom(value).buildPartial();
+        } else {
+          options_ = value;
+        }
+        onChanged();
+      } else {
+        optionsBuilder_.mergeFrom(value);
+      }
+
+      return this;
+    }
+    /**
+     * <code>.nitric.faas.v1.ApiWorkerOptions options = 4;</code>
+     */
+    public Builder clearOptions() {
+      if (optionsBuilder_ == null) {
+        options_ = null;
+        onChanged();
+      } else {
+        options_ = null;
+        optionsBuilder_ = null;
+      }
+
+      return this;
+    }
+    /**
+     * <code>.nitric.faas.v1.ApiWorkerOptions options = 4;</code>
+     */
+    public io.nitric.proto.faas.v1.ApiWorkerOptions.Builder getOptionsBuilder() {
+      
+      onChanged();
+      return getOptionsFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.nitric.faas.v1.ApiWorkerOptions options = 4;</code>
+     */
+    public io.nitric.proto.faas.v1.ApiWorkerOptionsOrBuilder getOptionsOrBuilder() {
+      if (optionsBuilder_ != null) {
+        return optionsBuilder_.getMessageOrBuilder();
+      } else {
+        return options_ == null ?
+            io.nitric.proto.faas.v1.ApiWorkerOptions.getDefaultInstance() : options_;
+      }
+    }
+    /**
+     * <code>.nitric.faas.v1.ApiWorkerOptions options = 4;</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        io.nitric.proto.faas.v1.ApiWorkerOptions, io.nitric.proto.faas.v1.ApiWorkerOptions.Builder, io.nitric.proto.faas.v1.ApiWorkerOptionsOrBuilder> 
+        getOptionsFieldBuilder() {
+      if (optionsBuilder_ == null) {
+        optionsBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            io.nitric.proto.faas.v1.ApiWorkerOptions, io.nitric.proto.faas.v1.ApiWorkerOptions.Builder, io.nitric.proto.faas.v1.ApiWorkerOptionsOrBuilder>(
+                getOptions(),
+                getParentForChildren(),
+                isClean());
+        options_ = null;
+      }
+      return optionsBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

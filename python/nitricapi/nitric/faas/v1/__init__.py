@@ -36,10 +36,28 @@ class ServerMessage(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class ApiWorkerScopes(betterproto.Message):
+    scopes: List[str] = betterproto.string_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class ApiWorkerOptions(betterproto.Message):
+    # Apply security definitions to this operation
+    security: Dict[str, "ApiWorkerScopes"] = betterproto.map_field(
+        1, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE
+    )
+    # explicitly disable security for this endpoint We need to do this as the
+    # default value of a repeated field is always empty so there is no way of
+    # knowing if security is explicitly disabled
+    security_disabled: bool = betterproto.bool_field(2)
+
+
+@dataclass(eq=False, repr=False)
 class ApiWorker(betterproto.Message):
     api: str = betterproto.string_field(1)
     path: str = betterproto.string_field(2)
     methods: List[str] = betterproto.string_field(3)
+    options: "ApiWorkerOptions" = betterproto.message_field(4)
 
 
 @dataclass(eq=False, repr=False)

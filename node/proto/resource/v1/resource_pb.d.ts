@@ -98,6 +98,11 @@ export class ResourceDeclareRequest extends jspb.Message {
   getSecret(): SecretResource | undefined;
   setSecret(value?: SecretResource): void;
 
+  hasApi(): boolean;
+  clearApi(): void;
+  getApi(): ApiResource | undefined;
+  setApi(value?: ApiResource): void;
+
   getConfigCase(): ResourceDeclareRequest.ConfigCase;
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ResourceDeclareRequest.AsObject;
@@ -118,6 +123,7 @@ export namespace ResourceDeclareRequest {
     topic?: TopicResource.AsObject,
     collection?: CollectionResource.AsObject,
     secret?: SecretResource.AsObject,
+    api?: ApiResource.AsObject,
   }
 
   export enum ConfigCase {
@@ -128,6 +134,7 @@ export namespace ResourceDeclareRequest {
     TOPIC = 13,
     COLLECTION = 14,
     SECRET = 15,
+    API = 16,
   }
 }
 
@@ -208,6 +215,104 @@ export class SecretResource extends jspb.Message {
 
 export namespace SecretResource {
   export type AsObject = {
+  }
+}
+
+export class ApiSecurityDefinitionJwt extends jspb.Message {
+  getIssuer(): string;
+  setIssuer(value: string): void;
+
+  clearAudiencesList(): void;
+  getAudiencesList(): Array<string>;
+  setAudiencesList(value: Array<string>): void;
+  addAudiences(value: string, index?: number): string;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): ApiSecurityDefinitionJwt.AsObject;
+  static toObject(includeInstance: boolean, msg: ApiSecurityDefinitionJwt): ApiSecurityDefinitionJwt.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: ApiSecurityDefinitionJwt, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ApiSecurityDefinitionJwt;
+  static deserializeBinaryFromReader(message: ApiSecurityDefinitionJwt, reader: jspb.BinaryReader): ApiSecurityDefinitionJwt;
+}
+
+export namespace ApiSecurityDefinitionJwt {
+  export type AsObject = {
+    issuer: string,
+    audiencesList: Array<string>,
+  }
+}
+
+export class ApiSecurityDefinition extends jspb.Message {
+  hasJwt(): boolean;
+  clearJwt(): void;
+  getJwt(): ApiSecurityDefinitionJwt | undefined;
+  setJwt(value?: ApiSecurityDefinitionJwt): void;
+
+  getDefinitionCase(): ApiSecurityDefinition.DefinitionCase;
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): ApiSecurityDefinition.AsObject;
+  static toObject(includeInstance: boolean, msg: ApiSecurityDefinition): ApiSecurityDefinition.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: ApiSecurityDefinition, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ApiSecurityDefinition;
+  static deserializeBinaryFromReader(message: ApiSecurityDefinition, reader: jspb.BinaryReader): ApiSecurityDefinition;
+}
+
+export namespace ApiSecurityDefinition {
+  export type AsObject = {
+    jwt?: ApiSecurityDefinitionJwt.AsObject,
+  }
+
+  export enum DefinitionCase {
+    DEFINITION_NOT_SET = 0,
+    JWT = 1,
+  }
+}
+
+export class ApiScopes extends jspb.Message {
+  clearScopesList(): void;
+  getScopesList(): Array<string>;
+  setScopesList(value: Array<string>): void;
+  addScopes(value: string, index?: number): string;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): ApiScopes.AsObject;
+  static toObject(includeInstance: boolean, msg: ApiScopes): ApiScopes.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: ApiScopes, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ApiScopes;
+  static deserializeBinaryFromReader(message: ApiScopes, reader: jspb.BinaryReader): ApiScopes;
+}
+
+export namespace ApiScopes {
+  export type AsObject = {
+    scopesList: Array<string>,
+  }
+}
+
+export class ApiResource extends jspb.Message {
+  getSecurityDefinitionsMap(): jspb.Map<string, ApiSecurityDefinition>;
+  clearSecurityDefinitionsMap(): void;
+  getSecurityMap(): jspb.Map<string, ApiScopes>;
+  clearSecurityMap(): void;
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): ApiResource.AsObject;
+  static toObject(includeInstance: boolean, msg: ApiResource): ApiResource.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: ApiResource, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ApiResource;
+  static deserializeBinaryFromReader(message: ApiResource, reader: jspb.BinaryReader): ApiResource;
+}
+
+export namespace ApiResource {
+  export type AsObject = {
+    securityDefinitionsMap: Array<[string, ApiSecurityDefinition.AsObject]>,
+    securityMap: Array<[string, ApiScopes.AsObject]>,
   }
 }
 

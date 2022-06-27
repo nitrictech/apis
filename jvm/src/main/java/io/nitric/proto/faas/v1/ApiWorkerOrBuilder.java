@@ -55,4 +55,19 @@ public interface ApiWorkerOrBuilder extends
    */
   com.google.protobuf.ByteString
       getMethodsBytes(int index);
+
+  /**
+   * <code>.nitric.faas.v1.ApiWorkerOptions options = 4;</code>
+   * @return Whether the options field is set.
+   */
+  boolean hasOptions();
+  /**
+   * <code>.nitric.faas.v1.ApiWorkerOptions options = 4;</code>
+   * @return The options.
+   */
+  io.nitric.proto.faas.v1.ApiWorkerOptions getOptions();
+  /**
+   * <code>.nitric.faas.v1.ApiWorkerOptions options = 4;</code>
+   */
+  io.nitric.proto.faas.v1.ApiWorkerOptionsOrBuilder getOptionsOrBuilder();
 }

@@ -20,6 +20,7 @@ class ResourceType(betterproto.Enum):
     Collection = 7
     Policy = 8
     Secret = 9
+    DeadLetter = 10
 
 
 class Action(betterproto.Enum):
@@ -71,6 +72,7 @@ class ResourceDeclareRequest(betterproto.Message):
     collection: "CollectionResource" = betterproto.message_field(14, group="config")
     secret: "SecretResource" = betterproto.message_field(15, group="config")
     api: "ApiResource" = betterproto.message_field(16, group="config")
+    dead_letter: "DeadLetterResource" = betterproto.message_field(17, group="config")
 
 
 @dataclass(eq=False, repr=False)
@@ -95,6 +97,11 @@ class CollectionResource(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class SecretResource(betterproto.Message):
+    pass
+
+
+@dataclass(eq=False, repr=False)
+class DeadLetterResource(betterproto.Message):
     pass
 
 
@@ -146,6 +153,7 @@ class ResourceServiceStub(betterproto.ServiceStub):
         collection: "CollectionResource" = None,
         secret: "SecretResource" = None,
         api: "ApiResource" = None,
+        dead_letter: "DeadLetterResource" = None,
     ) -> "ResourceDeclareResponse":
 
         request = ResourceDeclareRequest()
@@ -165,6 +173,8 @@ class ResourceServiceStub(betterproto.ServiceStub):
             request.secret = secret
         if api is not None:
             request.api = api
+        if dead_letter is not None:
+            request.dead_letter = dead_letter
 
         return await self._unary_unary(
             "/nitric.resource.v1.ResourceService/Declare",
@@ -184,6 +194,7 @@ class ResourceServiceBase(ServiceBase):
         collection: "CollectionResource",
         secret: "SecretResource",
         api: "ApiResource",
+        dead_letter: "DeadLetterResource",
     ) -> "ResourceDeclareResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
@@ -199,6 +210,7 @@ class ResourceServiceBase(ServiceBase):
             "collection": request.collection,
             "secret": request.secret,
             "api": request.api,
+            "dead_letter": request.dead_letter,
         }
 
         response = await self.declare(**request_kwargs)

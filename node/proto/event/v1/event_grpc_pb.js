@@ -6,6 +6,50 @@ var proto_event_v1_event_pb = require('../../../proto/event/v1/event_pb.js');
 var google_protobuf_struct_pb = require('google-protobuf/google/protobuf/struct_pb.js');
 var validate_validate_pb = require('../../../validate/validate_pb.js');
 
+function serialize_nitric_event_v1_DeadLetterCompleteRequest(arg) {
+  if (!(arg instanceof proto_event_v1_event_pb.DeadLetterCompleteRequest)) {
+    throw new Error('Expected argument of type nitric.event.v1.DeadLetterCompleteRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_nitric_event_v1_DeadLetterCompleteRequest(buffer_arg) {
+  return proto_event_v1_event_pb.DeadLetterCompleteRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_nitric_event_v1_DeadLetterCompleteResponse(arg) {
+  if (!(arg instanceof proto_event_v1_event_pb.DeadLetterCompleteResponse)) {
+    throw new Error('Expected argument of type nitric.event.v1.DeadLetterCompleteResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_nitric_event_v1_DeadLetterCompleteResponse(buffer_arg) {
+  return proto_event_v1_event_pb.DeadLetterCompleteResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_nitric_event_v1_DeadLetterReceiveRequest(arg) {
+  if (!(arg instanceof proto_event_v1_event_pb.DeadLetterReceiveRequest)) {
+    throw new Error('Expected argument of type nitric.event.v1.DeadLetterReceiveRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_nitric_event_v1_DeadLetterReceiveRequest(buffer_arg) {
+  return proto_event_v1_event_pb.DeadLetterReceiveRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_nitric_event_v1_DeadLetterReceiveResponse(arg) {
+  if (!(arg instanceof proto_event_v1_event_pb.DeadLetterReceiveResponse)) {
+    throw new Error('Expected argument of type nitric.event.v1.DeadLetterReceiveResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_nitric_event_v1_DeadLetterReceiveResponse(buffer_arg) {
+  return proto_event_v1_event_pb.DeadLetterReceiveResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_nitric_event_v1_EventPublishRequest(arg) {
   if (!(arg instanceof proto_event_v1_event_pb.EventPublishRequest)) {
     throw new Error('Expected argument of type nitric.event.v1.EventPublishRequest');
@@ -85,3 +129,31 @@ list: {
 };
 
 exports.TopicServiceClient = grpc.makeGenericClientConstructor(TopicServiceService);
+var DeadLetterServiceService = exports.DeadLetterServiceService = {
+  // Receive dead-letter messages(s)
+receive: {
+    path: '/nitric.event.v1.DeadLetterService/Receive',
+    requestStream: false,
+    responseStream: false,
+    requestType: proto_event_v1_event_pb.DeadLetterReceiveRequest,
+    responseType: proto_event_v1_event_pb.DeadLetterReceiveResponse,
+    requestSerialize: serialize_nitric_event_v1_DeadLetterReceiveRequest,
+    requestDeserialize: deserialize_nitric_event_v1_DeadLetterReceiveRequest,
+    responseSerialize: serialize_nitric_event_v1_DeadLetterReceiveResponse,
+    responseDeserialize: deserialize_nitric_event_v1_DeadLetterReceiveResponse,
+  },
+  // Complete an event previously popped from a queue
+complete: {
+    path: '/nitric.event.v1.DeadLetterService/Complete',
+    requestStream: false,
+    responseStream: false,
+    requestType: proto_event_v1_event_pb.DeadLetterCompleteRequest,
+    responseType: proto_event_v1_event_pb.DeadLetterCompleteResponse,
+    requestSerialize: serialize_nitric_event_v1_DeadLetterCompleteRequest,
+    requestDeserialize: deserialize_nitric_event_v1_DeadLetterCompleteRequest,
+    responseSerialize: serialize_nitric_event_v1_DeadLetterCompleteResponse,
+    responseDeserialize: deserialize_nitric_event_v1_DeadLetterCompleteResponse,
+  },
+};
+
+exports.DeadLetterServiceClient = grpc.makeGenericClientConstructor(DeadLetterServiceService);

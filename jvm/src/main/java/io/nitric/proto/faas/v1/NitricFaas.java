@@ -175,61 +175,61 @@ public final class NitricFaas {
       ".v1.ApiWorkerScopes:\0028\001\"j\n\tApiWorker\022\013\n\003" +
       "api\030\001 \001(\t\022\014\n\004path\030\002 \001(\t\022\017\n\007methods\030\003 \003(\t" +
       "\0221\n\007options\030\004 \001(\0132 .nitric.faas.v1.ApiWo" +
-      "rkerOptions\"#\n\022SubscriptionWorker\022\r\n\005top" +
-      "ic\030\001 \001(\t\"\204\001\n\016ScheduleWorker\022\013\n\003key\030\001 \001(\t" +
-      "\022,\n\004rate\030\n \001(\0132\034.nitric.faas.v1.Schedule" +
-      "RateH\000\022,\n\004cron\030\013 \001(\0132\034.nitric.faas.v1.Sc" +
-      "heduleCronH\000B\t\n\007cadence\"\034\n\014ScheduleRate\022" +
-      "\014\n\004rate\030\001 \001(\t\"\034\n\014ScheduleCron\022\014\n\004cron\030\001 " +
-      "\001(\t\"\261\001\n\013InitRequest\022(\n\003api\030\n \001(\0132\031.nitri" +
-      "c.faas.v1.ApiWorkerH\000\022:\n\014subscription\030\013 " +
-      "\001(\0132\".nitric.faas.v1.SubscriptionWorkerH" +
-      "\000\0222\n\010schedule\030\014 \001(\0132\036.nitric.faas.v1.Sch" +
-      "eduleWorkerH\000B\010\n\006Worker\"\016\n\014InitResponse\"" +
-      "\246\001\n\016TriggerRequest\022\014\n\004data\030\001 \001(\014\022\021\n\tmime" +
-      "_type\030\002 \001(\t\0222\n\004http\030\003 \001(\0132\".nitric.faas." +
-      "v1.HttpTriggerContextH\000\0224\n\005topic\030\004 \001(\0132#" +
-      ".nitric.faas.v1.TopicTriggerContextH\000B\t\n" +
-      "\007context\"\034\n\013HeaderValue\022\r\n\005value\030\001 \003(\t\"\033" +
-      "\n\nQueryValue\022\r\n\005value\030\001 \003(\t\"\345\005\n\022HttpTrig" +
-      "gerContext\022\016\n\006method\030\001 \001(\t\022\014\n\004path\030\002 \001(\t" +
-      "\022K\n\013headers_old\030\003 \003(\01322.nitric.faas.v1.H" +
-      "ttpTriggerContext.HeadersOldEntryB\002\030\001\022T\n" +
-      "\020query_params_old\030\004 \003(\01326.nitric.faas.v1" +
-      ".HttpTriggerContext.QueryParamsOldEntryB" +
-      "\002\030\001\022@\n\007headers\030\005 \003(\0132/.nitric.faas.v1.Ht" +
-      "tpTriggerContext.HeadersEntry\022I\n\014query_p" +
-      "arams\030\006 \003(\01323.nitric.faas.v1.HttpTrigger" +
-      "Context.QueryParamsEntry\022G\n\013path_params\030" +
-      "\007 \003(\01322.nitric.faas.v1.HttpTriggerContex" +
-      "t.PathParamsEntry\0321\n\017HeadersOldEntry\022\013\n\003" +
-      "key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\0325\n\023QueryPar" +
-      "amsOldEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:" +
-      "\0028\001\032K\n\014HeadersEntry\022\013\n\003key\030\001 \001(\t\022*\n\005valu" +
-      "e\030\002 \001(\0132\033.nitric.faas.v1.HeaderValue:\0028\001" +
-      "\032N\n\020QueryParamsEntry\022\013\n\003key\030\001 \001(\t\022)\n\005val" +
-      "ue\030\002 \001(\0132\032.nitric.faas.v1.QueryValue:\0028\001" +
-      "\0321\n\017PathParamsEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005valu" +
-      "e\030\002 \001(\t:\0028\001\"$\n\023TopicTriggerContext\022\r\n\005to" +
-      "pic\030\001 \001(\t\"\226\001\n\017TriggerResponse\022\014\n\004data\030\001 " +
-      "\001(\014\0223\n\004http\030\n \001(\0132#.nitric.faas.v1.HttpR" +
-      "esponseContextH\000\0225\n\005topic\030\013 \001(\0132$.nitric" +
-      ".faas.v1.TopicResponseContextH\000B\t\n\007conte" +
-      "xt\"\266\002\n\023HttpResponseContext\022L\n\013headers_ol" +
-      "d\030\001 \003(\01323.nitric.faas.v1.HttpResponseCon" +
-      "text.HeadersOldEntryB\002\030\001\022\016\n\006status\030\002 \001(\005" +
-      "\022A\n\007headers\030\003 \003(\01320.nitric.faas.v1.HttpR" +
-      "esponseContext.HeadersEntry\0321\n\017HeadersOl" +
-      "dEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\032K" +
-      "\n\014HeadersEntry\022\013\n\003key\030\001 \001(\t\022*\n\005value\030\002 \001" +
-      "(\0132\033.nitric.faas.v1.HeaderValue:\0028\001\"\'\n\024T" +
-      "opicResponseContext\022\017\n\007success\030\001 \001(\0102`\n\013" +
-      "FaasService\022Q\n\rTriggerStream\022\035.nitric.fa" +
-      "as.v1.ClientMessage\032\035.nitric.faas.v1.Ser" +
-      "verMessage(\0010\001Bc\n\027io.nitric.proto.faas.v" +
-      "1B\nNitricFaasP\001Z\014nitric/v1;v1\252\002\024Nitric.P" +
-      "roto.Faas.v1\312\002\024Nitric\\Proto\\Faas\\V1b\006pro" +
-      "to3"
+      "rkerOptions\"8\n\022SubscriptionWorker\022\r\n\005top" +
+      "ic\030\001 \001(\t\022\023\n\013dead_letter\030\002 \001(\t\"\204\001\n\016Schedu" +
+      "leWorker\022\013\n\003key\030\001 \001(\t\022,\n\004rate\030\n \001(\0132\034.ni" +
+      "tric.faas.v1.ScheduleRateH\000\022,\n\004cron\030\013 \001(" +
+      "\0132\034.nitric.faas.v1.ScheduleCronH\000B\t\n\007cad" +
+      "ence\"\034\n\014ScheduleRate\022\014\n\004rate\030\001 \001(\t\"\034\n\014Sc" +
+      "heduleCron\022\014\n\004cron\030\001 \001(\t\"\261\001\n\013InitRequest" +
+      "\022(\n\003api\030\n \001(\0132\031.nitric.faas.v1.ApiWorker" +
+      "H\000\022:\n\014subscription\030\013 \001(\0132\".nitric.faas.v" +
+      "1.SubscriptionWorkerH\000\0222\n\010schedule\030\014 \001(\013" +
+      "2\036.nitric.faas.v1.ScheduleWorkerH\000B\010\n\006Wo" +
+      "rker\"\016\n\014InitResponse\"\246\001\n\016TriggerRequest\022" +
+      "\014\n\004data\030\001 \001(\014\022\021\n\tmime_type\030\002 \001(\t\0222\n\004http" +
+      "\030\003 \001(\0132\".nitric.faas.v1.HttpTriggerConte" +
+      "xtH\000\0224\n\005topic\030\004 \001(\0132#.nitric.faas.v1.Top" +
+      "icTriggerContextH\000B\t\n\007context\"\034\n\013HeaderV" +
+      "alue\022\r\n\005value\030\001 \003(\t\"\033\n\nQueryValue\022\r\n\005val" +
+      "ue\030\001 \003(\t\"\345\005\n\022HttpTriggerContext\022\016\n\006metho" +
+      "d\030\001 \001(\t\022\014\n\004path\030\002 \001(\t\022K\n\013headers_old\030\003 \003" +
+      "(\01322.nitric.faas.v1.HttpTriggerContext.H" +
+      "eadersOldEntryB\002\030\001\022T\n\020query_params_old\030\004" +
+      " \003(\01326.nitric.faas.v1.HttpTriggerContext" +
+      ".QueryParamsOldEntryB\002\030\001\022@\n\007headers\030\005 \003(" +
+      "\0132/.nitric.faas.v1.HttpTriggerContext.He" +
+      "adersEntry\022I\n\014query_params\030\006 \003(\01323.nitri" +
+      "c.faas.v1.HttpTriggerContext.QueryParams" +
+      "Entry\022G\n\013path_params\030\007 \003(\01322.nitric.faas" +
+      ".v1.HttpTriggerContext.PathParamsEntry\0321" +
+      "\n\017HeadersOldEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030" +
+      "\002 \001(\t:\0028\001\0325\n\023QueryParamsOldEntry\022\013\n\003key\030" +
+      "\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\032K\n\014HeadersEntry" +
+      "\022\013\n\003key\030\001 \001(\t\022*\n\005value\030\002 \001(\0132\033.nitric.fa" +
+      "as.v1.HeaderValue:\0028\001\032N\n\020QueryParamsEntr" +
+      "y\022\013\n\003key\030\001 \001(\t\022)\n\005value\030\002 \001(\0132\032.nitric.f" +
+      "aas.v1.QueryValue:\0028\001\0321\n\017PathParamsEntry" +
+      "\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"$\n\023Topi" +
+      "cTriggerContext\022\r\n\005topic\030\001 \001(\t\"\226\001\n\017Trigg" +
+      "erResponse\022\014\n\004data\030\001 \001(\014\0223\n\004http\030\n \001(\0132#" +
+      ".nitric.faas.v1.HttpResponseContextH\000\0225\n" +
+      "\005topic\030\013 \001(\0132$.nitric.faas.v1.TopicRespo" +
+      "nseContextH\000B\t\n\007context\"\266\002\n\023HttpResponse" +
+      "Context\022L\n\013headers_old\030\001 \003(\01323.nitric.fa" +
+      "as.v1.HttpResponseContext.HeadersOldEntr" +
+      "yB\002\030\001\022\016\n\006status\030\002 \001(\005\022A\n\007headers\030\003 \003(\01320" +
+      ".nitric.faas.v1.HttpResponseContext.Head" +
+      "ersEntry\0321\n\017HeadersOldEntry\022\013\n\003key\030\001 \001(\t" +
+      "\022\r\n\005value\030\002 \001(\t:\0028\001\032K\n\014HeadersEntry\022\013\n\003k" +
+      "ey\030\001 \001(\t\022*\n\005value\030\002 \001(\0132\033.nitric.faas.v1" +
+      ".HeaderValue:\0028\001\"\'\n\024TopicResponseContext" +
+      "\022\017\n\007success\030\001 \001(\0102`\n\013FaasService\022Q\n\rTrig" +
+      "gerStream\022\035.nitric.faas.v1.ClientMessage" +
+      "\032\035.nitric.faas.v1.ServerMessage(\0010\001Bc\n\027i" +
+      "o.nitric.proto.faas.v1B\nNitricFaasP\001Z\014ni" +
+      "tric/v1;v1\252\002\024Nitric.Proto.Faas.v1\312\002\024Nitr" +
+      "ic\\Proto\\Faas\\V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -276,7 +276,7 @@ public final class NitricFaas {
     internal_static_nitric_faas_v1_SubscriptionWorker_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_nitric_faas_v1_SubscriptionWorker_descriptor,
-        new java.lang.String[] { "Topic", });
+        new java.lang.String[] { "Topic", "DeadLetter", });
     internal_static_nitric_faas_v1_ScheduleWorker_descriptor =
       getDescriptor().getMessageTypes().get(6);
     internal_static_nitric_faas_v1_ScheduleWorker_fieldAccessorTable = new

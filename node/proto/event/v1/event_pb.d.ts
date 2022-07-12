@@ -139,3 +139,89 @@ export namespace NitricEvent {
   }
 }
 
+export class DeadLetterReceiveRequest extends jspb.Message {
+  getName(): string;
+  setName(value: string): void;
+
+  getDepth(): number;
+  setDepth(value: number): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): DeadLetterReceiveRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: DeadLetterReceiveRequest): DeadLetterReceiveRequest.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: DeadLetterReceiveRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): DeadLetterReceiveRequest;
+  static deserializeBinaryFromReader(message: DeadLetterReceiveRequest, reader: jspb.BinaryReader): DeadLetterReceiveRequest;
+}
+
+export namespace DeadLetterReceiveRequest {
+  export type AsObject = {
+    name: string,
+    depth: number,
+  }
+}
+
+export class DeadLetterReceiveResponse extends jspb.Message {
+  clearEventsList(): void;
+  getEventsList(): Array<NitricEvent>;
+  setEventsList(value: Array<NitricEvent>): void;
+  addEvents(value?: NitricEvent, index?: number): NitricEvent;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): DeadLetterReceiveResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: DeadLetterReceiveResponse): DeadLetterReceiveResponse.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: DeadLetterReceiveResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): DeadLetterReceiveResponse;
+  static deserializeBinaryFromReader(message: DeadLetterReceiveResponse, reader: jspb.BinaryReader): DeadLetterReceiveResponse;
+}
+
+export namespace DeadLetterReceiveResponse {
+  export type AsObject = {
+    eventsList: Array<NitricEvent.AsObject>,
+  }
+}
+
+export class DeadLetterCompleteRequest extends jspb.Message {
+  getName(): string;
+  setName(value: string): void;
+
+  getId(): string;
+  setId(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): DeadLetterCompleteRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: DeadLetterCompleteRequest): DeadLetterCompleteRequest.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: DeadLetterCompleteRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): DeadLetterCompleteRequest;
+  static deserializeBinaryFromReader(message: DeadLetterCompleteRequest, reader: jspb.BinaryReader): DeadLetterCompleteRequest;
+}
+
+export namespace DeadLetterCompleteRequest {
+  export type AsObject = {
+    name: string,
+    id: string,
+  }
+}
+
+export class DeadLetterCompleteResponse extends jspb.Message {
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): DeadLetterCompleteResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: DeadLetterCompleteResponse): DeadLetterCompleteResponse.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: DeadLetterCompleteResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): DeadLetterCompleteResponse;
+  static deserializeBinaryFromReader(message: DeadLetterCompleteResponse, reader: jspb.BinaryReader): DeadLetterCompleteResponse;
+}
+
+export namespace DeadLetterCompleteResponse {
+  export type AsObject = {
+  }
+}
+

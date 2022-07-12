@@ -18,4 +18,24 @@ public interface SubscriptionWorkerOrBuilder extends
    */
   com.google.protobuf.ByteString
       getTopicBytes();
+
+  /**
+   * <pre>
+   * optional dead-letter target where events should be sent if they can't be delivered to or processed by this worker.
+   * </pre>
+   *
+   * <code>string dead_letter = 2;</code>
+   * @return The deadLetter.
+   */
+  java.lang.String getDeadLetter();
+  /**
+   * <pre>
+   * optional dead-letter target where events should be sent if they can't be delivered to or processed by this worker.
+   * </pre>
+   *
+   * <code>string dead_letter = 2;</code>
+   * @return The bytes for deadLetter.
+   */
+  com.google.protobuf.ByteString
+      getDeadLetterBytes();
 }

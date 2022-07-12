@@ -63,6 +63,9 @@ class ApiWorker(betterproto.Message):
 @dataclass(eq=False, repr=False)
 class SubscriptionWorker(betterproto.Message):
     topic: str = betterproto.string_field(1)
+    # optional dead-letter target where events should be sent if they can't be
+    # delivered to or processed by this worker.
+    dead_letter: str = betterproto.string_field(2)
 
 
 @dataclass(eq=False, repr=False)

@@ -103,6 +103,11 @@ export class ResourceDeclareRequest extends jspb.Message {
   getApi(): ApiResource | undefined;
   setApi(value?: ApiResource): void;
 
+  hasDeadLetter(): boolean;
+  clearDeadLetter(): void;
+  getDeadLetter(): DeadLetterResource | undefined;
+  setDeadLetter(value?: DeadLetterResource): void;
+
   getConfigCase(): ResourceDeclareRequest.ConfigCase;
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ResourceDeclareRequest.AsObject;
@@ -124,6 +129,7 @@ export namespace ResourceDeclareRequest {
     collection?: CollectionResource.AsObject,
     secret?: SecretResource.AsObject,
     api?: ApiResource.AsObject,
+    deadLetter?: DeadLetterResource.AsObject,
   }
 
   export enum ConfigCase {
@@ -135,6 +141,7 @@ export namespace ResourceDeclareRequest {
     COLLECTION = 14,
     SECRET = 15,
     API = 16,
+    DEAD_LETTER = 17,
   }
 }
 
@@ -214,6 +221,22 @@ export class SecretResource extends jspb.Message {
 }
 
 export namespace SecretResource {
+  export type AsObject = {
+  }
+}
+
+export class DeadLetterResource extends jspb.Message {
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): DeadLetterResource.AsObject;
+  static toObject(includeInstance: boolean, msg: DeadLetterResource): DeadLetterResource.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: DeadLetterResource, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): DeadLetterResource;
+  static deserializeBinaryFromReader(message: DeadLetterResource, reader: jspb.BinaryReader): DeadLetterResource;
+}
+
+export namespace DeadLetterResource {
   export type AsObject = {
   }
 }
@@ -343,6 +366,7 @@ export interface ResourceTypeMap {
   COLLECTION: 7;
   POLICY: 8;
   SECRET: 9;
+  DEADLETTER: 10;
 }
 
 export const ResourceType: ResourceTypeMap;

@@ -127,5 +127,20 @@ public interface ResourceDeclareRequestOrBuilder extends
    */
   io.nitric.proto.resource.v1.ApiResourceOrBuilder getApiOrBuilder();
 
+  /**
+   * <code>.nitric.resource.v1.DeadLetterResource dead_letter = 17;</code>
+   * @return Whether the deadLetter field is set.
+   */
+  boolean hasDeadLetter();
+  /**
+   * <code>.nitric.resource.v1.DeadLetterResource dead_letter = 17;</code>
+   * @return The deadLetter.
+   */
+  io.nitric.proto.resource.v1.DeadLetterResource getDeadLetter();
+  /**
+   * <code>.nitric.resource.v1.DeadLetterResource dead_letter = 17;</code>
+   */
+  io.nitric.proto.resource.v1.DeadLetterResourceOrBuilder getDeadLetterOrBuilder();
+
   public io.nitric.proto.resource.v1.ResourceDeclareRequest.ConfigCase getConfigCase();
 }

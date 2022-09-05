@@ -2,14 +2,27 @@
 # sources: proto/storage/v1/storage.proto
 # plugin: python-betterproto
 from dataclasses import dataclass
-from typing import Dict, List
+from typing import (
+    TYPE_CHECKING,
+    Dict,
+    List,
+    Optional,
+)
 
 import betterproto
-from betterproto.grpc.grpclib_server import ServiceBase
 import grpclib
+from betterproto.grpc.grpclib_server import ServiceBase
+
+
+if TYPE_CHECKING:
+    import grpclib.server
+    from betterproto.grpc.grpclib_client import MetadataLike
+    from grpclib.metadata import Deadline
 
 
 class StoragePreSignUrlRequestOperation(betterproto.Enum):
+    """Operation"""
+
     READ = 0
     WRITE = 1
 
@@ -18,13 +31,17 @@ class StoragePreSignUrlRequestOperation(betterproto.Enum):
 class StorageWriteRequest(betterproto.Message):
     """Request to put (create/update) a storage item"""
 
-    # Nitric name of the bucket to store in  this will be automatically resolved
-    # to the provider specific bucket identifier.
     bucket_name: str = betterproto.string_field(1)
-    # Key to store the item under
+    """
+    Nitric name of the bucket to store in  this will be automatically resolved
+    to the provider specific bucket identifier.
+    """
+
     key: str = betterproto.string_field(2)
-    # bytes array to store
+    """Key to store the item under"""
+
     body: bytes = betterproto.bytes_field(3)
+    """bytes array to store"""
 
 
 @dataclass(eq=False, repr=False)
@@ -38,29 +55,33 @@ class StorageWriteResponse(betterproto.Message):
 class StorageReadRequest(betterproto.Message):
     """Request to retrieve a storage item"""
 
-    # Nitric name of the bucket to retrieve from  this will be automatically
-    # resolved to the provider specific bucket identifier.
     bucket_name: str = betterproto.string_field(1)
-    # Key of item to retrieve
+    """
+    Nitric name of the bucket to retrieve from  this will be automatically
+    resolved to the provider specific bucket identifier.
+    """
+
     key: str = betterproto.string_field(2)
+    """Key of item to retrieve"""
 
 
 @dataclass(eq=False, repr=False)
 class StorageReadResponse(betterproto.Message):
     """Returned storage item"""
 
-    # The body bytes of the retrieved storage item
     body: bytes = betterproto.bytes_field(1)
+    """The body bytes of the retrieved storage item"""
 
 
 @dataclass(eq=False, repr=False)
 class StorageDeleteRequest(betterproto.Message):
     """Request to delete a storage item"""
 
-    # Name of the bucket to delete from
     bucket_name: str = betterproto.string_field(1)
-    # Key of item to delete
+    """Name of the bucket to delete from"""
+
     key: str = betterproto.string_field(2)
+    """Key of item to delete"""
 
 
 @dataclass(eq=False, repr=False)
@@ -77,24 +98,34 @@ class StoragePreSignUrlRequest(betterproto.Message):
     operation, such as read or write.
     """
 
-    # Nitric name of the bucket to retrieve from  this will be automatically
-    # resolved to the provider specific bucket identifier.
     bucket_name: str = betterproto.string_field(1)
-    # Key of item to generate the signed URL for. The URL and the token it
-    # contains will only be valid for operations on this resource specifically.
+    """
+    Nitric name of the bucket to retrieve from  this will be automatically
+    resolved to the provider specific bucket identifier.
+    """
+
     key: str = betterproto.string_field(2)
+    """
+    Key of item to generate the signed URL for. The URL and the token it
+    contains will only be valid for operations on this resource specifically.
+    """
+
     operation: "StoragePreSignUrlRequestOperation" = betterproto.enum_field(3)
-    # Expiry time in seconds for the token included in the signed URL.  Time
-    # starts from when the access token is generated, not when this request is
-    # made.  e.g. time.Now().Add(expiry * time.Second) on the server
     expiry: int = betterproto.uint32_field(4)
+    """
+    Expiry time in seconds for the token included in the signed URL.  Time
+    starts from when the access token is generated, not when this request is
+    made.  e.g. time.Now().Add(expiry * time.Second) on the server
+    """
 
 
 @dataclass(eq=False, repr=False)
 class StoragePreSignUrlResponse(betterproto.Message):
-    # The pre-signed url, restricted to the operation, resource and expiry time
-    # specified in the request.
     url: str = betterproto.string_field(1)
+    """
+    The pre-signed url, restricted to the operation, resource and expiry time
+    specified in the request.
+    """
 
 
 @dataclass(eq=False, repr=False)
@@ -109,160 +140,159 @@ class File(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class StorageListFilesResponse(betterproto.Message):
-    # keys of the files in the bucket
     files: List["File"] = betterproto.message_field(1)
+    """keys of the files in the bucket"""
 
 
 class StorageServiceStub(betterproto.ServiceStub):
     async def read(
-        self, *, bucket_name: str = "", key: str = ""
+        self,
+        storage_read_request: "StorageReadRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
     ) -> "StorageReadResponse":
-
-        request = StorageReadRequest()
-        request.bucket_name = bucket_name
-        request.key = key
-
         return await self._unary_unary(
-            "/nitric.storage.v1.StorageService/Read", request, StorageReadResponse
+            "/nitric.storage.v1.StorageService/Read",
+            storage_read_request,
+            StorageReadResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
         )
 
     async def write(
-        self, *, bucket_name: str = "", key: str = "", body: bytes = b""
+        self,
+        storage_write_request: "StorageWriteRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
     ) -> "StorageWriteResponse":
-
-        request = StorageWriteRequest()
-        request.bucket_name = bucket_name
-        request.key = key
-        request.body = body
-
         return await self._unary_unary(
-            "/nitric.storage.v1.StorageService/Write", request, StorageWriteResponse
+            "/nitric.storage.v1.StorageService/Write",
+            storage_write_request,
+            StorageWriteResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
         )
 
     async def delete(
-        self, *, bucket_name: str = "", key: str = ""
+        self,
+        storage_delete_request: "StorageDeleteRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
     ) -> "StorageDeleteResponse":
-
-        request = StorageDeleteRequest()
-        request.bucket_name = bucket_name
-        request.key = key
-
         return await self._unary_unary(
-            "/nitric.storage.v1.StorageService/Delete", request, StorageDeleteResponse
+            "/nitric.storage.v1.StorageService/Delete",
+            storage_delete_request,
+            StorageDeleteResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
         )
 
     async def pre_sign_url(
         self,
+        storage_pre_sign_url_request: "StoragePreSignUrlRequest",
         *,
-        bucket_name: str = "",
-        key: str = "",
-        operation: "StoragePreSignUrlRequestOperation" = None,
-        expiry: int = 0,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
     ) -> "StoragePreSignUrlResponse":
-
-        request = StoragePreSignUrlRequest()
-        request.bucket_name = bucket_name
-        request.key = key
-        request.operation = operation
-        request.expiry = expiry
-
         return await self._unary_unary(
             "/nitric.storage.v1.StorageService/PreSignUrl",
-            request,
+            storage_pre_sign_url_request,
             StoragePreSignUrlResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
         )
 
-    async def list_files(self, *, bucket_name: str = "") -> "StorageListFilesResponse":
-
-        request = StorageListFilesRequest()
-        request.bucket_name = bucket_name
-
+    async def list_files(
+        self,
+        storage_list_files_request: "StorageListFilesRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "StorageListFilesResponse":
         return await self._unary_unary(
             "/nitric.storage.v1.StorageService/ListFiles",
-            request,
+            storage_list_files_request,
             StorageListFilesResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
         )
 
 
 class StorageServiceBase(ServiceBase):
-    async def read(self, bucket_name: str, key: str) -> "StorageReadResponse":
+    async def read(
+        self, storage_read_request: "StorageReadRequest"
+    ) -> "StorageReadResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
     async def write(
-        self, bucket_name: str, key: str, body: bytes
+        self, storage_write_request: "StorageWriteRequest"
     ) -> "StorageWriteResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
-    async def delete(self, bucket_name: str, key: str) -> "StorageDeleteResponse":
+    async def delete(
+        self, storage_delete_request: "StorageDeleteRequest"
+    ) -> "StorageDeleteResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
     async def pre_sign_url(
-        self,
-        bucket_name: str,
-        key: str,
-        operation: "StoragePreSignUrlRequestOperation",
-        expiry: int,
+        self, storage_pre_sign_url_request: "StoragePreSignUrlRequest"
     ) -> "StoragePreSignUrlResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
-    async def list_files(self, bucket_name: str) -> "StorageListFilesResponse":
+    async def list_files(
+        self, storage_list_files_request: "StorageListFilesRequest"
+    ) -> "StorageListFilesResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
-    async def __rpc_read(self, stream: grpclib.server.Stream) -> None:
+    async def __rpc_read(
+        self, stream: "grpclib.server.Stream[StorageReadRequest, StorageReadResponse]"
+    ) -> None:
         request = await stream.recv_message()
-
-        request_kwargs = {
-            "bucket_name": request.bucket_name,
-            "key": request.key,
-        }
-
-        response = await self.read(**request_kwargs)
+        response = await self.read(request)
         await stream.send_message(response)
 
-    async def __rpc_write(self, stream: grpclib.server.Stream) -> None:
+    async def __rpc_write(
+        self, stream: "grpclib.server.Stream[StorageWriteRequest, StorageWriteResponse]"
+    ) -> None:
         request = await stream.recv_message()
-
-        request_kwargs = {
-            "bucket_name": request.bucket_name,
-            "key": request.key,
-            "body": request.body,
-        }
-
-        response = await self.write(**request_kwargs)
+        response = await self.write(request)
         await stream.send_message(response)
 
-    async def __rpc_delete(self, stream: grpclib.server.Stream) -> None:
+    async def __rpc_delete(
+        self,
+        stream: "grpclib.server.Stream[StorageDeleteRequest, StorageDeleteResponse]",
+    ) -> None:
         request = await stream.recv_message()
-
-        request_kwargs = {
-            "bucket_name": request.bucket_name,
-            "key": request.key,
-        }
-
-        response = await self.delete(**request_kwargs)
+        response = await self.delete(request)
         await stream.send_message(response)
 
-    async def __rpc_pre_sign_url(self, stream: grpclib.server.Stream) -> None:
+    async def __rpc_pre_sign_url(
+        self,
+        stream: "grpclib.server.Stream[StoragePreSignUrlRequest, StoragePreSignUrlResponse]",
+    ) -> None:
         request = await stream.recv_message()
-
-        request_kwargs = {
-            "bucket_name": request.bucket_name,
-            "key": request.key,
-            "operation": request.operation,
-            "expiry": request.expiry,
-        }
-
-        response = await self.pre_sign_url(**request_kwargs)
+        response = await self.pre_sign_url(request)
         await stream.send_message(response)
 
-    async def __rpc_list_files(self, stream: grpclib.server.Stream) -> None:
+    async def __rpc_list_files(
+        self,
+        stream: "grpclib.server.Stream[StorageListFilesRequest, StorageListFilesResponse]",
+    ) -> None:
         request = await stream.recv_message()
-
-        request_kwargs = {
-            "bucket_name": request.bucket_name,
-        }
-
-        response = await self.list_files(**request_kwargs)
+        response = await self.list_files(request)
         await stream.send_message(response)
 
     def __mapping__(self) -> Dict[str, grpclib.const.Handler]:

@@ -2,120 +2,137 @@
 # sources: proto/secret/v1/secret.proto
 # plugin: python-betterproto
 from dataclasses import dataclass
-from typing import Dict
+from typing import (
+    TYPE_CHECKING,
+    Dict,
+    Optional,
+)
 
 import betterproto
-from betterproto.grpc.grpclib_server import ServiceBase
 import grpclib
+from betterproto.grpc.grpclib_server import ServiceBase
+
+
+if TYPE_CHECKING:
+    import grpclib.server
+    from betterproto.grpc.grpclib_client import MetadataLike
+    from grpclib.metadata import Deadline
 
 
 @dataclass(eq=False, repr=False)
 class SecretPutRequest(betterproto.Message):
     """Request to put a secret to a Secret Store"""
 
-    # The Secret to put to the Secret store
     secret: "Secret" = betterproto.message_field(1)
-    # The value to assign to that secret
+    """The Secret to put to the Secret store"""
+
     value: bytes = betterproto.bytes_field(2)
+    """The value to assign to that secret"""
 
 
 @dataclass(eq=False, repr=False)
 class SecretPutResponse(betterproto.Message):
     """Result from putting the secret to a Secret Store"""
 
-    # The id of the secret
     secret_version: "SecretVersion" = betterproto.message_field(1)
+    """The id of the secret"""
 
 
 @dataclass(eq=False, repr=False)
 class SecretAccessRequest(betterproto.Message):
     """Request to get a secret from a Secret Store"""
 
-    # The id of the secret
     secret_version: "SecretVersion" = betterproto.message_field(1)
+    """The id of the secret"""
 
 
 @dataclass(eq=False, repr=False)
 class SecretAccessResponse(betterproto.Message):
     """The secret response"""
 
-    # The version of the secret that was requested
     secret_version: "SecretVersion" = betterproto.message_field(1)
-    # The value of the secret
+    """The version of the secret that was requested"""
+
     value: bytes = betterproto.bytes_field(2)
+    """The value of the secret"""
 
 
 @dataclass(eq=False, repr=False)
 class Secret(betterproto.Message):
     """The secret container"""
 
-    # The secret name
     name: str = betterproto.string_field(1)
+    """The secret name"""
 
 
 @dataclass(eq=False, repr=False)
 class SecretVersion(betterproto.Message):
     """A version of a secret"""
 
-    # Reference to the secret container
     secret: "Secret" = betterproto.message_field(1)
-    # The secret version
+    """Reference to the secret container"""
+
     version: str = betterproto.string_field(2)
+    """The secret version"""
 
 
 class SecretServiceStub(betterproto.ServiceStub):
     async def put(
-        self, *, secret: "Secret" = None, value: bytes = b""
+        self,
+        secret_put_request: "SecretPutRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
     ) -> "SecretPutResponse":
-
-        request = SecretPutRequest()
-        if secret is not None:
-            request.secret = secret
-        request.value = value
-
         return await self._unary_unary(
-            "/nitric.secret.v1.SecretService/Put", request, SecretPutResponse
+            "/nitric.secret.v1.SecretService/Put",
+            secret_put_request,
+            SecretPutResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
         )
 
     async def access(
-        self, *, secret_version: "SecretVersion" = None
+        self,
+        secret_access_request: "SecretAccessRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
     ) -> "SecretAccessResponse":
-
-        request = SecretAccessRequest()
-        if secret_version is not None:
-            request.secret_version = secret_version
-
         return await self._unary_unary(
-            "/nitric.secret.v1.SecretService/Access", request, SecretAccessResponse
+            "/nitric.secret.v1.SecretService/Access",
+            secret_access_request,
+            SecretAccessResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
         )
 
 
 class SecretServiceBase(ServiceBase):
-    async def put(self, secret: "Secret", value: bytes) -> "SecretPutResponse":
+    async def put(self, secret_put_request: "SecretPutRequest") -> "SecretPutResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
-    async def access(self, secret_version: "SecretVersion") -> "SecretAccessResponse":
+    async def access(
+        self, secret_access_request: "SecretAccessRequest"
+    ) -> "SecretAccessResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
-    async def __rpc_put(self, stream: grpclib.server.Stream) -> None:
+    async def __rpc_put(
+        self, stream: "grpclib.server.Stream[SecretPutRequest, SecretPutResponse]"
+    ) -> None:
         request = await stream.recv_message()
-
-        request_kwargs = {
-            "secret": request.secret,
-            "value": request.value,
-        }
-
-        response = await self.put(**request_kwargs)
+        response = await self.put(request)
         await stream.send_message(response)
 
-    async def __rpc_access(self, stream: grpclib.server.Stream) -> None:
+    async def __rpc_access(
+        self, stream: "grpclib.server.Stream[SecretAccessRequest, SecretAccessResponse]"
+    ) -> None:
         request = await stream.recv_message()
-
-        request_kwargs = {
-            "secret_version": request.secret_version,
-        }
-
-        response = await self.access(**request_kwargs)
+        response = await self.access(request)
         await stream.send_message(response)
 
     def __mapping__(self) -> Dict[str, grpclib.const.Handler]:

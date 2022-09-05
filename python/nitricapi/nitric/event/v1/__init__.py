@@ -2,30 +2,45 @@
 # sources: proto/event/v1/event.proto
 # plugin: python-betterproto
 from dataclasses import dataclass
-from typing import Dict, List
+from typing import (
+    TYPE_CHECKING,
+    Dict,
+    List,
+    Optional,
+)
 
 import betterproto
-from betterproto.grpc.grpclib_server import ServiceBase
+import betterproto.lib.google.protobuf as betterproto_lib_google_protobuf
 import grpclib
+from betterproto.grpc.grpclib_server import ServiceBase
+
+
+if TYPE_CHECKING:
+    import grpclib.server
+    from betterproto.grpc.grpclib_client import MetadataLike
+    from grpclib.metadata import Deadline
 
 
 @dataclass(eq=False, repr=False)
 class EventPublishRequest(betterproto.Message):
     """Request to publish an event to a topic"""
 
-    # The name of the topic to publish the event to
     topic: str = betterproto.string_field(1)
-    # The event to be published
+    """The name of the topic to publish the event to"""
+
     event: "NitricEvent" = betterproto.message_field(2)
+    """The event to be published"""
 
 
 @dataclass(eq=False, repr=False)
 class EventPublishResponse(betterproto.Message):
     """Result of publishing an event"""
 
-    # The id of the published message When an id was not supplied one should be
-    # automatically generated
     id: str = betterproto.string_field(1)
+    """
+    The id of the published message When an id was not supplied one should be
+    automatically generated
+    """
 
 
 @dataclass(eq=False, repr=False)
@@ -39,53 +54,63 @@ class TopicListRequest(betterproto.Message):
 class TopicListResponse(betterproto.Message):
     """Topic List Response"""
 
-    # The list of found topics
     topics: List["NitricTopic"] = betterproto.message_field(1)
+    """The list of found topics"""
 
 
 @dataclass(eq=False, repr=False)
 class NitricTopic(betterproto.Message):
     """Represents an event topic"""
 
-    # The Nitric name for the topic
     name: str = betterproto.string_field(1)
+    """The Nitric name for the topic"""
 
 
 @dataclass(eq=False, repr=False)
 class NitricEvent(betterproto.Message):
     """Nitric Event Model"""
 
-    # A Unique ID for the Nitric Event
     id: str = betterproto.string_field(1)
-    # A content hint for the events payload
+    """A Unique ID for the Nitric Event"""
+
     payload_type: str = betterproto.string_field(2)
-    # The payload of the event
+    """A content hint for the events payload"""
+
     payload: "betterproto_lib_google_protobuf.Struct" = betterproto.message_field(3)
+    """The payload of the event"""
 
 
 @dataclass(eq=False, repr=False)
 class DeadLetterReceiveRequest(betterproto.Message):
-    # The nitric name for the dead-letter target this will automatically be
-    # resolved to the provider specific identifier.
     name: str = betterproto.string_field(1)
-    # The max number of items to pop off the queue, may be capped by provider
-    # specific limitations
+    """
+    The nitric name for the dead-letter target this will automatically be
+    resolved to the provider specific identifier.
+    """
+
     depth: int = betterproto.int32_field(2)
+    """
+    The max number of items to pop off the queue, may be capped by provider
+    specific limitations
+    """
 
 
 @dataclass(eq=False, repr=False)
 class DeadLetterReceiveResponse(betterproto.Message):
-    # Array of dead-letter events
     events: List["NitricEvent"] = betterproto.message_field(1)
+    """Array of dead-letter events"""
 
 
 @dataclass(eq=False, repr=False)
 class DeadLetterCompleteRequest(betterproto.Message):
-    # The nitric name for the dead-letter target  this will automatically be
-    # resolved to the provider specific queue identifier.
     name: str = betterproto.string_field(1)
-    # ID of the event to be completed
+    """
+    The nitric name for the dead-letter target  this will automatically be
+    resolved to the provider specific queue identifier.
+    """
+
     id: str = betterproto.string_field(2)
+    """ID of the event to be completed"""
 
 
 @dataclass(eq=False, repr=False)
@@ -95,72 +120,89 @@ class DeadLetterCompleteResponse(betterproto.Message):
 
 class EventServiceStub(betterproto.ServiceStub):
     async def publish(
-        self, *, topic: str = "", event: "NitricEvent" = None
+        self,
+        event_publish_request: "EventPublishRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
     ) -> "EventPublishResponse":
-
-        request = EventPublishRequest()
-        request.topic = topic
-        if event is not None:
-            request.event = event
-
         return await self._unary_unary(
-            "/nitric.event.v1.EventService/Publish", request, EventPublishResponse
+            "/nitric.event.v1.EventService/Publish",
+            event_publish_request,
+            EventPublishResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
         )
 
 
 class TopicServiceStub(betterproto.ServiceStub):
-    async def list(self) -> "TopicListResponse":
-
-        request = TopicListRequest()
-
+    async def list(
+        self,
+        topic_list_request: "TopicListRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "TopicListResponse":
         return await self._unary_unary(
-            "/nitric.event.v1.TopicService/List", request, TopicListResponse
+            "/nitric.event.v1.TopicService/List",
+            topic_list_request,
+            TopicListResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
         )
 
 
 class DeadLetterServiceStub(betterproto.ServiceStub):
     async def receive(
-        self, *, name: str = "", depth: int = 0
+        self,
+        dead_letter_receive_request: "DeadLetterReceiveRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
     ) -> "DeadLetterReceiveResponse":
-
-        request = DeadLetterReceiveRequest()
-        request.name = name
-        request.depth = depth
-
         return await self._unary_unary(
             "/nitric.event.v1.DeadLetterService/Receive",
-            request,
+            dead_letter_receive_request,
             DeadLetterReceiveResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
         )
 
     async def complete(
-        self, *, name: str = "", id: str = ""
+        self,
+        dead_letter_complete_request: "DeadLetterCompleteRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
     ) -> "DeadLetterCompleteResponse":
-
-        request = DeadLetterCompleteRequest()
-        request.name = name
-        request.id = id
-
         return await self._unary_unary(
             "/nitric.event.v1.DeadLetterService/Complete",
-            request,
+            dead_letter_complete_request,
             DeadLetterCompleteResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
         )
 
 
 class EventServiceBase(ServiceBase):
-    async def publish(self, topic: str, event: "NitricEvent") -> "EventPublishResponse":
+    async def publish(
+        self, event_publish_request: "EventPublishRequest"
+    ) -> "EventPublishResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
-    async def __rpc_publish(self, stream: grpclib.server.Stream) -> None:
+    async def __rpc_publish(
+        self, stream: "grpclib.server.Stream[EventPublishRequest, EventPublishResponse]"
+    ) -> None:
         request = await stream.recv_message()
-
-        request_kwargs = {
-            "topic": request.topic,
-            "event": request.event,
-        }
-
-        response = await self.publish(**request_kwargs)
+        response = await self.publish(request)
         await stream.send_message(response)
 
     def __mapping__(self) -> Dict[str, grpclib.const.Handler]:
@@ -175,15 +217,14 @@ class EventServiceBase(ServiceBase):
 
 
 class TopicServiceBase(ServiceBase):
-    async def list(self) -> "TopicListResponse":
+    async def list(self, topic_list_request: "TopicListRequest") -> "TopicListResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
-    async def __rpc_list(self, stream: grpclib.server.Stream) -> None:
+    async def __rpc_list(
+        self, stream: "grpclib.server.Stream[TopicListRequest, TopicListResponse]"
+    ) -> None:
         request = await stream.recv_message()
-
-        request_kwargs = {}
-
-        response = await self.list(**request_kwargs)
+        response = await self.list(request)
         await stream.send_message(response)
 
     def __mapping__(self) -> Dict[str, grpclib.const.Handler]:
@@ -198,32 +239,30 @@ class TopicServiceBase(ServiceBase):
 
 
 class DeadLetterServiceBase(ServiceBase):
-    async def receive(self, name: str, depth: int) -> "DeadLetterReceiveResponse":
+    async def receive(
+        self, dead_letter_receive_request: "DeadLetterReceiveRequest"
+    ) -> "DeadLetterReceiveResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
-    async def complete(self, name: str, id: str) -> "DeadLetterCompleteResponse":
+    async def complete(
+        self, dead_letter_complete_request: "DeadLetterCompleteRequest"
+    ) -> "DeadLetterCompleteResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
-    async def __rpc_receive(self, stream: grpclib.server.Stream) -> None:
+    async def __rpc_receive(
+        self,
+        stream: "grpclib.server.Stream[DeadLetterReceiveRequest, DeadLetterReceiveResponse]",
+    ) -> None:
         request = await stream.recv_message()
-
-        request_kwargs = {
-            "name": request.name,
-            "depth": request.depth,
-        }
-
-        response = await self.receive(**request_kwargs)
+        response = await self.receive(request)
         await stream.send_message(response)
 
-    async def __rpc_complete(self, stream: grpclib.server.Stream) -> None:
+    async def __rpc_complete(
+        self,
+        stream: "grpclib.server.Stream[DeadLetterCompleteRequest, DeadLetterCompleteResponse]",
+    ) -> None:
         request = await stream.recv_message()
-
-        request_kwargs = {
-            "name": request.name,
-            "id": request.id,
-        }
-
-        response = await self.complete(**request_kwargs)
+        response = await self.complete(request)
         await stream.send_message(response)
 
     def __mapping__(self) -> Dict[str, grpclib.const.Handler]:
@@ -241,6 +280,3 @@ class DeadLetterServiceBase(ServiceBase):
                 DeadLetterCompleteResponse,
             ),
         }
-
-
-import betterproto.lib.google.protobuf as betterproto_lib_google_protobuf

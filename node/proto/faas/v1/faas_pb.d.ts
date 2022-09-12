@@ -166,9 +166,6 @@ export class SubscriptionWorker extends jspb.Message {
   getTopic(): string;
   setTopic(value: string): void;
 
-  getDeadLetter(): string;
-  setDeadLetter(value: string): void;
-
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): SubscriptionWorker.AsObject;
   static toObject(includeInstance: boolean, msg: SubscriptionWorker): SubscriptionWorker.AsObject;
@@ -182,7 +179,6 @@ export class SubscriptionWorker extends jspb.Message {
 export namespace SubscriptionWorker {
   export type AsObject = {
     topic: string,
-    deadLetter: string,
   }
 }
 

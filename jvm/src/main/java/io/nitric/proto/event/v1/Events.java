@@ -44,26 +44,6 @@ public final class Events {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_nitric_event_v1_NitricEvent_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_nitric_event_v1_DeadLetterReceiveRequest_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_nitric_event_v1_DeadLetterReceiveRequest_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_nitric_event_v1_DeadLetterReceiveResponse_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_nitric_event_v1_DeadLetterReceiveResponse_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_nitric_event_v1_DeadLetterCompleteRequest_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_nitric_event_v1_DeadLetterCompleteRequest_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_nitric_event_v1_DeadLetterCompleteResponse_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_nitric_event_v1_DeadLetterCompleteResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -84,27 +64,15 @@ public final class Events {
       "ric.event.v1.NitricTopic\"\033\n\013NitricTopic\022" +
       "\014\n\004name\030\001 \001(\t\"Y\n\013NitricEvent\022\n\n\002id\030\001 \001(\t" +
       "\022\024\n\014payload_type\030\002 \001(\t\022(\n\007payload\030\003 \001(\0132" +
-      "\027.google.protobuf.Struct\"S\n\030DeadLetterRe" +
-      "ceiveRequest\022(\n\004name\030\001 \001(\tB\032\372B\027r\025(\200\0022\020^\\" +
-      "w+([.\\-]\\w+)*$\022\r\n\005depth\030\002 \001(\005\"I\n\031DeadLet" +
-      "terReceiveResponse\022,\n\006events\030\001 \003(\0132\034.nit" +
-      "ric.event.v1.NitricEvent\"Z\n\031DeadLetterCo" +
-      "mpleteRequest\022(\n\004name\030\001 \001(\tB\032\372B\027r\025(\200\0022\020^" +
-      "\\w+([.\\-]\\w+)*$\022\023\n\002id\030\002 \001(\tB\007\372B\004r\002\020\001\"\034\n\032" +
-      "DeadLetterCompleteResponse2f\n\014EventServi" +
-      "ce\022V\n\007Publish\022$.nitric.event.v1.EventPub" +
-      "lishRequest\032%.nitric.event.v1.EventPubli" +
-      "shResponse2]\n\014TopicService\022M\n\004List\022!.nit" +
-      "ric.event.v1.TopicListRequest\032\".nitric.e" +
-      "vent.v1.TopicListResponse2\332\001\n\021DeadLetter" +
-      "Service\022`\n\007Receive\022).nitric.event.v1.Dea" +
-      "dLetterReceiveRequest\032*.nitric.event.v1." +
-      "DeadLetterReceiveResponse\022c\n\010Complete\022*." +
-      "nitric.event.v1.DeadLetterCompleteReques" +
-      "t\032+.nitric.event.v1.DeadLetterCompleteRe" +
-      "sponseBb\n\030io.nitric.proto.event.v1B\006Even" +
-      "tsP\001Z\014nitric/v1;v1\252\002\025Nitric.Proto.Event." +
-      "v1\312\002\025Nitric\\Proto\\Event\\V1b\006proto3"
+      "\027.google.protobuf.Struct2f\n\014EventService" +
+      "\022V\n\007Publish\022$.nitric.event.v1.EventPubli" +
+      "shRequest\032%.nitric.event.v1.EventPublish" +
+      "Response2]\n\014TopicService\022M\n\004List\022!.nitri" +
+      "c.event.v1.TopicListRequest\032\".nitric.eve" +
+      "nt.v1.TopicListResponseBb\n\030io.nitric.pro" +
+      "to.event.v1B\006EventsP\001Z\014nitric/v1;v1\252\002\025Ni" +
+      "tric.Proto.Event.v1\312\002\025Nitric\\Proto\\Event" +
+      "\\V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -148,30 +116,6 @@ public final class Events {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_nitric_event_v1_NitricEvent_descriptor,
         new java.lang.String[] { "Id", "PayloadType", "Payload", });
-    internal_static_nitric_event_v1_DeadLetterReceiveRequest_descriptor =
-      getDescriptor().getMessageTypes().get(6);
-    internal_static_nitric_event_v1_DeadLetterReceiveRequest_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_nitric_event_v1_DeadLetterReceiveRequest_descriptor,
-        new java.lang.String[] { "Name", "Depth", });
-    internal_static_nitric_event_v1_DeadLetterReceiveResponse_descriptor =
-      getDescriptor().getMessageTypes().get(7);
-    internal_static_nitric_event_v1_DeadLetterReceiveResponse_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_nitric_event_v1_DeadLetterReceiveResponse_descriptor,
-        new java.lang.String[] { "Events", });
-    internal_static_nitric_event_v1_DeadLetterCompleteRequest_descriptor =
-      getDescriptor().getMessageTypes().get(8);
-    internal_static_nitric_event_v1_DeadLetterCompleteRequest_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_nitric_event_v1_DeadLetterCompleteRequest_descriptor,
-        new java.lang.String[] { "Name", "Id", });
-    internal_static_nitric_event_v1_DeadLetterCompleteResponse_descriptor =
-      getDescriptor().getMessageTypes().get(9);
-    internal_static_nitric_event_v1_DeadLetterCompleteResponse_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_nitric_event_v1_DeadLetterCompleteResponse_descriptor,
-        new java.lang.String[] { });
     com.google.protobuf.ExtensionRegistry registry =
         com.google.protobuf.ExtensionRegistry.newInstance();
     registry.add(io.envoyproxy.pgv.validate.Validate.rules);

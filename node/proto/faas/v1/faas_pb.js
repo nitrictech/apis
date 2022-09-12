@@ -1573,8 +1573,7 @@ proto.nitric.faas.v1.SubscriptionWorker.prototype.toObject = function(opt_includ
  */
 proto.nitric.faas.v1.SubscriptionWorker.toObject = function(includeInstance, msg) {
   var f, obj = {
-    topic: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    deadLetter: jspb.Message.getFieldWithDefault(msg, 2, "")
+    topic: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -1615,10 +1614,6 @@ proto.nitric.faas.v1.SubscriptionWorker.deserializeBinaryFromReader = function(m
       var value = /** @type {string} */ (reader.readString());
       msg.setTopic(value);
       break;
-    case 2:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setDeadLetter(value);
-      break;
     default:
       reader.skipField();
       break;
@@ -1655,13 +1650,6 @@ proto.nitric.faas.v1.SubscriptionWorker.serializeBinaryToWriter = function(messa
       f
     );
   }
-  f = message.getDeadLetter();
-  if (f.length > 0) {
-    writer.writeString(
-      2,
-      f
-    );
-  }
 };
 
 
@@ -1680,24 +1668,6 @@ proto.nitric.faas.v1.SubscriptionWorker.prototype.getTopic = function() {
  */
 proto.nitric.faas.v1.SubscriptionWorker.prototype.setTopic = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
-};
-
-
-/**
- * optional string dead_letter = 2;
- * @return {string}
- */
-proto.nitric.faas.v1.SubscriptionWorker.prototype.getDeadLetter = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.nitric.faas.v1.SubscriptionWorker} returns this
- */
-proto.nitric.faas.v1.SubscriptionWorker.prototype.setDeadLetter = function(value) {
-  return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 

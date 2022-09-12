@@ -80,44 +80,6 @@ class NitricEvent(betterproto.Message):
     """The payload of the event"""
 
 
-@dataclass(eq=False, repr=False)
-class DeadLetterReceiveRequest(betterproto.Message):
-    name: str = betterproto.string_field(1)
-    """
-    The nitric name for the dead-letter target this will automatically be
-    resolved to the provider specific identifier.
-    """
-
-    depth: int = betterproto.int32_field(2)
-    """
-    The max number of items to pop off the queue, may be capped by provider
-    specific limitations
-    """
-
-
-@dataclass(eq=False, repr=False)
-class DeadLetterReceiveResponse(betterproto.Message):
-    events: List["NitricEvent"] = betterproto.message_field(1)
-    """Array of dead-letter events"""
-
-
-@dataclass(eq=False, repr=False)
-class DeadLetterCompleteRequest(betterproto.Message):
-    name: str = betterproto.string_field(1)
-    """
-    The nitric name for the dead-letter target  this will automatically be
-    resolved to the provider specific queue identifier.
-    """
-
-    id: str = betterproto.string_field(2)
-    """ID of the event to be completed"""
-
-
-@dataclass(eq=False, repr=False)
-class DeadLetterCompleteResponse(betterproto.Message):
-    pass
-
-
 class EventServiceStub(betterproto.ServiceStub):
     async def publish(
         self,
@@ -150,42 +112,6 @@ class TopicServiceStub(betterproto.ServiceStub):
             "/nitric.event.v1.TopicService/List",
             topic_list_request,
             TopicListResponse,
-            timeout=timeout,
-            deadline=deadline,
-            metadata=metadata,
-        )
-
-
-class DeadLetterServiceStub(betterproto.ServiceStub):
-    async def receive(
-        self,
-        dead_letter_receive_request: "DeadLetterReceiveRequest",
-        *,
-        timeout: Optional[float] = None,
-        deadline: Optional["Deadline"] = None,
-        metadata: Optional["MetadataLike"] = None
-    ) -> "DeadLetterReceiveResponse":
-        return await self._unary_unary(
-            "/nitric.event.v1.DeadLetterService/Receive",
-            dead_letter_receive_request,
-            DeadLetterReceiveResponse,
-            timeout=timeout,
-            deadline=deadline,
-            metadata=metadata,
-        )
-
-    async def complete(
-        self,
-        dead_letter_complete_request: "DeadLetterCompleteRequest",
-        *,
-        timeout: Optional[float] = None,
-        deadline: Optional["Deadline"] = None,
-        metadata: Optional["MetadataLike"] = None
-    ) -> "DeadLetterCompleteResponse":
-        return await self._unary_unary(
-            "/nitric.event.v1.DeadLetterService/Complete",
-            dead_letter_complete_request,
-            DeadLetterCompleteResponse,
             timeout=timeout,
             deadline=deadline,
             metadata=metadata,
@@ -234,49 +160,5 @@ class TopicServiceBase(ServiceBase):
                 grpclib.const.Cardinality.UNARY_UNARY,
                 TopicListRequest,
                 TopicListResponse,
-            ),
-        }
-
-
-class DeadLetterServiceBase(ServiceBase):
-    async def receive(
-        self, dead_letter_receive_request: "DeadLetterReceiveRequest"
-    ) -> "DeadLetterReceiveResponse":
-        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
-
-    async def complete(
-        self, dead_letter_complete_request: "DeadLetterCompleteRequest"
-    ) -> "DeadLetterCompleteResponse":
-        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
-
-    async def __rpc_receive(
-        self,
-        stream: "grpclib.server.Stream[DeadLetterReceiveRequest, DeadLetterReceiveResponse]",
-    ) -> None:
-        request = await stream.recv_message()
-        response = await self.receive(request)
-        await stream.send_message(response)
-
-    async def __rpc_complete(
-        self,
-        stream: "grpclib.server.Stream[DeadLetterCompleteRequest, DeadLetterCompleteResponse]",
-    ) -> None:
-        request = await stream.recv_message()
-        response = await self.complete(request)
-        await stream.send_message(response)
-
-    def __mapping__(self) -> Dict[str, grpclib.const.Handler]:
-        return {
-            "/nitric.event.v1.DeadLetterService/Receive": grpclib.const.Handler(
-                self.__rpc_receive,
-                grpclib.const.Cardinality.UNARY_UNARY,
-                DeadLetterReceiveRequest,
-                DeadLetterReceiveResponse,
-            ),
-            "/nitric.event.v1.DeadLetterService/Complete": grpclib.const.Handler(
-                self.__rpc_complete,
-                grpclib.const.Cardinality.UNARY_UNARY,
-                DeadLetterCompleteRequest,
-                DeadLetterCompleteResponse,
             ),
         }

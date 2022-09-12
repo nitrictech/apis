@@ -159,20 +159,6 @@ private static final long serialVersionUID = 0L;
             configCase_ = 16;
             break;
           }
-          case 138: {
-            io.nitric.proto.resource.v1.DeadLetterResource.Builder subBuilder = null;
-            if (configCase_ == 17) {
-              subBuilder = ((io.nitric.proto.resource.v1.DeadLetterResource) config_).toBuilder();
-            }
-            config_ =
-                input.readMessage(io.nitric.proto.resource.v1.DeadLetterResource.parser(), extensionRegistry);
-            if (subBuilder != null) {
-              subBuilder.mergeFrom((io.nitric.proto.resource.v1.DeadLetterResource) config_);
-              config_ = subBuilder.buildPartial();
-            }
-            configCase_ = 17;
-            break;
-          }
           default: {
             if (!parseUnknownField(
                 input, unknownFields, extensionRegistry, tag)) {
@@ -217,7 +203,6 @@ private static final long serialVersionUID = 0L;
     COLLECTION(14),
     SECRET(15),
     API(16),
-    DEAD_LETTER(17),
     CONFIG_NOT_SET(0);
     private final int value;
     private ConfigCase(int value) {
@@ -242,7 +227,6 @@ private static final long serialVersionUID = 0L;
         case 14: return COLLECTION;
         case 15: return SECRET;
         case 16: return API;
-        case 17: return DEAD_LETTER;
         case 0: return CONFIG_NOT_SET;
         default: return null;
       }
@@ -501,37 +485,6 @@ private static final long serialVersionUID = 0L;
     return io.nitric.proto.resource.v1.ApiResource.getDefaultInstance();
   }
 
-  public static final int DEAD_LETTER_FIELD_NUMBER = 17;
-  /**
-   * <code>.nitric.resource.v1.DeadLetterResource dead_letter = 17;</code>
-   * @return Whether the deadLetter field is set.
-   */
-  @java.lang.Override
-  public boolean hasDeadLetter() {
-    return configCase_ == 17;
-  }
-  /**
-   * <code>.nitric.resource.v1.DeadLetterResource dead_letter = 17;</code>
-   * @return The deadLetter.
-   */
-  @java.lang.Override
-  public io.nitric.proto.resource.v1.DeadLetterResource getDeadLetter() {
-    if (configCase_ == 17) {
-       return (io.nitric.proto.resource.v1.DeadLetterResource) config_;
-    }
-    return io.nitric.proto.resource.v1.DeadLetterResource.getDefaultInstance();
-  }
-  /**
-   * <code>.nitric.resource.v1.DeadLetterResource dead_letter = 17;</code>
-   */
-  @java.lang.Override
-  public io.nitric.proto.resource.v1.DeadLetterResourceOrBuilder getDeadLetterOrBuilder() {
-    if (configCase_ == 17) {
-       return (io.nitric.proto.resource.v1.DeadLetterResource) config_;
-    }
-    return io.nitric.proto.resource.v1.DeadLetterResource.getDefaultInstance();
-  }
-
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -569,9 +522,6 @@ private static final long serialVersionUID = 0L;
     }
     if (configCase_ == 16) {
       output.writeMessage(16, (io.nitric.proto.resource.v1.ApiResource) config_);
-    }
-    if (configCase_ == 17) {
-      output.writeMessage(17, (io.nitric.proto.resource.v1.DeadLetterResource) config_);
     }
     unknownFields.writeTo(output);
   }
@@ -613,10 +563,6 @@ private static final long serialVersionUID = 0L;
     if (configCase_ == 16) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(16, (io.nitric.proto.resource.v1.ApiResource) config_);
-    }
-    if (configCase_ == 17) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(17, (io.nitric.proto.resource.v1.DeadLetterResource) config_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -668,10 +614,6 @@ private static final long serialVersionUID = 0L;
         if (!getApi()
             .equals(other.getApi())) return false;
         break;
-      case 17:
-        if (!getDeadLetter()
-            .equals(other.getDeadLetter())) return false;
-        break;
       case 0:
       default:
     }
@@ -718,10 +660,6 @@ private static final long serialVersionUID = 0L;
       case 16:
         hash = (37 * hash) + API_FIELD_NUMBER;
         hash = (53 * hash) + getApi().hashCode();
-        break;
-      case 17:
-        hash = (37 * hash) + DEAD_LETTER_FIELD_NUMBER;
-        hash = (53 * hash) + getDeadLetter().hashCode();
         break;
       case 0:
       default:
@@ -947,13 +885,6 @@ private static final long serialVersionUID = 0L;
           result.config_ = apiBuilder_.build();
         }
       }
-      if (configCase_ == 17) {
-        if (deadLetterBuilder_ == null) {
-          result.config_ = config_;
-        } else {
-          result.config_ = deadLetterBuilder_.build();
-        }
-      }
       result.configCase_ = configCase_;
       onBuilt();
       return result;
@@ -1033,10 +964,6 @@ private static final long serialVersionUID = 0L;
         }
         case API: {
           mergeApi(other.getApi());
-          break;
-        }
-        case DEAD_LETTER: {
-          mergeDeadLetter(other.getDeadLetter());
           break;
         }
         case CONFIG_NOT_SET: {
@@ -2191,147 +2118,6 @@ private static final long serialVersionUID = 0L;
       configCase_ = 16;
       onChanged();;
       return apiBuilder_;
-    }
-
-    private com.google.protobuf.SingleFieldBuilderV3<
-        io.nitric.proto.resource.v1.DeadLetterResource, io.nitric.proto.resource.v1.DeadLetterResource.Builder, io.nitric.proto.resource.v1.DeadLetterResourceOrBuilder> deadLetterBuilder_;
-    /**
-     * <code>.nitric.resource.v1.DeadLetterResource dead_letter = 17;</code>
-     * @return Whether the deadLetter field is set.
-     */
-    @java.lang.Override
-    public boolean hasDeadLetter() {
-      return configCase_ == 17;
-    }
-    /**
-     * <code>.nitric.resource.v1.DeadLetterResource dead_letter = 17;</code>
-     * @return The deadLetter.
-     */
-    @java.lang.Override
-    public io.nitric.proto.resource.v1.DeadLetterResource getDeadLetter() {
-      if (deadLetterBuilder_ == null) {
-        if (configCase_ == 17) {
-          return (io.nitric.proto.resource.v1.DeadLetterResource) config_;
-        }
-        return io.nitric.proto.resource.v1.DeadLetterResource.getDefaultInstance();
-      } else {
-        if (configCase_ == 17) {
-          return deadLetterBuilder_.getMessage();
-        }
-        return io.nitric.proto.resource.v1.DeadLetterResource.getDefaultInstance();
-      }
-    }
-    /**
-     * <code>.nitric.resource.v1.DeadLetterResource dead_letter = 17;</code>
-     */
-    public Builder setDeadLetter(io.nitric.proto.resource.v1.DeadLetterResource value) {
-      if (deadLetterBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        config_ = value;
-        onChanged();
-      } else {
-        deadLetterBuilder_.setMessage(value);
-      }
-      configCase_ = 17;
-      return this;
-    }
-    /**
-     * <code>.nitric.resource.v1.DeadLetterResource dead_letter = 17;</code>
-     */
-    public Builder setDeadLetter(
-        io.nitric.proto.resource.v1.DeadLetterResource.Builder builderForValue) {
-      if (deadLetterBuilder_ == null) {
-        config_ = builderForValue.build();
-        onChanged();
-      } else {
-        deadLetterBuilder_.setMessage(builderForValue.build());
-      }
-      configCase_ = 17;
-      return this;
-    }
-    /**
-     * <code>.nitric.resource.v1.DeadLetterResource dead_letter = 17;</code>
-     */
-    public Builder mergeDeadLetter(io.nitric.proto.resource.v1.DeadLetterResource value) {
-      if (deadLetterBuilder_ == null) {
-        if (configCase_ == 17 &&
-            config_ != io.nitric.proto.resource.v1.DeadLetterResource.getDefaultInstance()) {
-          config_ = io.nitric.proto.resource.v1.DeadLetterResource.newBuilder((io.nitric.proto.resource.v1.DeadLetterResource) config_)
-              .mergeFrom(value).buildPartial();
-        } else {
-          config_ = value;
-        }
-        onChanged();
-      } else {
-        if (configCase_ == 17) {
-          deadLetterBuilder_.mergeFrom(value);
-        }
-        deadLetterBuilder_.setMessage(value);
-      }
-      configCase_ = 17;
-      return this;
-    }
-    /**
-     * <code>.nitric.resource.v1.DeadLetterResource dead_letter = 17;</code>
-     */
-    public Builder clearDeadLetter() {
-      if (deadLetterBuilder_ == null) {
-        if (configCase_ == 17) {
-          configCase_ = 0;
-          config_ = null;
-          onChanged();
-        }
-      } else {
-        if (configCase_ == 17) {
-          configCase_ = 0;
-          config_ = null;
-        }
-        deadLetterBuilder_.clear();
-      }
-      return this;
-    }
-    /**
-     * <code>.nitric.resource.v1.DeadLetterResource dead_letter = 17;</code>
-     */
-    public io.nitric.proto.resource.v1.DeadLetterResource.Builder getDeadLetterBuilder() {
-      return getDeadLetterFieldBuilder().getBuilder();
-    }
-    /**
-     * <code>.nitric.resource.v1.DeadLetterResource dead_letter = 17;</code>
-     */
-    @java.lang.Override
-    public io.nitric.proto.resource.v1.DeadLetterResourceOrBuilder getDeadLetterOrBuilder() {
-      if ((configCase_ == 17) && (deadLetterBuilder_ != null)) {
-        return deadLetterBuilder_.getMessageOrBuilder();
-      } else {
-        if (configCase_ == 17) {
-          return (io.nitric.proto.resource.v1.DeadLetterResource) config_;
-        }
-        return io.nitric.proto.resource.v1.DeadLetterResource.getDefaultInstance();
-      }
-    }
-    /**
-     * <code>.nitric.resource.v1.DeadLetterResource dead_letter = 17;</code>
-     */
-    private com.google.protobuf.SingleFieldBuilderV3<
-        io.nitric.proto.resource.v1.DeadLetterResource, io.nitric.proto.resource.v1.DeadLetterResource.Builder, io.nitric.proto.resource.v1.DeadLetterResourceOrBuilder> 
-        getDeadLetterFieldBuilder() {
-      if (deadLetterBuilder_ == null) {
-        if (!(configCase_ == 17)) {
-          config_ = io.nitric.proto.resource.v1.DeadLetterResource.getDefaultInstance();
-        }
-        deadLetterBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-            io.nitric.proto.resource.v1.DeadLetterResource, io.nitric.proto.resource.v1.DeadLetterResource.Builder, io.nitric.proto.resource.v1.DeadLetterResourceOrBuilder>(
-                (io.nitric.proto.resource.v1.DeadLetterResource) config_,
-                getParentForChildren(),
-                isClean());
-        config_ = null;
-      }
-      configCase_ = 17;
-      onChanged();;
-      return deadLetterBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

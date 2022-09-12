@@ -31,7 +31,6 @@ class ResourceType(betterproto.Enum):
     Collection = 7
     Policy = 8
     Secret = 9
-    DeadLetter = 10
 
 
 class Action(betterproto.Enum):
@@ -88,7 +87,6 @@ class ResourceDeclareRequest(betterproto.Message):
     collection: "CollectionResource" = betterproto.message_field(14, group="config")
     secret: "SecretResource" = betterproto.message_field(15, group="config")
     api: "ApiResource" = betterproto.message_field(16, group="config")
-    dead_letter: "DeadLetterResource" = betterproto.message_field(17, group="config")
 
 
 @dataclass(eq=False, repr=False)
@@ -113,11 +111,6 @@ class CollectionResource(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class SecretResource(betterproto.Message):
-    pass
-
-
-@dataclass(eq=False, repr=False)
-class DeadLetterResource(betterproto.Message):
     pass
 
 

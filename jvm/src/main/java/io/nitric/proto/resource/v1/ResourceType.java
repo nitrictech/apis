@@ -48,10 +48,6 @@ public enum ResourceType
    * <code>Secret = 9;</code>
    */
   Secret(9),
-  /**
-   * <code>DeadLetter = 10;</code>
-   */
-  DeadLetter(10),
   UNRECOGNIZED(-1),
   ;
 
@@ -95,10 +91,6 @@ public enum ResourceType
    * <code>Secret = 9;</code>
    */
   public static final int Secret_VALUE = 9;
-  /**
-   * <code>DeadLetter = 10;</code>
-   */
-  public static final int DeadLetter_VALUE = 10;
 
 
   public final int getNumber() {
@@ -135,7 +127,6 @@ public enum ResourceType
       case 7: return Collection;
       case 8: return Policy;
       case 9: return Secret;
-      case 10: return DeadLetter;
       default: return null;
     }
   }

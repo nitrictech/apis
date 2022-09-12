@@ -2,86 +2,110 @@
 # sources: proto/document/v1/document.proto
 # plugin: python-betterproto
 from dataclasses import dataclass
-from typing import AsyncIterator, Dict, List, Optional
+from typing import (
+    TYPE_CHECKING,
+    AsyncIterator,
+    Dict,
+    List,
+    Optional,
+)
 
 import betterproto
-from betterproto.grpc.grpclib_server import ServiceBase
+import betterproto.lib.google.protobuf as betterproto_lib_google_protobuf
 import grpclib
+from betterproto.grpc.grpclib_server import ServiceBase
+
+
+if TYPE_CHECKING:
+    import grpclib.server
+    from betterproto.grpc.grpclib_client import MetadataLike
+    from grpclib.metadata import Deadline
 
 
 @dataclass(eq=False, repr=False)
 class Collection(betterproto.Message):
     """Provides a Collection type for storing documents"""
 
-    # The collection name
     name: str = betterproto.string_field(1)
-    # Optional parent key, required when the collection is a sub-collection of
-    # another document
+    """The collection name"""
+
     parent: "Key" = betterproto.message_field(2)
+    """
+    Optional parent key, required when the collection is a sub-collection of
+    another document
+    """
 
 
 @dataclass(eq=False, repr=False)
 class Key(betterproto.Message):
     """Provides a document identifying key type"""
 
-    # The item collection
     collection: "Collection" = betterproto.message_field(1)
-    # The items unique id
+    """The item collection"""
+
     id: str = betterproto.string_field(2)
+    """The items unique id"""
 
 
 @dataclass(eq=False, repr=False)
 class Document(betterproto.Message):
     """Provides a return document type"""
 
-    # The document content (JSON object)
     content: "betterproto_lib_google_protobuf.Struct" = betterproto.message_field(1)
-    # The document's unique key, including collection/sub-collections
+    """The document content (JSON object)"""
+
     key: "Key" = betterproto.message_field(2)
+    """The document's unique key, including collection/sub-collections"""
 
 
 @dataclass(eq=False, repr=False)
 class ExpressionValue(betterproto.Message):
-    # Represents an integer value.
     int_value: int = betterproto.int64_field(1, group="kind")
-    # Represents a double value.
+    """Represents an integer value."""
+
     double_value: float = betterproto.double_field(2, group="kind")
-    # Represents a string value.
+    """Represents a double value."""
+
     string_value: str = betterproto.string_field(3, group="kind")
-    # Represents a boolean value.
+    """Represents a string value."""
+
     bool_value: bool = betterproto.bool_field(4, group="kind")
+    """Represents a boolean value."""
 
 
 @dataclass(eq=False, repr=False)
 class Expression(betterproto.Message):
     """Provides a query expression type"""
 
-    # The query operand or attribute
     operand: str = betterproto.string_field(1)
-    # The query operator [ == | < | <= | > | >= | startsWith ]
+    """The query operand or attribute"""
+
     operator: str = betterproto.string_field(2)
-    # The query expression value
+    """The query operator [ == | < | <= | > | >= | startsWith ]"""
+
     value: "ExpressionValue" = betterproto.message_field(3)
+    """The query expression value"""
 
 
 @dataclass(eq=False, repr=False)
 class DocumentGetRequest(betterproto.Message):
-    # Key of the document to retrieve
     key: "Key" = betterproto.message_field(1)
+    """Key of the document to retrieve"""
 
 
 @dataclass(eq=False, repr=False)
 class DocumentGetResponse(betterproto.Message):
-    # The retrieved value
     document: "Document" = betterproto.message_field(1)
+    """The retrieved value"""
 
 
 @dataclass(eq=False, repr=False)
 class DocumentSetRequest(betterproto.Message):
-    # Key of the document to set
     key: "Key" = betterproto.message_field(1)
-    # The document content to store (JSON object)
+    """Key of the document to set"""
+
     content: "betterproto_lib_google_protobuf.Struct" = betterproto.message_field(3)
+    """The document content to store (JSON object)"""
 
 
 @dataclass(eq=False, repr=False)
@@ -91,8 +115,8 @@ class DocumentSetResponse(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class DocumentDeleteRequest(betterproto.Message):
-    # Key of the document to delete
     key: "Key" = betterproto.message_field(1)
+    """Key of the document to delete"""
 
 
 @dataclass(eq=False, repr=False)
@@ -102,217 +126,206 @@ class DocumentDeleteResponse(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class DocumentQueryRequest(betterproto.Message):
-    # The collection to query
     collection: "Collection" = betterproto.message_field(1)
-    # Optional query expressions
+    """The collection to query"""
+
     expressions: List["Expression"] = betterproto.message_field(3)
-    # Optional query fetch limit
+    """Optional query expressions"""
+
     limit: int = betterproto.int32_field(4)
-    # Optional query paging continuation token
+    """Optional query fetch limit"""
+
     paging_token: Dict[str, str] = betterproto.map_field(
         5, betterproto.TYPE_STRING, betterproto.TYPE_STRING
     )
+    """Optional query paging continuation token"""
 
 
 @dataclass(eq=False, repr=False)
 class DocumentQueryResponse(betterproto.Message):
-    # The retrieved values
     documents: List["Document"] = betterproto.message_field(1)
-    # The query paging continuation token, when empty no further results are
-    # available
+    """The retrieved values"""
+
     paging_token: Dict[str, str] = betterproto.map_field(
         2, betterproto.TYPE_STRING, betterproto.TYPE_STRING
     )
+    """
+    The query paging continuation token, when empty no further results are
+    available
+    """
 
 
 @dataclass(eq=False, repr=False)
 class DocumentQueryStreamRequest(betterproto.Message):
-    # The collection to query
     collection: "Collection" = betterproto.message_field(1)
-    # Optional query expressions
+    """The collection to query"""
+
     expressions: List["Expression"] = betterproto.message_field(3)
-    # Optional query fetch limit
+    """Optional query expressions"""
+
     limit: int = betterproto.int32_field(4)
+    """Optional query fetch limit"""
 
 
 @dataclass(eq=False, repr=False)
 class DocumentQueryStreamResponse(betterproto.Message):
-    # The stream document
     document: "Document" = betterproto.message_field(1)
+    """The stream document"""
 
 
 class DocumentServiceStub(betterproto.ServiceStub):
-    async def get(self, *, key: "Key" = None) -> "DocumentGetResponse":
-
-        request = DocumentGetRequest()
-        if key is not None:
-            request.key = key
-
+    async def get(
+        self,
+        document_get_request: "DocumentGetRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "DocumentGetResponse":
         return await self._unary_unary(
-            "/nitric.document.v1.DocumentService/Get", request, DocumentGetResponse
+            "/nitric.document.v1.DocumentService/Get",
+            document_get_request,
+            DocumentGetResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
         )
 
     async def set(
         self,
+        document_set_request: "DocumentSetRequest",
         *,
-        key: "Key" = None,
-        content: "betterproto_lib_google_protobuf.Struct" = None,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
     ) -> "DocumentSetResponse":
-
-        request = DocumentSetRequest()
-        if key is not None:
-            request.key = key
-        if content is not None:
-            request.content = content
-
         return await self._unary_unary(
-            "/nitric.document.v1.DocumentService/Set", request, DocumentSetResponse
+            "/nitric.document.v1.DocumentService/Set",
+            document_set_request,
+            DocumentSetResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
         )
 
-    async def delete(self, *, key: "Key" = None) -> "DocumentDeleteResponse":
-
-        request = DocumentDeleteRequest()
-        if key is not None:
-            request.key = key
-
+    async def delete(
+        self,
+        document_delete_request: "DocumentDeleteRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "DocumentDeleteResponse":
         return await self._unary_unary(
             "/nitric.document.v1.DocumentService/Delete",
-            request,
+            document_delete_request,
             DocumentDeleteResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
         )
 
     async def query(
         self,
+        document_query_request: "DocumentQueryRequest",
         *,
-        collection: "Collection" = None,
-        expressions: Optional[List["Expression"]] = None,
-        limit: int = 0,
-        paging_token: Dict[str, str] = None,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
     ) -> "DocumentQueryResponse":
-        expressions = expressions or []
-
-        request = DocumentQueryRequest()
-        if collection is not None:
-            request.collection = collection
-        if expressions is not None:
-            request.expressions = expressions
-        request.limit = limit
-        request.paging_token = paging_token
-
         return await self._unary_unary(
-            "/nitric.document.v1.DocumentService/Query", request, DocumentQueryResponse
+            "/nitric.document.v1.DocumentService/Query",
+            document_query_request,
+            DocumentQueryResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
         )
 
     async def query_stream(
         self,
+        document_query_stream_request: "DocumentQueryStreamRequest",
         *,
-        collection: "Collection" = None,
-        expressions: Optional[List["Expression"]] = None,
-        limit: int = 0,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
     ) -> AsyncIterator["DocumentQueryStreamResponse"]:
-        expressions = expressions or []
-
-        request = DocumentQueryStreamRequest()
-        if collection is not None:
-            request.collection = collection
-        if expressions is not None:
-            request.expressions = expressions
-        request.limit = limit
-
         async for response in self._unary_stream(
             "/nitric.document.v1.DocumentService/QueryStream",
-            request,
+            document_query_stream_request,
             DocumentQueryStreamResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
         ):
             yield response
 
 
 class DocumentServiceBase(ServiceBase):
-    async def get(self, key: "Key") -> "DocumentGetResponse":
+    async def get(
+        self, document_get_request: "DocumentGetRequest"
+    ) -> "DocumentGetResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
     async def set(
-        self, key: "Key", content: "betterproto_lib_google_protobuf.Struct"
+        self, document_set_request: "DocumentSetRequest"
     ) -> "DocumentSetResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
-    async def delete(self, key: "Key") -> "DocumentDeleteResponse":
+    async def delete(
+        self, document_delete_request: "DocumentDeleteRequest"
+    ) -> "DocumentDeleteResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
     async def query(
-        self,
-        collection: "Collection",
-        expressions: Optional[List["Expression"]],
-        limit: int,
-        paging_token: Dict[str, str],
+        self, document_query_request: "DocumentQueryRequest"
     ) -> "DocumentQueryResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
     async def query_stream(
-        self,
-        collection: "Collection",
-        expressions: Optional[List["Expression"]],
-        limit: int,
+        self, document_query_stream_request: "DocumentQueryStreamRequest"
     ) -> AsyncIterator["DocumentQueryStreamResponse"]:
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
-    async def __rpc_get(self, stream: grpclib.server.Stream) -> None:
+    async def __rpc_get(
+        self, stream: "grpclib.server.Stream[DocumentGetRequest, DocumentGetResponse]"
+    ) -> None:
         request = await stream.recv_message()
-
-        request_kwargs = {
-            "key": request.key,
-        }
-
-        response = await self.get(**request_kwargs)
+        response = await self.get(request)
         await stream.send_message(response)
 
-    async def __rpc_set(self, stream: grpclib.server.Stream) -> None:
+    async def __rpc_set(
+        self, stream: "grpclib.server.Stream[DocumentSetRequest, DocumentSetResponse]"
+    ) -> None:
         request = await stream.recv_message()
-
-        request_kwargs = {
-            "key": request.key,
-            "content": request.content,
-        }
-
-        response = await self.set(**request_kwargs)
+        response = await self.set(request)
         await stream.send_message(response)
 
-    async def __rpc_delete(self, stream: grpclib.server.Stream) -> None:
+    async def __rpc_delete(
+        self,
+        stream: "grpclib.server.Stream[DocumentDeleteRequest, DocumentDeleteResponse]",
+    ) -> None:
         request = await stream.recv_message()
-
-        request_kwargs = {
-            "key": request.key,
-        }
-
-        response = await self.delete(**request_kwargs)
+        response = await self.delete(request)
         await stream.send_message(response)
 
-    async def __rpc_query(self, stream: grpclib.server.Stream) -> None:
+    async def __rpc_query(
+        self,
+        stream: "grpclib.server.Stream[DocumentQueryRequest, DocumentQueryResponse]",
+    ) -> None:
         request = await stream.recv_message()
-
-        request_kwargs = {
-            "collection": request.collection,
-            "expressions": request.expressions,
-            "limit": request.limit,
-            "paging_token": request.paging_token,
-        }
-
-        response = await self.query(**request_kwargs)
+        response = await self.query(request)
         await stream.send_message(response)
 
-    async def __rpc_query_stream(self, stream: grpclib.server.Stream) -> None:
+    async def __rpc_query_stream(
+        self,
+        stream: "grpclib.server.Stream[DocumentQueryStreamRequest, DocumentQueryStreamResponse]",
+    ) -> None:
         request = await stream.recv_message()
-
-        request_kwargs = {
-            "collection": request.collection,
-            "expressions": request.expressions,
-            "limit": request.limit,
-        }
-
         await self._call_rpc_handler_server_stream(
             self.query_stream,
             stream,
-            request_kwargs,
+            request,
         )
 
     def __mapping__(self) -> Dict[str, grpclib.const.Handler]:
@@ -348,6 +361,3 @@ class DocumentServiceBase(ServiceBase):
                 DocumentQueryStreamResponse,
             ),
         }
-
-
-import betterproto.lib.google.protobuf as betterproto_lib_google_protobuf

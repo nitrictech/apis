@@ -2,22 +2,37 @@
 # sources: proto/queue/v1/queue.proto
 # plugin: python-betterproto
 from dataclasses import dataclass
-from typing import Dict, List, Optional
+from typing import (
+    TYPE_CHECKING,
+    Dict,
+    List,
+    Optional,
+)
 
 import betterproto
-from betterproto.grpc.grpclib_server import ServiceBase
+import betterproto.lib.google.protobuf as betterproto_lib_google_protobuf
 import grpclib
+from betterproto.grpc.grpclib_server import ServiceBase
+
+
+if TYPE_CHECKING:
+    import grpclib.server
+    from betterproto.grpc.grpclib_client import MetadataLike
+    from grpclib.metadata import Deadline
 
 
 @dataclass(eq=False, repr=False)
 class QueueSendRequest(betterproto.Message):
     """Request to push a single event to a queue"""
 
-    # The Nitric name for the queue this will automatically be resolved to the
-    # provider specific queue identifier.
     queue: str = betterproto.string_field(1)
-    # The task to push to the queue
+    """
+    The Nitric name for the queue this will automatically be resolved to the
+    provider specific queue identifier.
+    """
+
     task: "NitricTask" = betterproto.message_field(2)
+    """The task to push to the queue"""
 
 
 @dataclass(eq=False, repr=False)
@@ -29,44 +44,55 @@ class QueueSendResponse(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class QueueSendBatchRequest(betterproto.Message):
-    # The Nitric name for the queue this will automatically be resolved to the
-    # provider specific queue identifier.
     queue: str = betterproto.string_field(1)
-    # Array of tasks to push to the queue
+    """
+    The Nitric name for the queue this will automatically be resolved to the
+    provider specific queue identifier.
+    """
+
     tasks: List["NitricTask"] = betterproto.message_field(2)
+    """Array of tasks to push to the queue"""
 
 
 @dataclass(eq=False, repr=False)
 class QueueSendBatchResponse(betterproto.Message):
     """Response for sending a collection of tasks"""
 
-    # A list of tasks that failed to be queued
     failed_tasks: List["FailedTask"] = betterproto.message_field(1)
+    """A list of tasks that failed to be queued"""
 
 
 @dataclass(eq=False, repr=False)
 class QueueReceiveRequest(betterproto.Message):
-    # The nitric name for the queue this will automatically be resolved to the
-    # provider specific queue identifier.
     queue: str = betterproto.string_field(1)
-    # The max number of items to pop off the queue, may be capped by provider
-    # specific limitations
+    """
+    The nitric name for the queue this will automatically be resolved to the
+    provider specific queue identifier.
+    """
+
     depth: int = betterproto.int32_field(2)
+    """
+    The max number of items to pop off the queue, may be capped by provider
+    specific limitations
+    """
 
 
 @dataclass(eq=False, repr=False)
 class QueueReceiveResponse(betterproto.Message):
-    # Array of tasks popped off the queue
     tasks: List["NitricTask"] = betterproto.message_field(1)
+    """Array of tasks popped off the queue"""
 
 
 @dataclass(eq=False, repr=False)
 class QueueCompleteRequest(betterproto.Message):
-    # The nitric name for the queue  this will automatically be resolved to the
-    # provider specific queue identifier.
     queue: str = betterproto.string_field(1)
-    # Lease id of the task to be completed
+    """
+    The nitric name for the queue  this will automatically be resolved to the
+    provider specific queue identifier.
+    """
+
     lease_id: str = betterproto.string_field(2)
+    """Lease id of the task to be completed"""
 
 
 @dataclass(eq=False, repr=False)
@@ -76,137 +102,150 @@ class QueueCompleteResponse(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class FailedTask(betterproto.Message):
-    # The task that failed to be pushed
     task: "NitricTask" = betterproto.message_field(1)
-    # A message describing the failure
+    """The task that failed to be pushed"""
+
     message: str = betterproto.string_field(2)
+    """A message describing the failure"""
 
 
 @dataclass(eq=False, repr=False)
 class NitricTask(betterproto.Message):
     """A task to be sent or received from a queue."""
 
-    # A unique id for the task
     id: str = betterproto.string_field(1)
-    # The lease id unique to the pop request, this must be used to complete,
-    # extend the lease or release the task.
+    """A unique id for the task"""
+
     lease_id: str = betterproto.string_field(2)
-    # A content hint for the tasks payload
+    """
+    The lease id unique to the pop request, this must be used to complete,
+    extend the lease or release the task.
+    """
+
     payload_type: str = betterproto.string_field(3)
-    # The payload of the task
+    """A content hint for the tasks payload"""
+
     payload: "betterproto_lib_google_protobuf.Struct" = betterproto.message_field(4)
+    """The payload of the task"""
 
 
 class QueueServiceStub(betterproto.ServiceStub):
     async def send(
-        self, *, queue: str = "", task: "NitricTask" = None
+        self,
+        queue_send_request: "QueueSendRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
     ) -> "QueueSendResponse":
-
-        request = QueueSendRequest()
-        request.queue = queue
-        if task is not None:
-            request.task = task
-
         return await self._unary_unary(
-            "/nitric.queue.v1.QueueService/Send", request, QueueSendResponse
+            "/nitric.queue.v1.QueueService/Send",
+            queue_send_request,
+            QueueSendResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
         )
 
     async def send_batch(
-        self, *, queue: str = "", tasks: Optional[List["NitricTask"]] = None
+        self,
+        queue_send_batch_request: "QueueSendBatchRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
     ) -> "QueueSendBatchResponse":
-        tasks = tasks or []
-
-        request = QueueSendBatchRequest()
-        request.queue = queue
-        if tasks is not None:
-            request.tasks = tasks
-
         return await self._unary_unary(
-            "/nitric.queue.v1.QueueService/SendBatch", request, QueueSendBatchResponse
+            "/nitric.queue.v1.QueueService/SendBatch",
+            queue_send_batch_request,
+            QueueSendBatchResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
         )
 
     async def receive(
-        self, *, queue: str = "", depth: int = 0
+        self,
+        queue_receive_request: "QueueReceiveRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
     ) -> "QueueReceiveResponse":
-
-        request = QueueReceiveRequest()
-        request.queue = queue
-        request.depth = depth
-
         return await self._unary_unary(
-            "/nitric.queue.v1.QueueService/Receive", request, QueueReceiveResponse
+            "/nitric.queue.v1.QueueService/Receive",
+            queue_receive_request,
+            QueueReceiveResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
         )
 
     async def complete(
-        self, *, queue: str = "", lease_id: str = ""
+        self,
+        queue_complete_request: "QueueCompleteRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
     ) -> "QueueCompleteResponse":
-
-        request = QueueCompleteRequest()
-        request.queue = queue
-        request.lease_id = lease_id
-
         return await self._unary_unary(
-            "/nitric.queue.v1.QueueService/Complete", request, QueueCompleteResponse
+            "/nitric.queue.v1.QueueService/Complete",
+            queue_complete_request,
+            QueueCompleteResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
         )
 
 
 class QueueServiceBase(ServiceBase):
-    async def send(self, queue: str, task: "NitricTask") -> "QueueSendResponse":
+    async def send(self, queue_send_request: "QueueSendRequest") -> "QueueSendResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
     async def send_batch(
-        self, queue: str, tasks: Optional[List["NitricTask"]]
+        self, queue_send_batch_request: "QueueSendBatchRequest"
     ) -> "QueueSendBatchResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
-    async def receive(self, queue: str, depth: int) -> "QueueReceiveResponse":
+    async def receive(
+        self, queue_receive_request: "QueueReceiveRequest"
+    ) -> "QueueReceiveResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
-    async def complete(self, queue: str, lease_id: str) -> "QueueCompleteResponse":
+    async def complete(
+        self, queue_complete_request: "QueueCompleteRequest"
+    ) -> "QueueCompleteResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
-    async def __rpc_send(self, stream: grpclib.server.Stream) -> None:
+    async def __rpc_send(
+        self, stream: "grpclib.server.Stream[QueueSendRequest, QueueSendResponse]"
+    ) -> None:
         request = await stream.recv_message()
-
-        request_kwargs = {
-            "queue": request.queue,
-            "task": request.task,
-        }
-
-        response = await self.send(**request_kwargs)
+        response = await self.send(request)
         await stream.send_message(response)
 
-    async def __rpc_send_batch(self, stream: grpclib.server.Stream) -> None:
+    async def __rpc_send_batch(
+        self,
+        stream: "grpclib.server.Stream[QueueSendBatchRequest, QueueSendBatchResponse]",
+    ) -> None:
         request = await stream.recv_message()
-
-        request_kwargs = {
-            "queue": request.queue,
-            "tasks": request.tasks,
-        }
-
-        response = await self.send_batch(**request_kwargs)
+        response = await self.send_batch(request)
         await stream.send_message(response)
 
-    async def __rpc_receive(self, stream: grpclib.server.Stream) -> None:
+    async def __rpc_receive(
+        self, stream: "grpclib.server.Stream[QueueReceiveRequest, QueueReceiveResponse]"
+    ) -> None:
         request = await stream.recv_message()
-
-        request_kwargs = {
-            "queue": request.queue,
-            "depth": request.depth,
-        }
-
-        response = await self.receive(**request_kwargs)
+        response = await self.receive(request)
         await stream.send_message(response)
 
-    async def __rpc_complete(self, stream: grpclib.server.Stream) -> None:
+    async def __rpc_complete(
+        self,
+        stream: "grpclib.server.Stream[QueueCompleteRequest, QueueCompleteResponse]",
+    ) -> None:
         request = await stream.recv_message()
-
-        request_kwargs = {
-            "queue": request.queue,
-            "lease_id": request.lease_id,
-        }
-
-        response = await self.complete(**request_kwargs)
+        response = await self.complete(request)
         await stream.send_message(response)
 
     def __mapping__(self) -> Dict[str, grpclib.const.Handler]:
@@ -236,6 +275,3 @@ class QueueServiceBase(ServiceBase):
                 QueueCompleteResponse,
             ),
         }
-
-
-import betterproto.lib.google.protobuf as betterproto_lib_google_protobuf

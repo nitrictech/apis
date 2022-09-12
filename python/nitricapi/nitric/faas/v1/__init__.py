@@ -3,36 +3,59 @@
 # plugin: python-betterproto
 import warnings
 from dataclasses import dataclass
-from typing import AsyncIterable, AsyncIterator, Dict, Iterable, List, Union
+from typing import (
+    TYPE_CHECKING,
+    AsyncIterable,
+    AsyncIterator,
+    Dict,
+    Iterable,
+    List,
+    Optional,
+    Union,
+)
 
 import betterproto
-from betterproto.grpc.grpclib_server import ServiceBase
 import grpclib
+from betterproto.grpc.grpclib_server import ServiceBase
+
+
+if TYPE_CHECKING:
+    import grpclib.server
+    from betterproto.grpc.grpclib_client import MetadataLike
+    from grpclib.metadata import Deadline
 
 
 @dataclass(eq=False, repr=False)
 class ClientMessage(betterproto.Message):
     """Messages the client is able to send to the server"""
 
-    # Client message ID, used to pair requests/responses
     id: str = betterproto.string_field(1)
-    # Client initialisation request A worker will not be eligible for triggers
-    # until it has identified itself
+    """Client message ID, used to pair requests/responses"""
+
     init_request: "InitRequest" = betterproto.message_field(2, group="content")
-    # Client responsding with result of a trigger
+    """
+    Client initialisation request A worker will not be eligible for triggers
+    until it has identified itself
+    """
+
     trigger_response: "TriggerResponse" = betterproto.message_field(3, group="content")
+    """Client responsding with result of a trigger"""
 
 
 @dataclass(eq=False, repr=False)
 class ServerMessage(betterproto.Message):
     """Messages the server is able to send to the client"""
 
-    # Server message ID, used to pair requests/responses
     id: str = betterproto.string_field(1)
-    # Server responding with client configuration details to an InitRequest
+    """Server message ID, used to pair requests/responses"""
+
     init_response: "InitResponse" = betterproto.message_field(2, group="content")
-    # Server requesting client to process a trigger
+    """
+    Server responding with client configuration details to an InitRequest
+    """
+
     trigger_request: "TriggerRequest" = betterproto.message_field(3, group="content")
+    """Server requesting client to process a trigger"""
 
 
 @dataclass(eq=False, repr=False)
@@ -42,14 +65,17 @@ class ApiWorkerScopes(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class ApiWorkerOptions(betterproto.Message):
-    # Apply security definitions to this operation
     security: Dict[str, "ApiWorkerScopes"] = betterproto.map_field(
         1, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE
     )
-    # explicitly disable security for this endpoint We need to do this as the
-    # default value of a repeated field is always empty so there is no way of
-    # knowing if security is explicitly disabled
+    """Apply security definitions to this operation"""
+
     security_disabled: bool = betterproto.bool_field(2)
+    """
+    explicitly disable security for this endpoint We need to do this as the
+    default value of a repeated field is always empty so there is no way of
+    knowing if security is explicitly disabled
+    """
 
 
 @dataclass(eq=False, repr=False)
@@ -106,10 +132,12 @@ class InitResponse(betterproto.Message):
 class TriggerRequest(betterproto.Message):
     """The server has a trigger for the client to handle"""
 
-    # The data in the trigger
     data: bytes = betterproto.bytes_field(1)
-    # Should we supply a mime type for the data? Or rely on context?
+    """The data in the trigger"""
+
     mime_type: str = betterproto.string_field(2)
+    """Should we supply a mime type for the data? Or rely on context?"""
+
     http: "HttpTriggerContext" = betterproto.message_field(3, group="context")
     topic: "TopicTriggerContext" = betterproto.message_field(4, group="context")
 
@@ -126,40 +154,50 @@ class QueryValue(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class HttpTriggerContext(betterproto.Message):
-    # The request method
     method: str = betterproto.string_field(1)
-    # The path of the request
+    """The request method"""
+
     path: str = betterproto.string_field(2)
-    # The old request headers (preserving for backwards compatibility) TODO:
-    # Remove in 1.0
+    """The path of the request"""
+
     headers_old: Dict[str, str] = betterproto.map_field(
         3, betterproto.TYPE_STRING, betterproto.TYPE_STRING
     )
-    # The old query params (preserving for backwards compatibility) TODO: Remove
-    # in 1.0
+    """
+    The old request headers (preserving for backwards compatibility) TODO:
+    Remove in 1.0
+    """
+
     query_params_old: Dict[str, str] = betterproto.map_field(
         4, betterproto.TYPE_STRING, betterproto.TYPE_STRING
     )
-    # HTTP request headers
+    """
+    The old query params (preserving for backwards compatibility) TODO: Remove
+    in 1.0
+    """
+
     headers: Dict[str, "HeaderValue"] = betterproto.map_field(
         5, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE
     )
-    # HTTP Query params
+    """HTTP request headers"""
+
     query_params: Dict[str, "QueryValue"] = betterproto.map_field(
         6, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE
     )
-    # HTTP Path parameters
+    """HTTP Query params"""
+
     path_params: Dict[str, str] = betterproto.map_field(
         7, betterproto.TYPE_STRING, betterproto.TYPE_STRING
     )
+    """HTTP Path parameters"""
 
     def __post_init__(self) -> None:
         super().__post_init__()
-        if self.headers_old:
+        if self.is_set("headers_old"):
             warnings.warn(
                 "HttpTriggerContext.headers_old is deprecated", DeprecationWarning
             )
-        if self.query_params_old:
+        if self.is_set("query_params_old"):
             warnings.warn(
                 "HttpTriggerContext.query_params_old is deprecated", DeprecationWarning
             )
@@ -167,20 +205,22 @@ class HttpTriggerContext(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class TopicTriggerContext(betterproto.Message):
-    # The topic the message was published for
     topic: str = betterproto.string_field(1)
+    """The topic the message was published for"""
 
 
 @dataclass(eq=False, repr=False)
 class TriggerResponse(betterproto.Message):
     """The worker has successfully processed a trigger"""
 
-    # The data returned in the response
     data: bytes = betterproto.bytes_field(1)
-    # response to a http request
+    """The data returned in the response"""
+
     http: "HttpResponseContext" = betterproto.message_field(10, group="context")
-    # response to a topic trigger
+    """response to a http request"""
+
     topic: "TopicResponseContext" = betterproto.message_field(11, group="context")
+    """response to a topic trigger"""
 
 
 @dataclass(eq=False, repr=False)
@@ -190,20 +230,22 @@ class HttpResponseContext(betterproto.Message):
     User at all but they will have the option of control If they choose...
     """
 
-    # Old HTTP response headers (deprecated) TODO: Remove in 1.0
     headers_old: Dict[str, str] = betterproto.map_field(
         1, betterproto.TYPE_STRING, betterproto.TYPE_STRING
     )
-    # The HTTP status of the request
+    """Old HTTP response headers (deprecated) TODO: Remove in 1.0"""
+
     status: int = betterproto.int32_field(2)
-    # HTTP response headers
+    """The HTTP status of the request"""
+
     headers: Dict[str, "HeaderValue"] = betterproto.map_field(
         3, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE
     )
+    """HTTP response headers"""
 
     def __post_init__(self) -> None:
         super().__post_init__()
-        if self.headers_old:
+        if self.is_set("headers_old"):
             warnings.warn(
                 "HttpResponseContext.headers_old is deprecated", DeprecationWarning
             )
@@ -216,40 +258,47 @@ class TopicResponseContext(betterproto.Message):
     whether or not they were successfully processed
     """
 
-    # Success status of the handled event
     success: bool = betterproto.bool_field(1)
+    """Success status of the handled event"""
 
 
 class FaasServiceStub(betterproto.ServiceStub):
     async def trigger_stream(
         self,
-        request_iterator: Union[
+        client_message_iterator: Union[
             AsyncIterable["ClientMessage"], Iterable["ClientMessage"]
         ],
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
     ) -> AsyncIterator["ServerMessage"]:
-
         async for response in self._stream_stream(
             "/nitric.faas.v1.FaasService/TriggerStream",
-            request_iterator,
+            client_message_iterator,
             ClientMessage,
             ServerMessage,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
         ):
             yield response
 
 
 class FaasServiceBase(ServiceBase):
     async def trigger_stream(
-        self, request_iterator: AsyncIterator["ClientMessage"]
+        self, client_message_iterator: AsyncIterator["ClientMessage"]
     ) -> AsyncIterator["ServerMessage"]:
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
-    async def __rpc_trigger_stream(self, stream: grpclib.server.Stream) -> None:
-        request_kwargs = {"request_iterator": stream.__aiter__()}
-
+    async def __rpc_trigger_stream(
+        self, stream: "grpclib.server.Stream[ClientMessage, ServerMessage]"
+    ) -> None:
+        request = stream.__aiter__()
         await self._call_rpc_handler_server_stream(
             self.trigger_stream,
             stream,
-            request_kwargs,
+            request,
         )
 
     def __mapping__(self) -> Dict[str, grpclib.const.Handler]:

@@ -2,11 +2,22 @@
 # sources: proto/resource/v1/resource.proto
 # plugin: python-betterproto
 from dataclasses import dataclass
-from typing import Dict, List
+from typing import (
+    TYPE_CHECKING,
+    Dict,
+    List,
+    Optional,
+)
 
 import betterproto
-from betterproto.grpc.grpclib_server import ServiceBase
 import grpclib
+from betterproto.grpc.grpclib_server import ServiceBase
+
+
+if TYPE_CHECKING:
+    import grpclib.server
+    from betterproto.grpc.grpclib_client import MetadataLike
+    from grpclib.metadata import Deadline
 
 
 class ResourceType(betterproto.Enum):
@@ -23,28 +34,33 @@ class ResourceType(betterproto.Enum):
 
 
 class Action(betterproto.Enum):
-    # Bucket Permissions: 0XX
     BucketFileList = 0
+    """Bucket Permissions: 0XX"""
+
     BucketFileGet = 1
     BucketFilePut = 2
     BucketFileDelete = 3
-    # Topic Permissions: 2XX
     TopicList = 200
+    """Topic Permissions: 2XX"""
+
     TopicDetail = 201
     TopicEventPublish = 202
-    # Queue Permissions: 3XX
     QueueSend = 300
+    """Queue Permissions: 3XX"""
+
     QueueReceive = 301
     QueueList = 302
     QueueDetail = 303
-    # Collection Permissions: 4XX
     CollectionDocumentRead = 400
+    """Collection Permissions: 4XX"""
+
     CollectionDocumentWrite = 401
     CollectionDocumentDelete = 402
     CollectionQuery = 403
     CollectionList = 404
-    # Secret Permissions: 5XX
     SecretPut = 500
+    """Secret Permissions: 5XX"""
+
     SecretAccess = 501
 
 
@@ -118,15 +134,18 @@ class ApiScopes(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class ApiResource(betterproto.Message):
-    # Security definitions for the api These may be used by registered routes and
-    # operations on the API
     security_definitions: Dict[str, "ApiSecurityDefinition"] = betterproto.map_field(
         1, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE
     )
-    # root level security for this api
+    """
+    Security definitions for the api These may be used by registered routes and
+    operations on the API
+    """
+
     security: Dict[str, "ApiScopes"] = betterproto.map_field(
         2, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE
     )
+    """root level security for this api"""
 
 
 @dataclass(eq=False, repr=False)
@@ -137,71 +156,34 @@ class ResourceDeclareResponse(betterproto.Message):
 class ResourceServiceStub(betterproto.ServiceStub):
     async def declare(
         self,
+        resource_declare_request: "ResourceDeclareRequest",
         *,
-        resource: "Resource" = None,
-        policy: "PolicyResource" = None,
-        bucket: "BucketResource" = None,
-        queue: "QueueResource" = None,
-        topic: "TopicResource" = None,
-        collection: "CollectionResource" = None,
-        secret: "SecretResource" = None,
-        api: "ApiResource" = None,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
     ) -> "ResourceDeclareResponse":
-
-        request = ResourceDeclareRequest()
-        if resource is not None:
-            request.resource = resource
-        if policy is not None:
-            request.policy = policy
-        if bucket is not None:
-            request.bucket = bucket
-        if queue is not None:
-            request.queue = queue
-        if topic is not None:
-            request.topic = topic
-        if collection is not None:
-            request.collection = collection
-        if secret is not None:
-            request.secret = secret
-        if api is not None:
-            request.api = api
-
         return await self._unary_unary(
             "/nitric.resource.v1.ResourceService/Declare",
-            request,
+            resource_declare_request,
             ResourceDeclareResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
         )
 
 
 class ResourceServiceBase(ServiceBase):
     async def declare(
-        self,
-        resource: "Resource",
-        policy: "PolicyResource",
-        bucket: "BucketResource",
-        queue: "QueueResource",
-        topic: "TopicResource",
-        collection: "CollectionResource",
-        secret: "SecretResource",
-        api: "ApiResource",
+        self, resource_declare_request: "ResourceDeclareRequest"
     ) -> "ResourceDeclareResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
-    async def __rpc_declare(self, stream: grpclib.server.Stream) -> None:
+    async def __rpc_declare(
+        self,
+        stream: "grpclib.server.Stream[ResourceDeclareRequest, ResourceDeclareResponse]",
+    ) -> None:
         request = await stream.recv_message()
-
-        request_kwargs = {
-            "resource": request.resource,
-            "policy": request.policy,
-            "bucket": request.bucket,
-            "queue": request.queue,
-            "topic": request.topic,
-            "collection": request.collection,
-            "secret": request.secret,
-            "api": request.api,
-        }
-
-        response = await self.declare(**request_kwargs)
+        response = await self.declare(request)
         await stream.send_message(response)
 
     def __mapping__(self) -> Dict[str, grpclib.const.Handler]:

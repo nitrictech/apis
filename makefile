@@ -7,7 +7,7 @@ generate-go:
 
 generate-jvm:
 	@echo "Generate JVM base SDK"
-	@cd jvm && mvn generate-sources
+	@cd jvm && make
 
 generate-node:
 	@echo "Generate Node.js base SDK"

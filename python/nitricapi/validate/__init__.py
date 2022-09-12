@@ -2,21 +2,24 @@
 # sources: validate/validate.proto
 # plugin: python-betterproto
 from dataclasses import dataclass
-from datetime import datetime, timedelta
+from datetime import (
+    datetime,
+    timedelta,
+)
 from typing import List
 
 import betterproto
-from betterproto.grpc.grpclib_server import ServiceBase
 
 
 class KnownRegex(betterproto.Enum):
     """WellKnownRegex contain some well-known patterns."""
 
     UNKNOWN = 0
-    # HTTP header name as defined by RFC 7230.
     HTTP_HEADER_NAME = 1
-    # HTTP header value as defined by RFC 7230.
+    """HTTP header name as defined by RFC 7230."""
+
     HTTP_HEADER_VALUE = 2
+    """HTTP header value as defined by RFC 7230."""
 
 
 @dataclass(eq=False, repr=False)
@@ -27,8 +30,9 @@ class FieldRules(betterproto.Message):
     """
 
     message: "MessageRules" = betterproto.message_field(17)
-    # Scalar Field Types
     float: "FloatRules" = betterproto.message_field(1, group="type")
+    """Scalar Field Types"""
+
     double: "DoubleRules" = betterproto.message_field(2, group="type")
     int32: "Int32Rules" = betterproto.message_field(3, group="type")
     int64: "Int64Rules" = betterproto.message_field(4, group="type")
@@ -42,13 +46,15 @@ class FieldRules(betterproto.Message):
     sfixed64: "SFixed64Rules" = betterproto.message_field(12, group="type")
     bool: "BoolRules" = betterproto.message_field(13, group="type")
     string: "StringRules" = betterproto.message_field(14, group="type")
-    bytes_: "BytesRules" = betterproto.message_field(15, group="type")
-    # Complex Field Types
+    bytes: "BytesRules" = betterproto.message_field(15, group="type")
     enum: "EnumRules" = betterproto.message_field(16, group="type")
+    """Complex Field Types"""
+
     repeated: "RepeatedRules" = betterproto.message_field(18, group="type")
     map: "MapRules" = betterproto.message_field(19, group="type")
-    # Well-Known Field Types
     any: "AnyRules" = betterproto.message_field(20, group="type")
+    """Well-Known Field Types"""
+
     duration: "DurationRules" = betterproto.message_field(21, group="type")
     timestamp: "TimestampRules" = betterproto.message_field(22, group="type")
 
@@ -57,516 +63,887 @@ class FieldRules(betterproto.Message):
 class FloatRules(betterproto.Message):
     """FloatRules describes the constraints applied to `float` values"""
 
-    # Const specifies that this field must be exactly the specified value
     const: float = betterproto.float_field(1)
-    # Lt specifies that this field must be less than the specified value,
-    # exclusive
+    """Const specifies that this field must be exactly the specified value"""
+
     lt: float = betterproto.float_field(2)
-    # Lte specifies that this field must be less than or equal to the specified
-    # value, inclusive
+    """
+    Lt specifies that this field must be less than the specified value,
+    exclusive
+    """
+
     lte: float = betterproto.float_field(3)
-    # Gt specifies that this field must be greater than the specified value,
-    # exclusive. If the value of Gt is larger than a specified Lt or Lte, the
-    # range is reversed.
+    """
+    Lte specifies that this field must be less than or equal to the specified
+    value, inclusive
+    """
+
     gt: float = betterproto.float_field(4)
-    # Gte specifies that this field must be greater than or equal to the
-    # specified value, inclusive. If the value of Gte is larger than a specified
-    # Lt or Lte, the range is reversed.
+    """
+    Gt specifies that this field must be greater than the specified value,
+    exclusive. If the value of Gt is larger than a specified Lt or Lte, the
+    range is reversed.
+    """
+
     gte: float = betterproto.float_field(5)
-    # In specifies that this field must be equal to one of the specified values
+    """
+    Gte specifies that this field must be greater than or equal to the
+    specified value, inclusive. If the value of Gte is larger than a specified
+    Lt or Lte, the range is reversed.
+    """
+
     in_: List[float] = betterproto.float_field(6)
-    # NotIn specifies that this field cannot be equal to one of the specified
-    # values
+    """
+    In specifies that this field must be equal to one of the specified values
+    """
+
     not_in: List[float] = betterproto.float_field(7)
-    # IgnoreEmpty specifies that the validation rules of this field should be
-    # evaluated only if the field is not empty
+    """
+    NotIn specifies that this field cannot be equal to one of the specified
+    values
+    """
+
     ignore_empty: bool = betterproto.bool_field(8)
+    """
+    IgnoreEmpty specifies that the validation rules of this field should be
+    evaluated only if the field is not empty
+    """
 
 
 @dataclass(eq=False, repr=False)
 class DoubleRules(betterproto.Message):
     """DoubleRules describes the constraints applied to `double` values"""
 
-    # Const specifies that this field must be exactly the specified value
     const: float = betterproto.double_field(1)
-    # Lt specifies that this field must be less than the specified value,
-    # exclusive
+    """Const specifies that this field must be exactly the specified value"""
+
     lt: float = betterproto.double_field(2)
-    # Lte specifies that this field must be less than or equal to the specified
-    # value, inclusive
+    """
+    Lt specifies that this field must be less than the specified value,
+    exclusive
+    """
+
     lte: float = betterproto.double_field(3)
-    # Gt specifies that this field must be greater than the specified value,
-    # exclusive. If the value of Gt is larger than a specified Lt or Lte, the
-    # range is reversed.
+    """
+    Lte specifies that this field must be less than or equal to the specified
+    value, inclusive
+    """
+
     gt: float = betterproto.double_field(4)
-    # Gte specifies that this field must be greater than or equal to the
-    # specified value, inclusive. If the value of Gte is larger than a specified
-    # Lt or Lte, the range is reversed.
+    """
+    Gt specifies that this field must be greater than the specified value,
+    exclusive. If the value of Gt is larger than a specified Lt or Lte, the
+    range is reversed.
+    """
+
     gte: float = betterproto.double_field(5)
-    # In specifies that this field must be equal to one of the specified values
+    """
+    Gte specifies that this field must be greater than or equal to the
+    specified value, inclusive. If the value of Gte is larger than a specified
+    Lt or Lte, the range is reversed.
+    """
+
     in_: List[float] = betterproto.double_field(6)
-    # NotIn specifies that this field cannot be equal to one of the specified
-    # values
+    """
+    In specifies that this field must be equal to one of the specified values
+    """
+
     not_in: List[float] = betterproto.double_field(7)
-    # IgnoreEmpty specifies that the validation rules of this field should be
-    # evaluated only if the field is not empty
+    """
+    NotIn specifies that this field cannot be equal to one of the specified
+    values
+    """
+
     ignore_empty: bool = betterproto.bool_field(8)
+    """
+    IgnoreEmpty specifies that the validation rules of this field should be
+    evaluated only if the field is not empty
+    """
 
 
 @dataclass(eq=False, repr=False)
 class Int32Rules(betterproto.Message):
     """Int32Rules describes the constraints applied to `int32` values"""
 
-    # Const specifies that this field must be exactly the specified value
     const: int = betterproto.int32_field(1)
-    # Lt specifies that this field must be less than the specified value,
-    # exclusive
+    """Const specifies that this field must be exactly the specified value"""
+
     lt: int = betterproto.int32_field(2)
-    # Lte specifies that this field must be less than or equal to the specified
-    # value, inclusive
+    """
+    Lt specifies that this field must be less than the specified value,
+    exclusive
+    """
+
     lte: int = betterproto.int32_field(3)
-    # Gt specifies that this field must be greater than the specified value,
-    # exclusive. If the value of Gt is larger than a specified Lt or Lte, the
-    # range is reversed.
+    """
+    Lte specifies that this field must be less than or equal to the specified
+    value, inclusive
+    """
+
     gt: int = betterproto.int32_field(4)
-    # Gte specifies that this field must be greater than or equal to the
-    # specified value, inclusive. If the value of Gte is larger than a specified
-    # Lt or Lte, the range is reversed.
+    """
+    Gt specifies that this field must be greater than the specified value,
+    exclusive. If the value of Gt is larger than a specified Lt or Lte, the
+    range is reversed.
+    """
+
     gte: int = betterproto.int32_field(5)
-    # In specifies that this field must be equal to one of the specified values
+    """
+    Gte specifies that this field must be greater than or equal to the
+    specified value, inclusive. If the value of Gte is larger than a specified
+    Lt or Lte, the range is reversed.
+    """
+
     in_: List[int] = betterproto.int32_field(6)
-    # NotIn specifies that this field cannot be equal to one of the specified
-    # values
+    """
+    In specifies that this field must be equal to one of the specified values
+    """
+
     not_in: List[int] = betterproto.int32_field(7)
-    # IgnoreEmpty specifies that the validation rules of this field should be
-    # evaluated only if the field is not empty
+    """
+    NotIn specifies that this field cannot be equal to one of the specified
+    values
+    """
+
     ignore_empty: bool = betterproto.bool_field(8)
+    """
+    IgnoreEmpty specifies that the validation rules of this field should be
+    evaluated only if the field is not empty
+    """
 
 
 @dataclass(eq=False, repr=False)
 class Int64Rules(betterproto.Message):
     """Int64Rules describes the constraints applied to `int64` values"""
 
-    # Const specifies that this field must be exactly the specified value
     const: int = betterproto.int64_field(1)
-    # Lt specifies that this field must be less than the specified value,
-    # exclusive
+    """Const specifies that this field must be exactly the specified value"""
+
     lt: int = betterproto.int64_field(2)
-    # Lte specifies that this field must be less than or equal to the specified
-    # value, inclusive
+    """
+    Lt specifies that this field must be less than the specified value,
+    exclusive
+    """
+
     lte: int = betterproto.int64_field(3)
-    # Gt specifies that this field must be greater than the specified value,
-    # exclusive. If the value of Gt is larger than a specified Lt or Lte, the
-    # range is reversed.
+    """
+    Lte specifies that this field must be less than or equal to the specified
+    value, inclusive
+    """
+
     gt: int = betterproto.int64_field(4)
-    # Gte specifies that this field must be greater than or equal to the
-    # specified value, inclusive. If the value of Gte is larger than a specified
-    # Lt or Lte, the range is reversed.
+    """
+    Gt specifies that this field must be greater than the specified value,
+    exclusive. If the value of Gt is larger than a specified Lt or Lte, the
+    range is reversed.
+    """
+
     gte: int = betterproto.int64_field(5)
-    # In specifies that this field must be equal to one of the specified values
+    """
+    Gte specifies that this field must be greater than or equal to the
+    specified value, inclusive. If the value of Gte is larger than a specified
+    Lt or Lte, the range is reversed.
+    """
+
     in_: List[int] = betterproto.int64_field(6)
-    # NotIn specifies that this field cannot be equal to one of the specified
-    # values
+    """
+    In specifies that this field must be equal to one of the specified values
+    """
+
     not_in: List[int] = betterproto.int64_field(7)
-    # IgnoreEmpty specifies that the validation rules of this field should be
-    # evaluated only if the field is not empty
+    """
+    NotIn specifies that this field cannot be equal to one of the specified
+    values
+    """
+
     ignore_empty: bool = betterproto.bool_field(8)
+    """
+    IgnoreEmpty specifies that the validation rules of this field should be
+    evaluated only if the field is not empty
+    """
 
 
 @dataclass(eq=False, repr=False)
 class UInt32Rules(betterproto.Message):
     """UInt32Rules describes the constraints applied to `uint32` values"""
 
-    # Const specifies that this field must be exactly the specified value
     const: int = betterproto.uint32_field(1)
-    # Lt specifies that this field must be less than the specified value,
-    # exclusive
+    """Const specifies that this field must be exactly the specified value"""
+
     lt: int = betterproto.uint32_field(2)
-    # Lte specifies that this field must be less than or equal to the specified
-    # value, inclusive
+    """
+    Lt specifies that this field must be less than the specified value,
+    exclusive
+    """
+
     lte: int = betterproto.uint32_field(3)
-    # Gt specifies that this field must be greater than the specified value,
-    # exclusive. If the value of Gt is larger than a specified Lt or Lte, the
-    # range is reversed.
+    """
+    Lte specifies that this field must be less than or equal to the specified
+    value, inclusive
+    """
+
     gt: int = betterproto.uint32_field(4)
-    # Gte specifies that this field must be greater than or equal to the
-    # specified value, inclusive. If the value of Gte is larger than a specified
-    # Lt or Lte, the range is reversed.
+    """
+    Gt specifies that this field must be greater than the specified value,
+    exclusive. If the value of Gt is larger than a specified Lt or Lte, the
+    range is reversed.
+    """
+
     gte: int = betterproto.uint32_field(5)
-    # In specifies that this field must be equal to one of the specified values
+    """
+    Gte specifies that this field must be greater than or equal to the
+    specified value, inclusive. If the value of Gte is larger than a specified
+    Lt or Lte, the range is reversed.
+    """
+
     in_: List[int] = betterproto.uint32_field(6)
-    # NotIn specifies that this field cannot be equal to one of the specified
-    # values
+    """
+    In specifies that this field must be equal to one of the specified values
+    """
+
     not_in: List[int] = betterproto.uint32_field(7)
-    # IgnoreEmpty specifies that the validation rules of this field should be
-    # evaluated only if the field is not empty
+    """
+    NotIn specifies that this field cannot be equal to one of the specified
+    values
+    """
+
     ignore_empty: bool = betterproto.bool_field(8)
+    """
+    IgnoreEmpty specifies that the validation rules of this field should be
+    evaluated only if the field is not empty
+    """
 
 
 @dataclass(eq=False, repr=False)
 class UInt64Rules(betterproto.Message):
     """UInt64Rules describes the constraints applied to `uint64` values"""
 
-    # Const specifies that this field must be exactly the specified value
     const: int = betterproto.uint64_field(1)
-    # Lt specifies that this field must be less than the specified value,
-    # exclusive
+    """Const specifies that this field must be exactly the specified value"""
+
     lt: int = betterproto.uint64_field(2)
-    # Lte specifies that this field must be less than or equal to the specified
-    # value, inclusive
+    """
+    Lt specifies that this field must be less than the specified value,
+    exclusive
+    """
+
     lte: int = betterproto.uint64_field(3)
-    # Gt specifies that this field must be greater than the specified value,
-    # exclusive. If the value of Gt is larger than a specified Lt or Lte, the
-    # range is reversed.
+    """
+    Lte specifies that this field must be less than or equal to the specified
+    value, inclusive
+    """
+
     gt: int = betterproto.uint64_field(4)
-    # Gte specifies that this field must be greater than or equal to the
-    # specified value, inclusive. If the value of Gte is larger than a specified
-    # Lt or Lte, the range is reversed.
+    """
+    Gt specifies that this field must be greater than the specified value,
+    exclusive. If the value of Gt is larger than a specified Lt or Lte, the
+    range is reversed.
+    """
+
     gte: int = betterproto.uint64_field(5)
-    # In specifies that this field must be equal to one of the specified values
+    """
+    Gte specifies that this field must be greater than or equal to the
+    specified value, inclusive. If the value of Gte is larger than a specified
+    Lt or Lte, the range is reversed.
+    """
+
     in_: List[int] = betterproto.uint64_field(6)
-    # NotIn specifies that this field cannot be equal to one of the specified
-    # values
+    """
+    In specifies that this field must be equal to one of the specified values
+    """
+
     not_in: List[int] = betterproto.uint64_field(7)
-    # IgnoreEmpty specifies that the validation rules of this field should be
-    # evaluated only if the field is not empty
+    """
+    NotIn specifies that this field cannot be equal to one of the specified
+    values
+    """
+
     ignore_empty: bool = betterproto.bool_field(8)
+    """
+    IgnoreEmpty specifies that the validation rules of this field should be
+    evaluated only if the field is not empty
+    """
 
 
 @dataclass(eq=False, repr=False)
 class SInt32Rules(betterproto.Message):
     """SInt32Rules describes the constraints applied to `sint32` values"""
 
-    # Const specifies that this field must be exactly the specified value
     const: int = betterproto.sint32_field(1)
-    # Lt specifies that this field must be less than the specified value,
-    # exclusive
+    """Const specifies that this field must be exactly the specified value"""
+
     lt: int = betterproto.sint32_field(2)
-    # Lte specifies that this field must be less than or equal to the specified
-    # value, inclusive
+    """
+    Lt specifies that this field must be less than the specified value,
+    exclusive
+    """
+
     lte: int = betterproto.sint32_field(3)
-    # Gt specifies that this field must be greater than the specified value,
-    # exclusive. If the value of Gt is larger than a specified Lt or Lte, the
-    # range is reversed.
+    """
+    Lte specifies that this field must be less than or equal to the specified
+    value, inclusive
+    """
+
     gt: int = betterproto.sint32_field(4)
-    # Gte specifies that this field must be greater than or equal to the
-    # specified value, inclusive. If the value of Gte is larger than a specified
-    # Lt or Lte, the range is reversed.
+    """
+    Gt specifies that this field must be greater than the specified value,
+    exclusive. If the value of Gt is larger than a specified Lt or Lte, the
+    range is reversed.
+    """
+
     gte: int = betterproto.sint32_field(5)
-    # In specifies that this field must be equal to one of the specified values
+    """
+    Gte specifies that this field must be greater than or equal to the
+    specified value, inclusive. If the value of Gte is larger than a specified
+    Lt or Lte, the range is reversed.
+    """
+
     in_: List[int] = betterproto.sint32_field(6)
-    # NotIn specifies that this field cannot be equal to one of the specified
-    # values
+    """
+    In specifies that this field must be equal to one of the specified values
+    """
+
     not_in: List[int] = betterproto.sint32_field(7)
-    # IgnoreEmpty specifies that the validation rules of this field should be
-    # evaluated only if the field is not empty
+    """
+    NotIn specifies that this field cannot be equal to one of the specified
+    values
+    """
+
     ignore_empty: bool = betterproto.bool_field(8)
+    """
+    IgnoreEmpty specifies that the validation rules of this field should be
+    evaluated only if the field is not empty
+    """
 
 
 @dataclass(eq=False, repr=False)
 class SInt64Rules(betterproto.Message):
     """SInt64Rules describes the constraints applied to `sint64` values"""
 
-    # Const specifies that this field must be exactly the specified value
     const: int = betterproto.sint64_field(1)
-    # Lt specifies that this field must be less than the specified value,
-    # exclusive
+    """Const specifies that this field must be exactly the specified value"""
+
     lt: int = betterproto.sint64_field(2)
-    # Lte specifies that this field must be less than or equal to the specified
-    # value, inclusive
+    """
+    Lt specifies that this field must be less than the specified value,
+    exclusive
+    """
+
     lte: int = betterproto.sint64_field(3)
-    # Gt specifies that this field must be greater than the specified value,
-    # exclusive. If the value of Gt is larger than a specified Lt or Lte, the
-    # range is reversed.
+    """
+    Lte specifies that this field must be less than or equal to the specified
+    value, inclusive
+    """
+
     gt: int = betterproto.sint64_field(4)
-    # Gte specifies that this field must be greater than or equal to the
-    # specified value, inclusive. If the value of Gte is larger than a specified
-    # Lt or Lte, the range is reversed.
+    """
+    Gt specifies that this field must be greater than the specified value,
+    exclusive. If the value of Gt is larger than a specified Lt or Lte, the
+    range is reversed.
+    """
+
     gte: int = betterproto.sint64_field(5)
-    # In specifies that this field must be equal to one of the specified values
+    """
+    Gte specifies that this field must be greater than or equal to the
+    specified value, inclusive. If the value of Gte is larger than a specified
+    Lt or Lte, the range is reversed.
+    """
+
     in_: List[int] = betterproto.sint64_field(6)
-    # NotIn specifies that this field cannot be equal to one of the specified
-    # values
+    """
+    In specifies that this field must be equal to one of the specified values
+    """
+
     not_in: List[int] = betterproto.sint64_field(7)
-    # IgnoreEmpty specifies that the validation rules of this field should be
-    # evaluated only if the field is not empty
+    """
+    NotIn specifies that this field cannot be equal to one of the specified
+    values
+    """
+
     ignore_empty: bool = betterproto.bool_field(8)
+    """
+    IgnoreEmpty specifies that the validation rules of this field should be
+    evaluated only if the field is not empty
+    """
 
 
 @dataclass(eq=False, repr=False)
 class Fixed32Rules(betterproto.Message):
     """Fixed32Rules describes the constraints applied to `fixed32` values"""
 
-    # Const specifies that this field must be exactly the specified value
     const: int = betterproto.fixed32_field(1)
-    # Lt specifies that this field must be less than the specified value,
-    # exclusive
+    """Const specifies that this field must be exactly the specified value"""
+
     lt: int = betterproto.fixed32_field(2)
-    # Lte specifies that this field must be less than or equal to the specified
-    # value, inclusive
+    """
+    Lt specifies that this field must be less than the specified value,
+    exclusive
+    """
+
     lte: int = betterproto.fixed32_field(3)
-    # Gt specifies that this field must be greater than the specified value,
-    # exclusive. If the value of Gt is larger than a specified Lt or Lte, the
-    # range is reversed.
+    """
+    Lte specifies that this field must be less than or equal to the specified
+    value, inclusive
+    """
+
     gt: int = betterproto.fixed32_field(4)
-    # Gte specifies that this field must be greater than or equal to the
-    # specified value, inclusive. If the value of Gte is larger than a specified
-    # Lt or Lte, the range is reversed.
+    """
+    Gt specifies that this field must be greater than the specified value,
+    exclusive. If the value of Gt is larger than a specified Lt or Lte, the
+    range is reversed.
+    """
+
     gte: int = betterproto.fixed32_field(5)
-    # In specifies that this field must be equal to one of the specified values
+    """
+    Gte specifies that this field must be greater than or equal to the
+    specified value, inclusive. If the value of Gte is larger than a specified
+    Lt or Lte, the range is reversed.
+    """
+
     in_: List[int] = betterproto.fixed32_field(6)
-    # NotIn specifies that this field cannot be equal to one of the specified
-    # values
+    """
+    In specifies that this field must be equal to one of the specified values
+    """
+
     not_in: List[int] = betterproto.fixed32_field(7)
-    # IgnoreEmpty specifies that the validation rules of this field should be
-    # evaluated only if the field is not empty
+    """
+    NotIn specifies that this field cannot be equal to one of the specified
+    values
+    """
+
     ignore_empty: bool = betterproto.bool_field(8)
+    """
+    IgnoreEmpty specifies that the validation rules of this field should be
+    evaluated only if the field is not empty
+    """
 
 
 @dataclass(eq=False, repr=False)
 class Fixed64Rules(betterproto.Message):
     """Fixed64Rules describes the constraints applied to `fixed64` values"""
 
-    # Const specifies that this field must be exactly the specified value
     const: int = betterproto.fixed64_field(1)
-    # Lt specifies that this field must be less than the specified value,
-    # exclusive
+    """Const specifies that this field must be exactly the specified value"""
+
     lt: int = betterproto.fixed64_field(2)
-    # Lte specifies that this field must be less than or equal to the specified
-    # value, inclusive
+    """
+    Lt specifies that this field must be less than the specified value,
+    exclusive
+    """
+
     lte: int = betterproto.fixed64_field(3)
-    # Gt specifies that this field must be greater than the specified value,
-    # exclusive. If the value of Gt is larger than a specified Lt or Lte, the
-    # range is reversed.
+    """
+    Lte specifies that this field must be less than or equal to the specified
+    value, inclusive
+    """
+
     gt: int = betterproto.fixed64_field(4)
-    # Gte specifies that this field must be greater than or equal to the
-    # specified value, inclusive. If the value of Gte is larger than a specified
-    # Lt or Lte, the range is reversed.
+    """
+    Gt specifies that this field must be greater than the specified value,
+    exclusive. If the value of Gt is larger than a specified Lt or Lte, the
+    range is reversed.
+    """
+
     gte: int = betterproto.fixed64_field(5)
-    # In specifies that this field must be equal to one of the specified values
+    """
+    Gte specifies that this field must be greater than or equal to the
+    specified value, inclusive. If the value of Gte is larger than a specified
+    Lt or Lte, the range is reversed.
+    """
+
     in_: List[int] = betterproto.fixed64_field(6)
-    # NotIn specifies that this field cannot be equal to one of the specified
-    # values
+    """
+    In specifies that this field must be equal to one of the specified values
+    """
+
     not_in: List[int] = betterproto.fixed64_field(7)
-    # IgnoreEmpty specifies that the validation rules of this field should be
-    # evaluated only if the field is not empty
+    """
+    NotIn specifies that this field cannot be equal to one of the specified
+    values
+    """
+
     ignore_empty: bool = betterproto.bool_field(8)
+    """
+    IgnoreEmpty specifies that the validation rules of this field should be
+    evaluated only if the field is not empty
+    """
 
 
 @dataclass(eq=False, repr=False)
 class SFixed32Rules(betterproto.Message):
     """SFixed32Rules describes the constraints applied to `sfixed32` values"""
 
-    # Const specifies that this field must be exactly the specified value
     const: int = betterproto.sfixed32_field(1)
-    # Lt specifies that this field must be less than the specified value,
-    # exclusive
+    """Const specifies that this field must be exactly the specified value"""
+
     lt: int = betterproto.sfixed32_field(2)
-    # Lte specifies that this field must be less than or equal to the specified
-    # value, inclusive
+    """
+    Lt specifies that this field must be less than the specified value,
+    exclusive
+    """
+
     lte: int = betterproto.sfixed32_field(3)
-    # Gt specifies that this field must be greater than the specified value,
-    # exclusive. If the value of Gt is larger than a specified Lt or Lte, the
-    # range is reversed.
+    """
+    Lte specifies that this field must be less than or equal to the specified
+    value, inclusive
+    """
+
     gt: int = betterproto.sfixed32_field(4)
-    # Gte specifies that this field must be greater than or equal to the
-    # specified value, inclusive. If the value of Gte is larger than a specified
-    # Lt or Lte, the range is reversed.
+    """
+    Gt specifies that this field must be greater than the specified value,
+    exclusive. If the value of Gt is larger than a specified Lt or Lte, the
+    range is reversed.
+    """
+
     gte: int = betterproto.sfixed32_field(5)
-    # In specifies that this field must be equal to one of the specified values
+    """
+    Gte specifies that this field must be greater than or equal to the
+    specified value, inclusive. If the value of Gte is larger than a specified
+    Lt or Lte, the range is reversed.
+    """
+
     in_: List[int] = betterproto.sfixed32_field(6)
-    # NotIn specifies that this field cannot be equal to one of the specified
-    # values
+    """
+    In specifies that this field must be equal to one of the specified values
+    """
+
     not_in: List[int] = betterproto.sfixed32_field(7)
-    # IgnoreEmpty specifies that the validation rules of this field should be
-    # evaluated only if the field is not empty
+    """
+    NotIn specifies that this field cannot be equal to one of the specified
+    values
+    """
+
     ignore_empty: bool = betterproto.bool_field(8)
+    """
+    IgnoreEmpty specifies that the validation rules of this field should be
+    evaluated only if the field is not empty
+    """
 
 
 @dataclass(eq=False, repr=False)
 class SFixed64Rules(betterproto.Message):
     """SFixed64Rules describes the constraints applied to `sfixed64` values"""
 
-    # Const specifies that this field must be exactly the specified value
     const: int = betterproto.sfixed64_field(1)
-    # Lt specifies that this field must be less than the specified value,
-    # exclusive
+    """Const specifies that this field must be exactly the specified value"""
+
     lt: int = betterproto.sfixed64_field(2)
-    # Lte specifies that this field must be less than or equal to the specified
-    # value, inclusive
+    """
+    Lt specifies that this field must be less than the specified value,
+    exclusive
+    """
+
     lte: int = betterproto.sfixed64_field(3)
-    # Gt specifies that this field must be greater than the specified value,
-    # exclusive. If the value of Gt is larger than a specified Lt or Lte, the
-    # range is reversed.
+    """
+    Lte specifies that this field must be less than or equal to the specified
+    value, inclusive
+    """
+
     gt: int = betterproto.sfixed64_field(4)
-    # Gte specifies that this field must be greater than or equal to the
-    # specified value, inclusive. If the value of Gte is larger than a specified
-    # Lt or Lte, the range is reversed.
+    """
+    Gt specifies that this field must be greater than the specified value,
+    exclusive. If the value of Gt is larger than a specified Lt or Lte, the
+    range is reversed.
+    """
+
     gte: int = betterproto.sfixed64_field(5)
-    # In specifies that this field must be equal to one of the specified values
+    """
+    Gte specifies that this field must be greater than or equal to the
+    specified value, inclusive. If the value of Gte is larger than a specified
+    Lt or Lte, the range is reversed.
+    """
+
     in_: List[int] = betterproto.sfixed64_field(6)
-    # NotIn specifies that this field cannot be equal to one of the specified
-    # values
+    """
+    In specifies that this field must be equal to one of the specified values
+    """
+
     not_in: List[int] = betterproto.sfixed64_field(7)
-    # IgnoreEmpty specifies that the validation rules of this field should be
-    # evaluated only if the field is not empty
+    """
+    NotIn specifies that this field cannot be equal to one of the specified
+    values
+    """
+
     ignore_empty: bool = betterproto.bool_field(8)
+    """
+    IgnoreEmpty specifies that the validation rules of this field should be
+    evaluated only if the field is not empty
+    """
 
 
 @dataclass(eq=False, repr=False)
 class BoolRules(betterproto.Message):
     """BoolRules describes the constraints applied to `bool` values"""
 
-    # Const specifies that this field must be exactly the specified value
     const: bool = betterproto.bool_field(1)
+    """Const specifies that this field must be exactly the specified value"""
 
 
 @dataclass(eq=False, repr=False)
 class StringRules(betterproto.Message):
     """StringRules describe the constraints applied to `string` values"""
 
-    # Const specifies that this field must be exactly the specified value
     const: str = betterproto.string_field(1)
-    # Len specifies that this field must be the specified number of characters
-    # (Unicode code points). Note that the number of characters may differ from
-    # the number of bytes in the string.
+    """Const specifies that this field must be exactly the specified value"""
+
     len: int = betterproto.uint64_field(19)
-    # MinLen specifies that this field must be the specified number of characters
-    # (Unicode code points) at a minimum. Note that the number of characters may
-    # differ from the number of bytes in the string.
+    """
+    Len specifies that this field must be the specified number of characters
+    (Unicode code points). Note that the number of characters may differ from
+    the number of bytes in the string.
+    """
+
     min_len: int = betterproto.uint64_field(2)
-    # MaxLen specifies that this field must be the specified number of characters
-    # (Unicode code points) at a maximum. Note that the number of characters may
-    # differ from the number of bytes in the string.
+    """
+    MinLen specifies that this field must be the specified number of characters
+    (Unicode code points) at a minimum. Note that the number of characters may
+    differ from the number of bytes in the string.
+    """
+
     max_len: int = betterproto.uint64_field(3)
-    # LenBytes specifies that this field must be the specified number of bytes at
-    # a minimum
+    """
+    MaxLen specifies that this field must be the specified number of characters
+    (Unicode code points) at a maximum. Note that the number of characters may
+    differ from the number of bytes in the string.
+    """
+
     len_bytes: int = betterproto.uint64_field(20)
-    # MinBytes specifies that this field must be the specified number of bytes at
-    # a minimum
+    """
+    LenBytes specifies that this field must be the specified number of bytes at
+    a minimum
+    """
+
     min_bytes: int = betterproto.uint64_field(4)
-    # MaxBytes specifies that this field must be the specified number of bytes at
-    # a maximum
+    """
+    MinBytes specifies that this field must be the specified number of bytes at
+    a minimum
+    """
+
     max_bytes: int = betterproto.uint64_field(5)
-    # Pattern specifes that this field must match against the specified regular
-    # expression (RE2 syntax). The included expression should elide any
-    # delimiters.
+    """
+    MaxBytes specifies that this field must be the specified number of bytes at
+    a maximum
+    """
+
     pattern: str = betterproto.string_field(6)
-    # Prefix specifies that this field must have the specified substring at the
-    # beginning of the string.
+    """
+    Pattern specifes that this field must match against the specified regular
+    expression (RE2 syntax). The included expression should elide any
+    delimiters.
+    """
+
     prefix: str = betterproto.string_field(7)
-    # Suffix specifies that this field must have the specified substring at the
-    # end of the string.
+    """
+    Prefix specifies that this field must have the specified substring at the
+    beginning of the string.
+    """
+
     suffix: str = betterproto.string_field(8)
-    # Contains specifies that this field must have the specified substring
-    # anywhere in the string.
+    """
+    Suffix specifies that this field must have the specified substring at the
+    end of the string.
+    """
+
     contains: str = betterproto.string_field(9)
-    # NotContains specifies that this field cannot have the specified substring
-    # anywhere in the string.
+    """
+    Contains specifies that this field must have the specified substring
+    anywhere in the string.
+    """
+
     not_contains: str = betterproto.string_field(23)
-    # In specifies that this field must be equal to one of the specified values
+    """
+    NotContains specifies that this field cannot have the specified substring
+    anywhere in the string.
+    """
+
     in_: List[str] = betterproto.string_field(10)
-    # NotIn specifies that this field cannot be equal to one of the specified
-    # values
+    """
+    In specifies that this field must be equal to one of the specified values
+    """
+
     not_in: List[str] = betterproto.string_field(11)
-    # Email specifies that the field must be a valid email address as defined by
-    # RFC 5322
+    """
+    NotIn specifies that this field cannot be equal to one of the specified
+    values
+    """
+
     email: bool = betterproto.bool_field(12, group="well_known")
-    # Hostname specifies that the field must be a valid hostname as defined by
-    # RFC 1034. This constraint does not support internationalized domain names
-    # (IDNs).
+    """
+    Email specifies that the field must be a valid email address as defined by
+    RFC 5322
+    """
+
     hostname: bool = betterproto.bool_field(13, group="well_known")
-    # Ip specifies that the field must be a valid IP (v4 or v6) address. Valid
-    # IPv6 addresses should not include surrounding square brackets.
+    """
+    Hostname specifies that the field must be a valid hostname as defined by
+    RFC 1034. This constraint does not support internationalized domain names
+    (IDNs).
+    """
+
     ip: bool = betterproto.bool_field(14, group="well_known")
-    # Ipv4 specifies that the field must be a valid IPv4 address.
+    """
+    Ip specifies that the field must be a valid IP (v4 or v6) address. Valid
+    IPv6 addresses should not include surrounding square brackets.
+    """
+
     ipv4: bool = betterproto.bool_field(15, group="well_known")
-    # Ipv6 specifies that the field must be a valid IPv6 address. Valid IPv6
-    # addresses should not include surrounding square brackets.
+    """Ipv4 specifies that the field must be a valid IPv4 address."""
+
     ipv6: bool = betterproto.bool_field(16, group="well_known")
-    # Uri specifies that the field must be a valid, absolute URI as defined by
-    # RFC 3986
+    """
+    Ipv6 specifies that the field must be a valid IPv6 address. Valid IPv6
+    addresses should not include surrounding square brackets.
+    """
+
     uri: bool = betterproto.bool_field(17, group="well_known")
-    # UriRef specifies that the field must be a valid URI as defined by RFC 3986
-    # and may be relative or absolute.
+    """
+    Uri specifies that the field must be a valid, absolute URI as defined by
+    RFC 3986
+    """
+
     uri_ref: bool = betterproto.bool_field(18, group="well_known")
-    # Address specifies that the field must be either a valid hostname as defined
-    # by RFC 1034 (which does not support internationalized domain names or
-    # IDNs), or it can be a valid IP (v4 or v6).
+    """
+    UriRef specifies that the field must be a valid URI as defined by RFC 3986
+    and may be relative or absolute.
+    """
+
     address: bool = betterproto.bool_field(21, group="well_known")
-    # Uuid specifies that the field must be a valid UUID as defined by RFC 4122
+    """
+    Address specifies that the field must be either a valid hostname as defined
+    by RFC 1034 (which does not support internationalized domain names or
+    IDNs), or it can be a valid IP (v4 or v6).
+    """
+
     uuid: bool = betterproto.bool_field(22, group="well_known")
-    # WellKnownRegex specifies a common well known pattern defined as a regex.
+    """
+    Uuid specifies that the field must be a valid UUID as defined by RFC 4122
+    """
+
     well_known_regex: "KnownRegex" = betterproto.enum_field(24, group="well_known")
-    # This applies to regexes HTTP_HEADER_NAME and HTTP_HEADER_VALUE to enable
-    # strict header validation. By default, this is true, and HTTP header
-    # validations are RFC-compliant. Setting to false will enable a looser
-    # validations that only disallows \r\n\0 characters, which can be used to
-    # bypass header matching rules.
+    """
+    WellKnownRegex specifies a common well known pattern defined as a regex.
+    """
+
     strict: bool = betterproto.bool_field(25)
-    # IgnoreEmpty specifies that the validation rules of this field should be
-    # evaluated only if the field is not empty
+    """
+    This applies to regexes HTTP_HEADER_NAME and HTTP_HEADER_VALUE to enable
+    strict header validation. By default, this is true, and HTTP header
+    validations are RFC-compliant. Setting to false will enable a looser
+    validations that only disallows \r\n\0 characters, which can be used to
+    bypass header matching rules.
+    """
+
     ignore_empty: bool = betterproto.bool_field(26)
+    """
+    IgnoreEmpty specifies that the validation rules of this field should be
+    evaluated only if the field is not empty
+    """
 
 
 @dataclass(eq=False, repr=False)
 class BytesRules(betterproto.Message):
     """BytesRules describe the constraints applied to `bytes` values"""
 
-    # Const specifies that this field must be exactly the specified value
     const: bytes = betterproto.bytes_field(1)
-    # Len specifies that this field must be the specified number of bytes
+    """Const specifies that this field must be exactly the specified value"""
+
     len: int = betterproto.uint64_field(13)
-    # MinLen specifies that this field must be the specified number of bytes at a
-    # minimum
+    """Len specifies that this field must be the specified number of bytes"""
+
     min_len: int = betterproto.uint64_field(2)
-    # MaxLen specifies that this field must be the specified number of bytes at a
-    # maximum
+    """
+    MinLen specifies that this field must be the specified number of bytes at a
+    minimum
+    """
+
     max_len: int = betterproto.uint64_field(3)
-    # Pattern specifes that this field must match against the specified regular
-    # expression (RE2 syntax). The included expression should elide any
-    # delimiters.
+    """
+    MaxLen specifies that this field must be the specified number of bytes at a
+    maximum
+    """
+
     pattern: str = betterproto.string_field(4)
-    # Prefix specifies that this field must have the specified bytes at the
-    # beginning of the string.
+    """
+    Pattern specifes that this field must match against the specified regular
+    expression (RE2 syntax). The included expression should elide any
+    delimiters.
+    """
+
     prefix: bytes = betterproto.bytes_field(5)
-    # Suffix specifies that this field must have the specified bytes at the end
-    # of the string.
+    """
+    Prefix specifies that this field must have the specified bytes at the
+    beginning of the string.
+    """
+
     suffix: bytes = betterproto.bytes_field(6)
-    # Contains specifies that this field must have the specified bytes anywhere
-    # in the string.
+    """
+    Suffix specifies that this field must have the specified bytes at the end
+    of the string.
+    """
+
     contains: bytes = betterproto.bytes_field(7)
-    # In specifies that this field must be equal to one of the specified values
+    """
+    Contains specifies that this field must have the specified bytes anywhere
+    in the string.
+    """
+
     in_: List[bytes] = betterproto.bytes_field(8)
-    # NotIn specifies that this field cannot be equal to one of the specified
-    # values
+    """
+    In specifies that this field must be equal to one of the specified values
+    """
+
     not_in: List[bytes] = betterproto.bytes_field(9)
-    # Ip specifies that the field must be a valid IP (v4 or v6) address in byte
-    # format
+    """
+    NotIn specifies that this field cannot be equal to one of the specified
+    values
+    """
+
     ip: bool = betterproto.bool_field(10, group="well_known")
-    # Ipv4 specifies that the field must be a valid IPv4 address in byte format
+    """
+    Ip specifies that the field must be a valid IP (v4 or v6) address in byte
+    format
+    """
+
     ipv4: bool = betterproto.bool_field(11, group="well_known")
-    # Ipv6 specifies that the field must be a valid IPv6 address in byte format
+    """
+    Ipv4 specifies that the field must be a valid IPv4 address in byte format
+    """
+
     ipv6: bool = betterproto.bool_field(12, group="well_known")
-    # IgnoreEmpty specifies that the validation rules of this field should be
-    # evaluated only if the field is not empty
+    """
+    Ipv6 specifies that the field must be a valid IPv6 address in byte format
+    """
+
     ignore_empty: bool = betterproto.bool_field(14)
+    """
+    IgnoreEmpty specifies that the validation rules of this field should be
+    evaluated only if the field is not empty
+    """
 
 
 @dataclass(eq=False, repr=False)
 class EnumRules(betterproto.Message):
     """EnumRules describe the constraints applied to enum values"""
 
-    # Const specifies that this field must be exactly the specified value
     const: int = betterproto.int32_field(1)
-    # DefinedOnly specifies that this field must be only one of the defined
-    # values for this enum, failing on any undefined value.
+    """Const specifies that this field must be exactly the specified value"""
+
     defined_only: bool = betterproto.bool_field(2)
-    # In specifies that this field must be equal to one of the specified values
+    """
+    DefinedOnly specifies that this field must be only one of the defined
+    values for this enum, failing on any undefined value.
+    """
+
     in_: List[int] = betterproto.int32_field(3)
-    # NotIn specifies that this field cannot be equal to one of the specified
-    # values
+    """
+    In specifies that this field must be equal to one of the specified values
+    """
+
     not_in: List[int] = betterproto.int32_field(4)
+    """
+    NotIn specifies that this field cannot be equal to one of the specified
+    values
+    """
 
 
 @dataclass(eq=False, repr=False)
@@ -576,58 +953,92 @@ class MessageRules(betterproto.Message):
     For message-type fields, validation is performed recursively.
     """
 
-    # Skip specifies that the validation rules of this field should not be
-    # evaluated
     skip: bool = betterproto.bool_field(1)
-    # Required specifies that this field must be set
+    """
+    Skip specifies that the validation rules of this field should not be
+    evaluated
+    """
+
     required: bool = betterproto.bool_field(2)
+    """Required specifies that this field must be set"""
 
 
 @dataclass(eq=False, repr=False)
 class RepeatedRules(betterproto.Message):
     """RepeatedRules describe the constraints applied to `repeated` values"""
 
-    # MinItems specifies that this field must have the specified number of items
-    # at a minimum
     min_items: int = betterproto.uint64_field(1)
-    # MaxItems specifies that this field must have the specified number of items
-    # at a maximum
+    """
+    MinItems specifies that this field must have the specified number of items
+    at a minimum
+    """
+
     max_items: int = betterproto.uint64_field(2)
-    # Unique specifies that all elements in this field must be unique. This
-    # contraint is only applicable to scalar and enum types (messages are not
-    # supported).
+    """
+    MaxItems specifies that this field must have the specified number of items
+    at a maximum
+    """
+
     unique: bool = betterproto.bool_field(3)
-    # Items specifies the contraints to be applied to each item in the field.
-    # Repeated message fields will still execute validation against each item
-    # unless skip is specified here.
+    """
+    Unique specifies that all elements in this field must be unique. This
+    contraint is only applicable to scalar and enum types (messages are not
+    supported).
+    """
+
     items: "FieldRules" = betterproto.message_field(4)
-    # IgnoreEmpty specifies that the validation rules of this field should be
-    # evaluated only if the field is not empty
+    """
+    Items specifies the contraints to be applied to each item in the field.
+    Repeated message fields will still execute validation against each item
+    unless skip is specified here.
+    """
+
     ignore_empty: bool = betterproto.bool_field(5)
+    """
+    IgnoreEmpty specifies that the validation rules of this field should be
+    evaluated only if the field is not empty
+    """
 
 
 @dataclass(eq=False, repr=False)
 class MapRules(betterproto.Message):
     """MapRules describe the constraints applied to `map` values"""
 
-    # MinPairs specifies that this field must have the specified number of KVs at
-    # a minimum
     min_pairs: int = betterproto.uint64_field(1)
-    # MaxPairs specifies that this field must have the specified number of KVs at
-    # a maximum
+    """
+    MinPairs specifies that this field must have the specified number of KVs at
+    a minimum
+    """
+
     max_pairs: int = betterproto.uint64_field(2)
-    # NoSparse specifies values in this field cannot be unset. This only applies
-    # to map's with message value types.
+    """
+    MaxPairs specifies that this field must have the specified number of KVs at
+    a maximum
+    """
+
     no_sparse: bool = betterproto.bool_field(3)
-    # Keys specifies the constraints to be applied to each key in the field.
+    """
+    NoSparse specifies values in this field cannot be unset. This only applies
+    to map's with message value types.
+    """
+
     keys: "FieldRules" = betterproto.message_field(4)
-    # Values specifies the constraints to be applied to the value of each key in
-    # the field. Message values will still have their validations evaluated
-    # unless skip is specified here.
+    """
+    Keys specifies the constraints to be applied to each key in the field.
+    """
+
     values: "FieldRules" = betterproto.message_field(5)
-    # IgnoreEmpty specifies that the validation rules of this field should be
-    # evaluated only if the field is not empty
+    """
+    Values specifies the constraints to be applied to the value of each key in
+    the field. Message values will still have their validations evaluated
+    unless skip is specified here.
+    """
+
     ignore_empty: bool = betterproto.bool_field(6)
+    """
+    IgnoreEmpty specifies that the validation rules of this field should be
+    evaluated only if the field is not empty
+    """
 
 
 @dataclass(eq=False, repr=False)
@@ -637,14 +1048,20 @@ class AnyRules(betterproto.Message):
     `google.protobuf.Any` well-known type
     """
 
-    # Required specifies that this field must be set
     required: bool = betterproto.bool_field(1)
-    # In specifies that this field's `type_url` must be equal to one of the
-    # specified values.
+    """Required specifies that this field must be set"""
+
     in_: List[str] = betterproto.string_field(2)
-    # NotIn specifies that this field's `type_url` must not be equal to any of
-    # the specified values.
+    """
+    In specifies that this field's `type_url` must be equal to one of the
+    specified values.
+    """
+
     not_in: List[str] = betterproto.string_field(3)
+    """
+    NotIn specifies that this field's `type_url` must not be equal to any of
+    the specified values.
+    """
 
 
 @dataclass(eq=False, repr=False)
@@ -654,27 +1071,46 @@ class DurationRules(betterproto.Message):
     `google.protobuf.Duration` well-known type
     """
 
-    # Required specifies that this field must be set
     required: bool = betterproto.bool_field(1)
-    # Const specifies that this field must be exactly the specified value
+    """Required specifies that this field must be set"""
+
     const: timedelta = betterproto.message_field(2)
-    # Lt specifies that this field must be less than the specified value,
-    # exclusive
+    """Const specifies that this field must be exactly the specified value"""
+
     lt: timedelta = betterproto.message_field(3)
-    # Lt specifies that this field must be less than the specified value,
-    # inclusive
+    """
+    Lt specifies that this field must be less than the specified value,
+    exclusive
+    """
+
     lte: timedelta = betterproto.message_field(4)
-    # Gt specifies that this field must be greater than the specified value,
-    # exclusive
+    """
+    Lt specifies that this field must be less than the specified value,
+    inclusive
+    """
+
     gt: timedelta = betterproto.message_field(5)
-    # Gte specifies that this field must be greater than the specified value,
-    # inclusive
+    """
+    Gt specifies that this field must be greater than the specified value,
+    exclusive
+    """
+
     gte: timedelta = betterproto.message_field(6)
-    # In specifies that this field must be equal to one of the specified values
+    """
+    Gte specifies that this field must be greater than the specified value,
+    inclusive
+    """
+
     in_: List[timedelta] = betterproto.message_field(7)
-    # NotIn specifies that this field cannot be equal to one of the specified
-    # values
+    """
+    In specifies that this field must be equal to one of the specified values
+    """
+
     not_in: List[timedelta] = betterproto.message_field(8)
+    """
+    NotIn specifies that this field cannot be equal to one of the specified
+    values
+    """
 
 
 @dataclass(eq=False, repr=False)
@@ -684,29 +1120,51 @@ class TimestampRules(betterproto.Message):
     `google.protobuf.Timestamp` well-known type
     """
 
-    # Required specifies that this field must be set
     required: bool = betterproto.bool_field(1)
-    # Const specifies that this field must be exactly the specified value
+    """Required specifies that this field must be set"""
+
     const: datetime = betterproto.message_field(2)
-    # Lt specifies that this field must be less than the specified value,
-    # exclusive
+    """Const specifies that this field must be exactly the specified value"""
+
     lt: datetime = betterproto.message_field(3)
-    # Lte specifies that this field must be less than the specified value,
-    # inclusive
+    """
+    Lt specifies that this field must be less than the specified value,
+    exclusive
+    """
+
     lte: datetime = betterproto.message_field(4)
-    # Gt specifies that this field must be greater than the specified value,
-    # exclusive
+    """
+    Lte specifies that this field must be less than the specified value,
+    inclusive
+    """
+
     gt: datetime = betterproto.message_field(5)
-    # Gte specifies that this field must be greater than the specified value,
-    # inclusive
+    """
+    Gt specifies that this field must be greater than the specified value,
+    exclusive
+    """
+
     gte: datetime = betterproto.message_field(6)
-    # LtNow specifies that this must be less than the current time. LtNow can
-    # only be used with the Within rule.
+    """
+    Gte specifies that this field must be greater than the specified value,
+    inclusive
+    """
+
     lt_now: bool = betterproto.bool_field(7)
-    # GtNow specifies that this must be greater than the current time. GtNow can
-    # only be used with the Within rule.
+    """
+    LtNow specifies that this must be less than the current time. LtNow can
+    only be used with the Within rule.
+    """
+
     gt_now: bool = betterproto.bool_field(8)
-    # Within specifies that this field must be within this duration of the
-    # current time. This constraint can be used alone or with the LtNow and GtNow
-    # rules.
+    """
+    GtNow specifies that this must be greater than the current time. GtNow can
+    only be used with the Within rule.
+    """
+
     within: timedelta = betterproto.message_field(9)
+    """
+    Within specifies that this field must be within this duration of the
+    current time. This constraint can be used alone or with the LtNow and GtNow
+    rules.
+    """

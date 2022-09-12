@@ -5,26 +5,33 @@ from dataclasses import dataclass
 from typing import Dict
 
 import betterproto
-from betterproto.grpc.grpclib_server import ServiceBase
 
 
 @dataclass(eq=False, repr=False)
 class ErrorScope(betterproto.Message):
-    # The API service invoked, e.g. 'Service.Method'.
     service: str = betterproto.string_field(1)
-    # The plugin method invoked, e.g. 'PluginService.Method'.
+    """The API service invoked, e.g. 'Service.Method'."""
+
     plugin: str = betterproto.string_field(2)
-    # The plugin method arguments, ensure only non-sensitive data is specified.
+    """The plugin method invoked, e.g. 'PluginService.Method'."""
+
     args: Dict[str, str] = betterproto.map_field(
         3, betterproto.TYPE_STRING, betterproto.TYPE_STRING
     )
+    """
+    The plugin method arguments, ensure only non-sensitive data is specified.
+    """
 
 
 @dataclass(eq=False, repr=False)
 class ErrorDetails(betterproto.Message):
-    # The developer error message, explaining the error and ideally solution.
     message: str = betterproto.string_field(1)
-    # The error root cause.
+    """
+    The developer error message, explaining the error and ideally solution.
+    """
+
     cause: str = betterproto.string_field(2)
-    # The scope of the error.
+    """The error root cause."""
+
     scope: "ErrorScope" = betterproto.message_field(3)
+    """The scope of the error."""

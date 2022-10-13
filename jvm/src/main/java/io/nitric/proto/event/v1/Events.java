@@ -55,24 +55,25 @@ public final class Events {
     java.lang.String[] descriptorData = {
       "\n\032proto/event/v1/event.proto\022\017nitric.eve" +
       "nt.v1\032\034google/protobuf/struct.proto\032\027val" +
-      "idate/validate.proto\"w\n\023EventPublishRequ" +
-      "est\022)\n\005topic\030\001 \001(\tB\032\372B\027r\025(\200\0022\020^\\w+([.\\-]" +
-      "\\w+)*$\0225\n\005event\030\002 \001(\0132\034.nitric.event.v1." +
-      "NitricEventB\010\372B\005\212\001\002\020\001\"\"\n\024EventPublishRes" +
-      "ponse\022\n\n\002id\030\001 \001(\t\"\022\n\020TopicListRequest\"A\n" +
-      "\021TopicListResponse\022,\n\006topics\030\001 \003(\0132\034.nit" +
-      "ric.event.v1.NitricTopic\"\033\n\013NitricTopic\022" +
-      "\014\n\004name\030\001 \001(\t\"Y\n\013NitricEvent\022\n\n\002id\030\001 \001(\t" +
-      "\022\024\n\014payload_type\030\002 \001(\t\022(\n\007payload\030\003 \001(\0132" +
-      "\027.google.protobuf.Struct2f\n\014EventService" +
-      "\022V\n\007Publish\022$.nitric.event.v1.EventPubli" +
-      "shRequest\032%.nitric.event.v1.EventPublish" +
-      "Response2]\n\014TopicService\022M\n\004List\022!.nitri" +
-      "c.event.v1.TopicListRequest\032\".nitric.eve" +
-      "nt.v1.TopicListResponseBb\n\030io.nitric.pro" +
-      "to.event.v1B\006EventsP\001Z\014nitric/v1;v1\252\002\025Ni" +
-      "tric.Proto.Event.v1\312\002\025Nitric\\Proto\\Event" +
-      "\\V1b\006proto3"
+      "idate/validate.proto\"\226\001\n\023EventPublishReq" +
+      "uest\022)\n\005topic\030\001 \001(\tB\032\372B\027r\025(\200\0022\020^\\w+([.\\-" +
+      "]\\w+)*$\0225\n\005event\030\002 \001(\0132\034.nitric.event.v1" +
+      ".NitricEventB\010\372B\005\212\001\002\020\001\022\035\n\005delay\030\003 \001(\rB\016\372" +
+      "B\013*\t\030\200\232\236\001(\n@\001\"\"\n\024EventPublishResponse\022\n\n" +
+      "\002id\030\001 \001(\t\"\022\n\020TopicListRequest\"A\n\021TopicLi" +
+      "stResponse\022,\n\006topics\030\001 \003(\0132\034.nitric.even" +
+      "t.v1.NitricTopic\"\033\n\013NitricTopic\022\014\n\004name\030" +
+      "\001 \001(\t\"Y\n\013NitricEvent\022\n\n\002id\030\001 \001(\t\022\024\n\014payl" +
+      "oad_type\030\002 \001(\t\022(\n\007payload\030\003 \001(\0132\027.google" +
+      ".protobuf.Struct2f\n\014EventService\022V\n\007Publ" +
+      "ish\022$.nitric.event.v1.EventPublishReques" +
+      "t\032%.nitric.event.v1.EventPublishResponse" +
+      "2]\n\014TopicService\022M\n\004List\022!.nitric.event." +
+      "v1.TopicListRequest\032\".nitric.event.v1.To" +
+      "picListResponseBb\n\030io.nitric.proto.event" +
+      ".v1B\006EventsP\001Z\014nitric/v1;v1\252\002\025Nitric.Pro" +
+      "to.Event.v1\312\002\025Nitric\\Proto\\Event\\V1b\006pro" +
+      "to3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -85,7 +86,7 @@ public final class Events {
     internal_static_nitric_event_v1_EventPublishRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_nitric_event_v1_EventPublishRequest_descriptor,
-        new java.lang.String[] { "Topic", "Event", });
+        new java.lang.String[] { "Topic", "Event", "Delay", });
     internal_static_nitric_event_v1_EventPublishResponse_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_nitric_event_v1_EventPublishResponse_fieldAccessorTable = new

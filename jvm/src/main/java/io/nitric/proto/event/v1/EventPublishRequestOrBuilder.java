@@ -53,4 +53,14 @@ public interface EventPublishRequestOrBuilder extends
    * <code>.nitric.event.v1.NitricEvent event = 2 [(.validate.rules) = { ... }</code>
    */
   io.nitric.proto.event.v1.NitricEventOrBuilder getEventOrBuilder();
+
+  /**
+   * <pre>
+   * An optional delay specified in seconds (minimum 10 seconds)
+   * </pre>
+   *
+   * <code>uint32 delay = 3 [(.validate.rules) = { ... }</code>
+   * @return The delay.
+   */
+  int getDelay();
 }

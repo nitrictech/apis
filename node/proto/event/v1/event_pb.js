@@ -184,7 +184,8 @@ proto.nitric.event.v1.EventPublishRequest.prototype.toObject = function(opt_incl
 proto.nitric.event.v1.EventPublishRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     topic: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    event: (f = msg.getEvent()) && proto.nitric.event.v1.NitricEvent.toObject(includeInstance, f)
+    event: (f = msg.getEvent()) && proto.nitric.event.v1.NitricEvent.toObject(includeInstance, f),
+    delay: jspb.Message.getFieldWithDefault(msg, 3, 0)
   };
 
   if (includeInstance) {
@@ -230,6 +231,10 @@ proto.nitric.event.v1.EventPublishRequest.deserializeBinaryFromReader = function
       reader.readMessage(value,proto.nitric.event.v1.NitricEvent.deserializeBinaryFromReader);
       msg.setEvent(value);
       break;
+    case 3:
+      var value = /** @type {number} */ (reader.readUint32());
+      msg.setDelay(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -272,6 +277,13 @@ proto.nitric.event.v1.EventPublishRequest.serializeBinaryToWriter = function(mes
       2,
       f,
       proto.nitric.event.v1.NitricEvent.serializeBinaryToWriter
+    );
+  }
+  f = message.getDelay();
+  if (f !== 0) {
+    writer.writeUint32(
+      3,
+      f
     );
   }
 };
@@ -329,6 +341,24 @@ proto.nitric.event.v1.EventPublishRequest.prototype.clearEvent = function() {
  */
 proto.nitric.event.v1.EventPublishRequest.prototype.hasEvent = function() {
   return jspb.Message.getField(this, 2) != null;
+};
+
+
+/**
+ * optional uint32 delay = 3;
+ * @return {number}
+ */
+proto.nitric.event.v1.EventPublishRequest.prototype.getDelay = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.nitric.event.v1.EventPublishRequest} returns this
+ */
+proto.nitric.event.v1.EventPublishRequest.prototype.setDelay = function(value) {
+  return jspb.Message.setProto3IntField(this, 3, value);
 };
 
 

@@ -14,6 +14,9 @@ export class EventPublishRequest extends jspb.Message {
   getEvent(): NitricEvent | undefined;
   setEvent(value?: NitricEvent): void;
 
+  getDelay(): number;
+  setDelay(value: number): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): EventPublishRequest.AsObject;
   static toObject(includeInstance: boolean, msg: EventPublishRequest): EventPublishRequest.AsObject;
@@ -28,6 +31,7 @@ export namespace EventPublishRequest {
   export type AsObject = {
     topic: string,
     event?: NitricEvent.AsObject,
+    delay: number,
   }
 }
 

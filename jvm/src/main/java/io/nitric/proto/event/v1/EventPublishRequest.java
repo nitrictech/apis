@@ -72,6 +72,11 @@ private static final long serialVersionUID = 0L;
 
             break;
           }
+          case 24: {
+
+            delay_ = input.readUInt32();
+            break;
+          }
           default: {
             if (!parseUnknownField(
                 input, unknownFields, extensionRegistry, tag)) {
@@ -188,6 +193,21 @@ private static final long serialVersionUID = 0L;
     return getEvent();
   }
 
+  public static final int DELAY_FIELD_NUMBER = 3;
+  private int delay_;
+  /**
+   * <pre>
+   * An optional delay specified in seconds (minimum 10 seconds)
+   * </pre>
+   *
+   * <code>uint32 delay = 3 [(.validate.rules) = { ... }</code>
+   * @return The delay.
+   */
+  @java.lang.Override
+  public int getDelay() {
+    return delay_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -208,6 +228,9 @@ private static final long serialVersionUID = 0L;
     if (event_ != null) {
       output.writeMessage(2, getEvent());
     }
+    if (delay_ != 0) {
+      output.writeUInt32(3, delay_);
+    }
     unknownFields.writeTo(output);
   }
 
@@ -223,6 +246,10 @@ private static final long serialVersionUID = 0L;
     if (event_ != null) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(2, getEvent());
+    }
+    if (delay_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeUInt32Size(3, delay_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -246,6 +273,8 @@ private static final long serialVersionUID = 0L;
       if (!getEvent()
           .equals(other.getEvent())) return false;
     }
+    if (getDelay()
+        != other.getDelay()) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -263,6 +292,8 @@ private static final long serialVersionUID = 0L;
       hash = (37 * hash) + EVENT_FIELD_NUMBER;
       hash = (53 * hash) + getEvent().hashCode();
     }
+    hash = (37 * hash) + DELAY_FIELD_NUMBER;
+    hash = (53 * hash) + getDelay();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -408,6 +439,8 @@ private static final long serialVersionUID = 0L;
         event_ = null;
         eventBuilder_ = null;
       }
+      delay_ = 0;
+
       return this;
     }
 
@@ -440,6 +473,7 @@ private static final long serialVersionUID = 0L;
       } else {
         result.event_ = eventBuilder_.build();
       }
+      result.delay_ = delay_;
       onBuilt();
       return result;
     }
@@ -494,6 +528,9 @@ private static final long serialVersionUID = 0L;
       }
       if (other.hasEvent()) {
         mergeEvent(other.getEvent());
+      }
+      if (other.getDelay() != 0) {
+        setDelay(other.getDelay());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -773,6 +810,49 @@ private static final long serialVersionUID = 0L;
         event_ = null;
       }
       return eventBuilder_;
+    }
+
+    private int delay_ ;
+    /**
+     * <pre>
+     * An optional delay specified in seconds (minimum 10 seconds)
+     * </pre>
+     *
+     * <code>uint32 delay = 3 [(.validate.rules) = { ... }</code>
+     * @return The delay.
+     */
+    @java.lang.Override
+    public int getDelay() {
+      return delay_;
+    }
+    /**
+     * <pre>
+     * An optional delay specified in seconds (minimum 10 seconds)
+     * </pre>
+     *
+     * <code>uint32 delay = 3 [(.validate.rules) = { ... }</code>
+     * @param value The delay to set.
+     * @return This builder for chaining.
+     */
+    public Builder setDelay(int value) {
+      
+      delay_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * An optional delay specified in seconds (minimum 10 seconds)
+     * </pre>
+     *
+     * <code>uint32 delay = 3 [(.validate.rules) = { ... }</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearDelay() {
+      
+      delay_ = 0;
+      onChanged();
+      return this;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

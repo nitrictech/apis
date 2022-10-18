@@ -31,6 +31,9 @@ class EventPublishRequest(betterproto.Message):
     event: "NitricEvent" = betterproto.message_field(2)
     """The event to be published"""
 
+    delay: int = betterproto.uint32_field(3)
+    """An optional delay specified in seconds (minimum 10 seconds)"""
+
 
 @dataclass(eq=False, repr=False)
 class EventPublishResponse(betterproto.Message):

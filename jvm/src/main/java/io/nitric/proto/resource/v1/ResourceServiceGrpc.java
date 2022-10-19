@@ -49,6 +49,37 @@ public final class ResourceServiceGrpc {
     return getDeclareMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<io.nitric.proto.resource.v1.ResourceDetailsRequest,
+      io.nitric.proto.resource.v1.ResourceDetailsResponse> getDetailsMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "Details",
+      requestType = io.nitric.proto.resource.v1.ResourceDetailsRequest.class,
+      responseType = io.nitric.proto.resource.v1.ResourceDetailsResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<io.nitric.proto.resource.v1.ResourceDetailsRequest,
+      io.nitric.proto.resource.v1.ResourceDetailsResponse> getDetailsMethod() {
+    io.grpc.MethodDescriptor<io.nitric.proto.resource.v1.ResourceDetailsRequest, io.nitric.proto.resource.v1.ResourceDetailsResponse> getDetailsMethod;
+    if ((getDetailsMethod = ResourceServiceGrpc.getDetailsMethod) == null) {
+      synchronized (ResourceServiceGrpc.class) {
+        if ((getDetailsMethod = ResourceServiceGrpc.getDetailsMethod) == null) {
+          ResourceServiceGrpc.getDetailsMethod = getDetailsMethod =
+              io.grpc.MethodDescriptor.<io.nitric.proto.resource.v1.ResourceDetailsRequest, io.nitric.proto.resource.v1.ResourceDetailsResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "Details"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  io.nitric.proto.resource.v1.ResourceDetailsRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  io.nitric.proto.resource.v1.ResourceDetailsResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new ResourceServiceMethodDescriptorSupplier("Details"))
+              .build();
+        }
+      }
+    }
+    return getDetailsMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -113,6 +144,16 @@ public final class ResourceServiceGrpc {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getDeclareMethod(), responseObserver);
     }
 
+    /**
+     * <pre>
+     * Retrieve details about a resource at runtime
+     * </pre>
+     */
+    public void details(io.nitric.proto.resource.v1.ResourceDetailsRequest request,
+        io.grpc.stub.StreamObserver<io.nitric.proto.resource.v1.ResourceDetailsResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getDetailsMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -122,6 +163,13 @@ public final class ResourceServiceGrpc {
                 io.nitric.proto.resource.v1.ResourceDeclareRequest,
                 io.nitric.proto.resource.v1.ResourceDeclareResponse>(
                   this, METHODID_DECLARE)))
+          .addMethod(
+            getDetailsMethod(),
+            io.grpc.stub.ServerCalls.asyncUnaryCall(
+              new MethodHandlers<
+                io.nitric.proto.resource.v1.ResourceDetailsRequest,
+                io.nitric.proto.resource.v1.ResourceDetailsResponse>(
+                  this, METHODID_DETAILS)))
           .build();
     }
   }
@@ -156,6 +204,17 @@ public final class ResourceServiceGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getDeclareMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     * <pre>
+     * Retrieve details about a resource at runtime
+     * </pre>
+     */
+    public void details(io.nitric.proto.resource.v1.ResourceDetailsRequest request,
+        io.grpc.stub.StreamObserver<io.nitric.proto.resource.v1.ResourceDetailsResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getDetailsMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -186,6 +245,16 @@ public final class ResourceServiceGrpc {
     public io.nitric.proto.resource.v1.ResourceDeclareResponse declare(io.nitric.proto.resource.v1.ResourceDeclareRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getDeclareMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Retrieve details about a resource at runtime
+     * </pre>
+     */
+    public io.nitric.proto.resource.v1.ResourceDetailsResponse details(io.nitric.proto.resource.v1.ResourceDetailsRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getDetailsMethod(), getCallOptions(), request);
     }
   }
 
@@ -219,9 +288,21 @@ public final class ResourceServiceGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getDeclareMethod(), getCallOptions()), request);
     }
+
+    /**
+     * <pre>
+     * Retrieve details about a resource at runtime
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<io.nitric.proto.resource.v1.ResourceDetailsResponse> details(
+        io.nitric.proto.resource.v1.ResourceDetailsRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getDetailsMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_DECLARE = 0;
+  private static final int METHODID_DETAILS = 1;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -243,6 +324,10 @@ public final class ResourceServiceGrpc {
         case METHODID_DECLARE:
           serviceImpl.declare((io.nitric.proto.resource.v1.ResourceDeclareRequest) request,
               (io.grpc.stub.StreamObserver<io.nitric.proto.resource.v1.ResourceDeclareResponse>) responseObserver);
+          break;
+        case METHODID_DETAILS:
+          serviceImpl.details((io.nitric.proto.resource.v1.ResourceDetailsRequest) request,
+              (io.grpc.stub.StreamObserver<io.nitric.proto.resource.v1.ResourceDetailsResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -306,6 +391,7 @@ public final class ResourceServiceGrpc {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new ResourceServiceFileDescriptorSupplier())
               .addMethod(getDeclareMethod())
+              .addMethod(getDetailsMethod())
               .build();
         }
       }

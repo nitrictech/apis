@@ -89,6 +89,21 @@ public final class Resources {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_nitric_resource_v1_ResourceDeclareResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_nitric_resource_v1_ApiResourceDetails_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_nitric_resource_v1_ApiResourceDetails_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_nitric_resource_v1_ResourceDetailsRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_nitric_resource_v1_ResourceDetailsRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_nitric_resource_v1_ResourceDetailsResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_nitric_resource_v1_ResourceDetailsResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -134,26 +149,35 @@ public final class Resources {
       "efinition:\0028\001\032N\n\rSecurityEntry\022\013\n\003key\030\001 " +
       "\001(\t\022,\n\005value\030\002 \001(\0132\035.nitric.resource.v1." +
       "ApiScopes:\0028\001\"\031\n\027ResourceDeclareResponse" +
-      "*\217\001\n\014ResourceType\022\007\n\003Api\020\000\022\014\n\010Function\020\001" +
-      "\022\n\n\006Bucket\020\002\022\t\n\005Queue\020\003\022\t\n\005Topic\020\004\022\014\n\010Sc" +
-      "hedule\020\005\022\020\n\014Subscription\020\006\022\016\n\nCollection" +
-      "\020\007\022\n\n\006Policy\020\010\022\n\n\006Secret\020\t*\377\002\n\006Action\022\022\n" +
-      "\016BucketFileList\020\000\022\021\n\rBucketFileGet\020\001\022\021\n\r" +
-      "BucketFilePut\020\002\022\024\n\020BucketFileDelete\020\003\022\016\n" +
-      "\tTopicList\020\310\001\022\020\n\013TopicDetail\020\311\001\022\026\n\021Topic" +
-      "EventPublish\020\312\001\022\016\n\tQueueSend\020\254\002\022\021\n\014Queue" +
-      "Receive\020\255\002\022\016\n\tQueueList\020\256\002\022\020\n\013QueueDetai" +
-      "l\020\257\002\022\033\n\026CollectionDocumentRead\020\220\003\022\034\n\027Col" +
-      "lectionDocumentWrite\020\221\003\022\035\n\030CollectionDoc" +
-      "umentDelete\020\222\003\022\024\n\017CollectionQuery\020\223\003\022\023\n\016" +
-      "CollectionList\020\224\003\022\016\n\tSecretPut\020\364\003\022\021\n\014Sec" +
-      "retAccess\020\365\0032u\n\017ResourceService\022b\n\007Decla" +
-      "re\022*.nitric.resource.v1.ResourceDeclareR" +
-      "equest\032+.nitric.resource.v1.ResourceDecl" +
-      "areResponseBn\n\033io.nitric.proto.resource." +
-      "v1B\tResourcesP\001Z\014nitric/v1;v1\252\002\030Nitric.P" +
-      "roto.Resource.v1\312\002\030Nitric\\Proto\\Resource" +
-      "\\V1b\006proto3"
+      "\"!\n\022ApiResourceDetails\022\013\n\003url\030\001 \001(\t\"H\n\026R" +
+      "esourceDetailsRequest\022.\n\010resource\030\001 \001(\0132" +
+      "\034.nitric.resource.v1.Resource\"\212\001\n\027Resour" +
+      "ceDetailsResponse\022\n\n\002id\030\001 \001(\t\022\020\n\010provide" +
+      "r\030\002 \001(\t\022\017\n\007service\030\003 \001(\t\0225\n\003api\030\n \001(\0132&." +
+      "nitric.resource.v1.ApiResourceDetailsH\000B" +
+      "\t\n\007details*\217\001\n\014ResourceType\022\007\n\003Api\020\000\022\014\n\010" +
+      "Function\020\001\022\n\n\006Bucket\020\002\022\t\n\005Queue\020\003\022\t\n\005Top" +
+      "ic\020\004\022\014\n\010Schedule\020\005\022\020\n\014Subscription\020\006\022\016\n\n" +
+      "Collection\020\007\022\n\n\006Policy\020\010\022\n\n\006Secret\020\t*\377\002\n" +
+      "\006Action\022\022\n\016BucketFileList\020\000\022\021\n\rBucketFil" +
+      "eGet\020\001\022\021\n\rBucketFilePut\020\002\022\024\n\020BucketFileD" +
+      "elete\020\003\022\016\n\tTopicList\020\310\001\022\020\n\013TopicDetail\020\311" +
+      "\001\022\026\n\021TopicEventPublish\020\312\001\022\016\n\tQueueSend\020\254" +
+      "\002\022\021\n\014QueueReceive\020\255\002\022\016\n\tQueueList\020\256\002\022\020\n\013" +
+      "QueueDetail\020\257\002\022\033\n\026CollectionDocumentRead" +
+      "\020\220\003\022\034\n\027CollectionDocumentWrite\020\221\003\022\035\n\030Col" +
+      "lectionDocumentDelete\020\222\003\022\024\n\017CollectionQu" +
+      "ery\020\223\003\022\023\n\016CollectionList\020\224\003\022\016\n\tSecretPut" +
+      "\020\364\003\022\021\n\014SecretAccess\020\365\0032\331\001\n\017ResourceServi" +
+      "ce\022b\n\007Declare\022*.nitric.resource.v1.Resou" +
+      "rceDeclareRequest\032+.nitric.resource.v1.R" +
+      "esourceDeclareResponse\022b\n\007Details\022*.nitr" +
+      "ic.resource.v1.ResourceDetailsRequest\032+." +
+      "nitric.resource.v1.ResourceDetailsRespon" +
+      "seBn\n\033io.nitric.proto.resource.v1B\tResou" +
+      "rcesP\001Z\014nitric/v1;v1\252\002\030Nitric.Proto.Reso" +
+      "urce.v1\312\002\030Nitric\\Proto\\Resource\\V1b\006prot" +
+      "o3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -250,6 +274,24 @@ public final class Resources {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_nitric_resource_v1_ResourceDeclareResponse_descriptor,
         new java.lang.String[] { });
+    internal_static_nitric_resource_v1_ApiResourceDetails_descriptor =
+      getDescriptor().getMessageTypes().get(13);
+    internal_static_nitric_resource_v1_ApiResourceDetails_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_nitric_resource_v1_ApiResourceDetails_descriptor,
+        new java.lang.String[] { "Url", });
+    internal_static_nitric_resource_v1_ResourceDetailsRequest_descriptor =
+      getDescriptor().getMessageTypes().get(14);
+    internal_static_nitric_resource_v1_ResourceDetailsRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_nitric_resource_v1_ResourceDetailsRequest_descriptor,
+        new java.lang.String[] { "Resource", });
+    internal_static_nitric_resource_v1_ResourceDetailsResponse_descriptor =
+      getDescriptor().getMessageTypes().get(15);
+    internal_static_nitric_resource_v1_ResourceDetailsResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_nitric_resource_v1_ResourceDetailsResponse_descriptor,
+        new java.lang.String[] { "Id", "Provider", "Service", "Api", "Details", });
     io.envoyproxy.pgv.validate.Validate.getDescriptor();
   }
 

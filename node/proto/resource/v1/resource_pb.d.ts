@@ -332,6 +332,88 @@ export namespace ResourceDeclareResponse {
   }
 }
 
+export class ApiResourceDetails extends jspb.Message {
+  getUrl(): string;
+  setUrl(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): ApiResourceDetails.AsObject;
+  static toObject(includeInstance: boolean, msg: ApiResourceDetails): ApiResourceDetails.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: ApiResourceDetails, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ApiResourceDetails;
+  static deserializeBinaryFromReader(message: ApiResourceDetails, reader: jspb.BinaryReader): ApiResourceDetails;
+}
+
+export namespace ApiResourceDetails {
+  export type AsObject = {
+    url: string,
+  }
+}
+
+export class ResourceDetailsRequest extends jspb.Message {
+  hasResource(): boolean;
+  clearResource(): void;
+  getResource(): Resource | undefined;
+  setResource(value?: Resource): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): ResourceDetailsRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: ResourceDetailsRequest): ResourceDetailsRequest.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: ResourceDetailsRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ResourceDetailsRequest;
+  static deserializeBinaryFromReader(message: ResourceDetailsRequest, reader: jspb.BinaryReader): ResourceDetailsRequest;
+}
+
+export namespace ResourceDetailsRequest {
+  export type AsObject = {
+    resource?: Resource.AsObject,
+  }
+}
+
+export class ResourceDetailsResponse extends jspb.Message {
+  getId(): string;
+  setId(value: string): void;
+
+  getProvider(): string;
+  setProvider(value: string): void;
+
+  getService(): string;
+  setService(value: string): void;
+
+  hasApi(): boolean;
+  clearApi(): void;
+  getApi(): ApiResourceDetails | undefined;
+  setApi(value?: ApiResourceDetails): void;
+
+  getDetailsCase(): ResourceDetailsResponse.DetailsCase;
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): ResourceDetailsResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: ResourceDetailsResponse): ResourceDetailsResponse.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: ResourceDetailsResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ResourceDetailsResponse;
+  static deserializeBinaryFromReader(message: ResourceDetailsResponse, reader: jspb.BinaryReader): ResourceDetailsResponse;
+}
+
+export namespace ResourceDetailsResponse {
+  export type AsObject = {
+    id: string,
+    provider: string,
+    service: string,
+    api?: ApiResourceDetails.AsObject,
+  }
+
+  export enum DetailsCase {
+    DETAILS_NOT_SET = 0,
+    API = 10,
+  }
+}
+
 export interface ResourceTypeMap {
   API: 0;
   FUNCTION: 1;

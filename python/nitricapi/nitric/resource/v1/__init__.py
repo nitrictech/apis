@@ -153,6 +153,30 @@ class ResourceDeclareResponse(betterproto.Message):
     pass
 
 
+@dataclass(eq=False, repr=False)
+class ApiResourceDetails(betterproto.Message):
+    url: str = betterproto.string_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class ResourceDetailsRequest(betterproto.Message):
+    resource: "Resource" = betterproto.message_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class ResourceDetailsResponse(betterproto.Message):
+    id: str = betterproto.string_field(1)
+    """The identifier of the resource"""
+
+    provider: str = betterproto.string_field(2)
+    """The provider this resource is deployed with (e.g. aws)"""
+
+    service: str = betterproto.string_field(3)
+    """The service this resource is deployed on (e.g. ApiGateway)"""
+
+    api: "ApiResourceDetails" = betterproto.message_field(10, group="details")
+
+
 class ResourceServiceStub(betterproto.ServiceStub):
     async def declare(
         self,
@@ -171,11 +195,33 @@ class ResourceServiceStub(betterproto.ServiceStub):
             metadata=metadata,
         )
 
+    async def details(
+        self,
+        resource_details_request: "ResourceDetailsRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "ResourceDetailsResponse":
+        return await self._unary_unary(
+            "/nitric.resource.v1.ResourceService/Details",
+            resource_details_request,
+            ResourceDetailsResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
 
 class ResourceServiceBase(ServiceBase):
     async def declare(
         self, resource_declare_request: "ResourceDeclareRequest"
     ) -> "ResourceDeclareResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def details(
+        self, resource_details_request: "ResourceDetailsRequest"
+    ) -> "ResourceDetailsResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
     async def __rpc_declare(
@@ -186,6 +232,14 @@ class ResourceServiceBase(ServiceBase):
         response = await self.declare(request)
         await stream.send_message(response)
 
+    async def __rpc_details(
+        self,
+        stream: "grpclib.server.Stream[ResourceDetailsRequest, ResourceDetailsResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.details(request)
+        await stream.send_message(response)
+
     def __mapping__(self) -> Dict[str, grpclib.const.Handler]:
         return {
             "/nitric.resource.v1.ResourceService/Declare": grpclib.const.Handler(
@@ -193,5 +247,11 @@ class ResourceServiceBase(ServiceBase):
                 grpclib.const.Cardinality.UNARY_UNARY,
                 ResourceDeclareRequest,
                 ResourceDeclareResponse,
+            ),
+            "/nitric.resource.v1.ResourceService/Details": grpclib.const.Handler(
+                self.__rpc_details,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                ResourceDetailsRequest,
+                ResourceDetailsResponse,
             ),
         }

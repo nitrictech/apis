@@ -40,6 +40,42 @@ public interface TriggerRequestOrBuilder extends
       getMimeTypeBytes();
 
   /**
+   * <pre>
+   * TraceInformation from the membrane
+   * Allows tying traces from external triggers (e.g. HttpRequests)
+   * into each event request/response pair of the Bidirectional stream.
+   * which cannot be facilitated by OOTB stream interceptors from OTEL.
+   * </pre>
+   *
+   * <code>.nitric.faas.v1.TraceContext trace_context = 10;</code>
+   * @return Whether the traceContext field is set.
+   */
+  boolean hasTraceContext();
+  /**
+   * <pre>
+   * TraceInformation from the membrane
+   * Allows tying traces from external triggers (e.g. HttpRequests)
+   * into each event request/response pair of the Bidirectional stream.
+   * which cannot be facilitated by OOTB stream interceptors from OTEL.
+   * </pre>
+   *
+   * <code>.nitric.faas.v1.TraceContext trace_context = 10;</code>
+   * @return The traceContext.
+   */
+  io.nitric.proto.faas.v1.TraceContext getTraceContext();
+  /**
+   * <pre>
+   * TraceInformation from the membrane
+   * Allows tying traces from external triggers (e.g. HttpRequests)
+   * into each event request/response pair of the Bidirectional stream.
+   * which cannot be facilitated by OOTB stream interceptors from OTEL.
+   * </pre>
+   *
+   * <code>.nitric.faas.v1.TraceContext trace_context = 10;</code>
+   */
+  io.nitric.proto.faas.v1.TraceContextOrBuilder getTraceContextOrBuilder();
+
+  /**
    * <code>.nitric.faas.v1.HttpTriggerContext http = 3;</code>
    * @return Whether the http field is set.
    */

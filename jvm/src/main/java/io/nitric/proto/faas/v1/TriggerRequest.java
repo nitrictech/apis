@@ -93,6 +93,19 @@ private static final long serialVersionUID = 0L;
             contextCase_ = 4;
             break;
           }
+          case 82: {
+            io.nitric.proto.faas.v1.TraceContext.Builder subBuilder = null;
+            if (traceContext_ != null) {
+              subBuilder = traceContext_.toBuilder();
+            }
+            traceContext_ = input.readMessage(io.nitric.proto.faas.v1.TraceContext.parser(), extensionRegistry);
+            if (subBuilder != null) {
+              subBuilder.mergeFrom(traceContext_);
+              traceContext_ = subBuilder.buildPartial();
+            }
+
+            break;
+          }
           default: {
             if (!parseUnknownField(
                 input, unknownFields, extensionRegistry, tag)) {
@@ -229,6 +242,53 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int TRACE_CONTEXT_FIELD_NUMBER = 10;
+  private io.nitric.proto.faas.v1.TraceContext traceContext_;
+  /**
+   * <pre>
+   * TraceInformation from the membrane
+   * Allows tying traces from external triggers (e.g. HttpRequests)
+   * into each event request/response pair of the Bidirectional stream.
+   * which cannot be facilitated by OOTB stream interceptors from OTEL.
+   * </pre>
+   *
+   * <code>.nitric.faas.v1.TraceContext trace_context = 10;</code>
+   * @return Whether the traceContext field is set.
+   */
+  @java.lang.Override
+  public boolean hasTraceContext() {
+    return traceContext_ != null;
+  }
+  /**
+   * <pre>
+   * TraceInformation from the membrane
+   * Allows tying traces from external triggers (e.g. HttpRequests)
+   * into each event request/response pair of the Bidirectional stream.
+   * which cannot be facilitated by OOTB stream interceptors from OTEL.
+   * </pre>
+   *
+   * <code>.nitric.faas.v1.TraceContext trace_context = 10;</code>
+   * @return The traceContext.
+   */
+  @java.lang.Override
+  public io.nitric.proto.faas.v1.TraceContext getTraceContext() {
+    return traceContext_ == null ? io.nitric.proto.faas.v1.TraceContext.getDefaultInstance() : traceContext_;
+  }
+  /**
+   * <pre>
+   * TraceInformation from the membrane
+   * Allows tying traces from external triggers (e.g. HttpRequests)
+   * into each event request/response pair of the Bidirectional stream.
+   * which cannot be facilitated by OOTB stream interceptors from OTEL.
+   * </pre>
+   *
+   * <code>.nitric.faas.v1.TraceContext trace_context = 10;</code>
+   */
+  @java.lang.Override
+  public io.nitric.proto.faas.v1.TraceContextOrBuilder getTraceContextOrBuilder() {
+    return getTraceContext();
+  }
+
   public static final int HTTP_FIELD_NUMBER = 3;
   /**
    * <code>.nitric.faas.v1.HttpTriggerContext http = 3;</code>
@@ -317,6 +377,9 @@ private static final long serialVersionUID = 0L;
     if (contextCase_ == 4) {
       output.writeMessage(4, (io.nitric.proto.faas.v1.TopicTriggerContext) context_);
     }
+    if (traceContext_ != null) {
+      output.writeMessage(10, getTraceContext());
+    }
     unknownFields.writeTo(output);
   }
 
@@ -341,6 +404,10 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(4, (io.nitric.proto.faas.v1.TopicTriggerContext) context_);
     }
+    if (traceContext_ != null) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(10, getTraceContext());
+    }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
     return size;
@@ -360,6 +427,11 @@ private static final long serialVersionUID = 0L;
         .equals(other.getData())) return false;
     if (!getMimeType()
         .equals(other.getMimeType())) return false;
+    if (hasTraceContext() != other.hasTraceContext()) return false;
+    if (hasTraceContext()) {
+      if (!getTraceContext()
+          .equals(other.getTraceContext())) return false;
+    }
     if (!getContextCase().equals(other.getContextCase())) return false;
     switch (contextCase_) {
       case 3:
@@ -388,6 +460,10 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getData().hashCode();
     hash = (37 * hash) + MIME_TYPE_FIELD_NUMBER;
     hash = (53 * hash) + getMimeType().hashCode();
+    if (hasTraceContext()) {
+      hash = (37 * hash) + TRACE_CONTEXT_FIELD_NUMBER;
+      hash = (53 * hash) + getTraceContext().hashCode();
+    }
     switch (contextCase_) {
       case 3:
         hash = (37 * hash) + HTTP_FIELD_NUMBER;
@@ -541,6 +617,12 @@ private static final long serialVersionUID = 0L;
 
       mimeType_ = "";
 
+      if (traceContextBuilder_ == null) {
+        traceContext_ = null;
+      } else {
+        traceContext_ = null;
+        traceContextBuilder_ = null;
+      }
       contextCase_ = 0;
       context_ = null;
       return this;
@@ -571,6 +653,11 @@ private static final long serialVersionUID = 0L;
       io.nitric.proto.faas.v1.TriggerRequest result = new io.nitric.proto.faas.v1.TriggerRequest(this);
       result.data_ = data_;
       result.mimeType_ = mimeType_;
+      if (traceContextBuilder_ == null) {
+        result.traceContext_ = traceContext_;
+      } else {
+        result.traceContext_ = traceContextBuilder_.build();
+      }
       if (contextCase_ == 3) {
         if (httpBuilder_ == null) {
           result.context_ = context_;
@@ -640,6 +727,9 @@ private static final long serialVersionUID = 0L;
       if (!other.getMimeType().isEmpty()) {
         mimeType_ = other.mimeType_;
         onChanged();
+      }
+      if (other.hasTraceContext()) {
+        mergeTraceContext(other.getTraceContext());
       }
       switch (other.getContextCase()) {
         case HTTP: {
@@ -843,6 +933,188 @@ private static final long serialVersionUID = 0L;
       mimeType_ = value;
       onChanged();
       return this;
+    }
+
+    private io.nitric.proto.faas.v1.TraceContext traceContext_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        io.nitric.proto.faas.v1.TraceContext, io.nitric.proto.faas.v1.TraceContext.Builder, io.nitric.proto.faas.v1.TraceContextOrBuilder> traceContextBuilder_;
+    /**
+     * <pre>
+     * TraceInformation from the membrane
+     * Allows tying traces from external triggers (e.g. HttpRequests)
+     * into each event request/response pair of the Bidirectional stream.
+     * which cannot be facilitated by OOTB stream interceptors from OTEL.
+     * </pre>
+     *
+     * <code>.nitric.faas.v1.TraceContext trace_context = 10;</code>
+     * @return Whether the traceContext field is set.
+     */
+    public boolean hasTraceContext() {
+      return traceContextBuilder_ != null || traceContext_ != null;
+    }
+    /**
+     * <pre>
+     * TraceInformation from the membrane
+     * Allows tying traces from external triggers (e.g. HttpRequests)
+     * into each event request/response pair of the Bidirectional stream.
+     * which cannot be facilitated by OOTB stream interceptors from OTEL.
+     * </pre>
+     *
+     * <code>.nitric.faas.v1.TraceContext trace_context = 10;</code>
+     * @return The traceContext.
+     */
+    public io.nitric.proto.faas.v1.TraceContext getTraceContext() {
+      if (traceContextBuilder_ == null) {
+        return traceContext_ == null ? io.nitric.proto.faas.v1.TraceContext.getDefaultInstance() : traceContext_;
+      } else {
+        return traceContextBuilder_.getMessage();
+      }
+    }
+    /**
+     * <pre>
+     * TraceInformation from the membrane
+     * Allows tying traces from external triggers (e.g. HttpRequests)
+     * into each event request/response pair of the Bidirectional stream.
+     * which cannot be facilitated by OOTB stream interceptors from OTEL.
+     * </pre>
+     *
+     * <code>.nitric.faas.v1.TraceContext trace_context = 10;</code>
+     */
+    public Builder setTraceContext(io.nitric.proto.faas.v1.TraceContext value) {
+      if (traceContextBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        traceContext_ = value;
+        onChanged();
+      } else {
+        traceContextBuilder_.setMessage(value);
+      }
+
+      return this;
+    }
+    /**
+     * <pre>
+     * TraceInformation from the membrane
+     * Allows tying traces from external triggers (e.g. HttpRequests)
+     * into each event request/response pair of the Bidirectional stream.
+     * which cannot be facilitated by OOTB stream interceptors from OTEL.
+     * </pre>
+     *
+     * <code>.nitric.faas.v1.TraceContext trace_context = 10;</code>
+     */
+    public Builder setTraceContext(
+        io.nitric.proto.faas.v1.TraceContext.Builder builderForValue) {
+      if (traceContextBuilder_ == null) {
+        traceContext_ = builderForValue.build();
+        onChanged();
+      } else {
+        traceContextBuilder_.setMessage(builderForValue.build());
+      }
+
+      return this;
+    }
+    /**
+     * <pre>
+     * TraceInformation from the membrane
+     * Allows tying traces from external triggers (e.g. HttpRequests)
+     * into each event request/response pair of the Bidirectional stream.
+     * which cannot be facilitated by OOTB stream interceptors from OTEL.
+     * </pre>
+     *
+     * <code>.nitric.faas.v1.TraceContext trace_context = 10;</code>
+     */
+    public Builder mergeTraceContext(io.nitric.proto.faas.v1.TraceContext value) {
+      if (traceContextBuilder_ == null) {
+        if (traceContext_ != null) {
+          traceContext_ =
+            io.nitric.proto.faas.v1.TraceContext.newBuilder(traceContext_).mergeFrom(value).buildPartial();
+        } else {
+          traceContext_ = value;
+        }
+        onChanged();
+      } else {
+        traceContextBuilder_.mergeFrom(value);
+      }
+
+      return this;
+    }
+    /**
+     * <pre>
+     * TraceInformation from the membrane
+     * Allows tying traces from external triggers (e.g. HttpRequests)
+     * into each event request/response pair of the Bidirectional stream.
+     * which cannot be facilitated by OOTB stream interceptors from OTEL.
+     * </pre>
+     *
+     * <code>.nitric.faas.v1.TraceContext trace_context = 10;</code>
+     */
+    public Builder clearTraceContext() {
+      if (traceContextBuilder_ == null) {
+        traceContext_ = null;
+        onChanged();
+      } else {
+        traceContext_ = null;
+        traceContextBuilder_ = null;
+      }
+
+      return this;
+    }
+    /**
+     * <pre>
+     * TraceInformation from the membrane
+     * Allows tying traces from external triggers (e.g. HttpRequests)
+     * into each event request/response pair of the Bidirectional stream.
+     * which cannot be facilitated by OOTB stream interceptors from OTEL.
+     * </pre>
+     *
+     * <code>.nitric.faas.v1.TraceContext trace_context = 10;</code>
+     */
+    public io.nitric.proto.faas.v1.TraceContext.Builder getTraceContextBuilder() {
+      
+      onChanged();
+      return getTraceContextFieldBuilder().getBuilder();
+    }
+    /**
+     * <pre>
+     * TraceInformation from the membrane
+     * Allows tying traces from external triggers (e.g. HttpRequests)
+     * into each event request/response pair of the Bidirectional stream.
+     * which cannot be facilitated by OOTB stream interceptors from OTEL.
+     * </pre>
+     *
+     * <code>.nitric.faas.v1.TraceContext trace_context = 10;</code>
+     */
+    public io.nitric.proto.faas.v1.TraceContextOrBuilder getTraceContextOrBuilder() {
+      if (traceContextBuilder_ != null) {
+        return traceContextBuilder_.getMessageOrBuilder();
+      } else {
+        return traceContext_ == null ?
+            io.nitric.proto.faas.v1.TraceContext.getDefaultInstance() : traceContext_;
+      }
+    }
+    /**
+     * <pre>
+     * TraceInformation from the membrane
+     * Allows tying traces from external triggers (e.g. HttpRequests)
+     * into each event request/response pair of the Bidirectional stream.
+     * which cannot be facilitated by OOTB stream interceptors from OTEL.
+     * </pre>
+     *
+     * <code>.nitric.faas.v1.TraceContext trace_context = 10;</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        io.nitric.proto.faas.v1.TraceContext, io.nitric.proto.faas.v1.TraceContext.Builder, io.nitric.proto.faas.v1.TraceContextOrBuilder> 
+        getTraceContextFieldBuilder() {
+      if (traceContextBuilder_ == null) {
+        traceContextBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            io.nitric.proto.faas.v1.TraceContext, io.nitric.proto.faas.v1.TraceContext.Builder, io.nitric.proto.faas.v1.TraceContextOrBuilder>(
+                getTraceContext(),
+                getParentForChildren(),
+                isClean());
+        traceContext_ = null;
+      }
+      return traceContextBuilder_;
     }
 
     private com.google.protobuf.SingleFieldBuilderV3<
